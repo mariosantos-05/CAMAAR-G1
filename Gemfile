@@ -56,8 +56,13 @@ group :development do
   gem "web-console"
 end
 
+# Testing gems
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  # Rails default system testing
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Cucumber support
+  gem "cucumber-rails", require: false
+  gem "database_cleaner-active_record"
 end
