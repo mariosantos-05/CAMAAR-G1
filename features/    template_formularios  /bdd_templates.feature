@@ -1,4 +1,4 @@
-Funcionalidade: Criar template de formulário 
+Funcionalidade: Criar template de formulário  
 
 Cenário: Criação de template com dados válidos (Feliz)
     Dado que estou na página de criação de templates
