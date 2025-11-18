@@ -182,8 +182,45 @@ As US desta sprint são:
 |-----------|---------------------------------------------------------------------------------------------------------------------|
 | RN-GTD-01 | Se um usuário (administrador de departamento ou não) tentar acessar diretamente via URL os dados de turmas de outro departamento, o sistema deve redirecioná-lo imediatamente para sua página principal (Dashboard). |
 
+## Regras de Negócio - Criar Formulário de Avaliação
+(Issue 09: "Criar um formulário de avaliação baseado em um template para turmas selecionadas")
 
+| Código | Descrição |
+|--------|-----------|
+| RN-CFA-01 | **Seleção Obrigatória de Turmas**: Não é permitido criar formulários se nenhuma turma for selecionada; o sistema deve exibir a mensagem de erro "Nenhuma turma selecionada." |
+| RN-CFA-02 | **Seleção Obrigatória de Template**: O sistema deve impedir a criação de formulários caso nenhum template seja selecionado, exibindo a mensagem "Nenhum template selecionado." |
+| RN-CFA-03 | **Criação em Lote por Turma**: O sistema deve gerar individualmente um formulário para cada turma selecionada quando solicitado. |
+| RN-CFA-04 | **Confirmação de Sucesso**: Após criar os formulários, o sistema deve exibir a mensagem "Formulários criados com sucesso para as turmas selecionadas." |
 
+## Regras de Negócio - Responder Formulário
+(Issue 05: "Responder o formulário de avaliação como Participante")
+
+| Código | Descrição |
+|--------|-----------|
+| RN-RF-01 | **Disponibilidade Vinculada à Turma**: O participante só pode responder formulários das turmas em que está matriculado. |
+| RN-RF-02 | **Existência de Formulário Ativo**: O sistema só permite acesso e envio se houver um formulário ativo disponível para a turma. |
+| RN-RF-03 | **Validação de Campos Obrigatórios**: O sistema deve impedir o envio caso campos obrigatórios não sejam preenchidos, exibindo erro. |
+| RN-RF-04 | **Registro de Respostas**: O sistema deve registrar todas as respostas submetidas pelo participante. |
+| RN-RF-05 | **Confirmação de Envio**: Após envio bem-sucedido, o sistema deve exibir "Seu formulário foi enviado com sucesso." |
+
+## Regras de Negócio - Visualização de Formulários Pendentes
+(Issue 15: "Visualizar os formulários não respondidos das turmas em que o participante está matriculado")
+
+| Código | Descrição |
+|--------|-----------|
+| RN-VFP-01 | **Exibição Apenas do que Não foi Respondido**: O sistema deve listar somente formulários pendentes. |
+| RN-VFP-01 | **Segmentação por Turma Matriculada**: O participante só visualiza formulários das turmas nas quais está matriculado. |
+| RN-VFP-01 | **Contador de Formulários Pendentes**: O sistema deve exibir o total de formulários pendentes com mensagem informativa. |
+| RN-VFP-01 | **Estado de Lista Vazia**: Na ausência de formulários pendentes, exibir "Você não possui formulários pendentes." |
+
+## Regras de Negócio - Visualizar Resultados dos Formulários
+(Issue 16: "Visualização dos formulários criados pelo Administrador")
+
+| Código | Descrição |
+|--------|-----------|
+| RN-VRF-01 | **Lista de Formulários Criados**: O administrador deve visualizar os formulários criados organizados por turma. |
+| RN-VRF-02 | **Contador de Formulários Criados**: O sistema deve exibir o total de formulários criados, como "Existem X formulários criados." |
+| RN-VRF-03 | **Acesso aos Detalhes**: O administrador deve poder visualizar perguntas, respostas e estatísticas de cada formulário selecionado. |
 
 ## Quem ficou responsável por cada cenário BDD em relação as US/Issues?
 
