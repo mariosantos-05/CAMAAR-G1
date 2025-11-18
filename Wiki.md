@@ -108,6 +108,81 @@ As US desta sprint são:
 | RN-L-05    | Usuários com perfil diferente de "Admin" (ex: Aluno, Professor) **não devem** ver a opção "Gerenciamento".         |
 | RN-L-06    | O login só é permitido se o status da conta do usuário for **"Ativo"** (ou seja, após a primeira definição de senha). |
 
+## Regras de Negócio - Criar Formulário (Template de Questões)
+(Issue 8: "Quero criar um template de formulário contendo as questões do formulário...")
+
+| Código | Descrição                                                                                          |
+|--------|----------------------------------------------------------------------------------------------------|
+| RN03   | **Confirmação de Exclusão**: A ação de deletar um template exige confirmação explícita (pop-up) antes de ser executada. |
+| RN04   | **Tipos de Questões**: O sistema deve permitir incluir e persistir diferentes tipos de perguntas (múltipla escolha, discursiva, etc.) no mesmo template. |
+## Regras de Negócio - Criar Template de Formulário
+(Issue 17: "Quero escolher criar um formulário para os docentes ou os discentes...")
+
+| Código | Descrição                                                                                          |
+|--------|----------------------------------------------------------------------------------------------------|
+| RN01   | **Obrigatoriedade de Título**: Não é permitido criar ou salvar um template com o campo "Nome/Título" vazio. |
+| RN02   | **Imutabilidade Histórica**: A edição de um template **não pode** alterar a estrutura ou os dados de formulários já respondidos (instâncias antigas permanecem inalteradas). |
+## Regras de Negócio - Editar Template
+(Issue 3: "Quero visualizar os templates criados")
+
+| Código | Descrição                                                                                          |
+|--------|----------------------------------------------------------------------------------------------------|
+| RN05   | **Condicionalidade de Campos**: O campo "Turma" deve ser **obrigatório** quando o público-alvo for "Discentes" e **oculto** quando for "Docentes". |
+| RN06   | **Segmentação de Envio**: O formulário gerado deve ser enviado **apenas** para os usuários vinculados à turma selecionada. |
+## Regras de Negócio - Visualizar Templates
+(Issue 2: "Quero editar e/ou deletar um template que eu criei sem afetar...")
+
+| Código | Descrição                                                                                          |
+|--------|----------------------------------------------------------------------------------------------------|
+| RN07   | **Estado de Lista Vazia**: Quando não houver templates cadastrados, exibir a mensagem "Nenhum template foi criado" em vez de uma lista em branco. |
+| RN08   | **Ações de Gerenciamento**: Cada item da lista deve exibir botões individuais de **"Editar"** e **"Deletar"**. |
+
+
+
+## Regras de Negócio - Importação de Dados do SIGAA (Apenas Adicionar)
+(Issue 4: Importar dados do SIGAA)
+(Quero importar dados de turmas, matérias e participantes do SIGAA caso não existam na base de dados atual)
+
+| Código | Descrição                                                                                                           |
+|--------|---------------------------------------------------------------------------------------------------------------------|
+| RN13   | Para cada item do JSON, verificar a chave única (ex: matrícula do aluno ou código da disciplina):<br>• Se **não existir** → criar o registro.<br>• Se **já existir** → ignorar o item (não atualizar nem duplicar). |
+| RN14   | Esta é uma operação de **"apenas adicionar"**, usada para alimentar a base sem risco de sobrescrever dados já alterados manualmente. |
+| RN15   | Aceitar somente arquivos com extensão **.json**. Qualquer outro formato deve ser rejeitado com mensagem de erro.   |
+| RN16   | O arquivo .json deve ser sintaticamente válido. Erro de sintaxe → rejeição imediata com mensagem de erro clara. |
+
+## Regras de Negócio - Gerenciamento de Relatórios e Resultados
+(Issue 7: Gerar relatório do administrador – Quero baixar um arquivo CSV contendo os resultados de um formulário)
+
+| Código | Descrição                                                                                                           |
+|--------|---------------------------------------------------------------------------------------------------------------------|
+| RN10   | O acesso à página **"Gerenciamento → Resultados"** e todas as suas funcionalidades é restrito exclusivamente a usuários com papel **"Administrador"**. |
+| RN11   | Usuários sem perfil Administrador **não devem ver** o link da página. Caso tentem acessar diretamente a URL, devem ser bloqueados e redirecionados ao seu dashboard. |
+| RN12   | Ao solicitar o download dos resultados, o sistema deve gerar e oferecer um arquivo no formato **CSV**.              |
+
+## Regras de Negócio - Atualizar Dados Existentes (via SIGAA)
+(Issue 4: Quero atualizar a base de dados já existente com os dados atuais do SIGAA)
+
+| Código | Descrição                                                                                                           |
+|--------|---------------------------------------------------------------------------------------------------------------------|
+| RN02   | Se o item (aluno, turma, etc.) do JSON **não existir** no banco, o sistema deve criá-lo.                              |
+| RN03   | Se o item do JSON **já existir** no banco, o sistema deve atualizar o registro existente com os dados do JSON.     |
+| RN04   | O sistema **nunca** deve criar duplicatas – a ação é sempre de correção/atualização do registro existente.          |
+| RN05   | Aceitar apenas arquivos com extensão **.json**. Qualquer outro formato deve ser rejeitado.                         |
+| RN06   | O arquivo .json deve ser sintaticamente válido. Caso contrário, a importação deve ser rejeitada.                   |
+| RN07   | O JSON deve conter todas as chaves obrigatórias esperadas. Se algum item estiver sem chave obrigatória (ex: matrícula), a importação deve falhar. |
+| RN08   | Após importação bem-sucedida, exibir mensagem de sucesso clara ao administrador.                                   |
+| RN09   | Após falha na importação (qualquer motivo), exibir mensagem de erro detalhando o problema.                          |
+
+## Regras de Negócio - Gerenciamento de Turmas por Departamento
+(Issue 12: Quero gerenciar somente as turmas do departamento o qual eu pertenço)
+
+| Código | Descrição                                                                                                           |
+|--------|---------------------------------------------------------------------------------------------------------------------|
+| RN01   | Se um usuário (administrador de departamento ou não) tentar acessar diretamente via URL os dados de turmas de outro departamento, o sistema deve redirecioná-lo imediatamente para sua página principal (Dashboard). |
+
+
+
+
 ## Quem ficou responsável por cada cenário BDD em relação as US/Issues?
 
 #[02](https://github.com/mariosantos-05/CAMAAR-G1/issues/2) Luís Filipe  
