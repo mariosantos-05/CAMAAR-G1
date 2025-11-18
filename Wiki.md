@@ -60,8 +60,55 @@ As US desta sprint são:
 [17](https://github.com/mariosantos-05/CAMAAR-G1/issues/17)
 
 # Quais serão as regras de negócio para cada funcionalidade?
+## Regras de Negócio - Redefinição de Senha
+(Issue 1: "Quero redefinir uma senha... a partir do e-mail recebido...")
 
-# Quem ficou responsável por cada cenário BDD em relação as US/Issues?
+| Código     | Descrição                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+| RN-RS-01   | O usuário deve informar um e-mail cadastrado para solicitar a redefinição de senha.                                 |
+| RN-RS-02   | Caso o e-mail **não exista** no sistema, exibir mensagem de sucesso genérica ("Se este e-mail estiver cadastrado...") para evitar enumeração de usuários. |
+| RN-RS-03   | Se o e-mail existir, gerar um **token único** de redefinição e enviá-lo por e-mail ao usuário.                      |
+| RN-RS-04   | O token de redefinição deve expirar em **60 minutos**.                                                              |
+| RN-RS-05   | O token é de **uso único** – após a redefinição da senha, torna-se inválido.                                        |
+| RN-RS-06   | A nova senha deve obedecer às regras de complexidade do sistema (ver RN-DS-02).                                    |
+## Regras de Negócio - Definição de Senha (Primeiro Acesso)
+(Issue 2: "Quero definir uma senha... a partir do e-mail do sistema de solicitação de cadastro...")
+
+| Código     | Descrição                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+| RN-DS-01   | O link de definição de senha é de **uso único**.                                                                    |
+| RN-DS-02   | A senha deve ter no mínimo **8 caracteres**, contendo letras maiúsculas, minúsculas e números.                     |
+| RN-DS-03   | Os campos **"Nova Senha"** e **"Confirmar Senha"** devem ser idênticos; caso contrário, exibir erro.               |
+| RN-DS-04   | A conta só muda de status **"Pendente" → "Ativo"** após a definição bem-sucedida da senha (cadastro efetivado).   |
+
+## Regras de Negócio - Cadastro de Usuários via Importação
+(Issue 4: "Quero cadastrar participantes... ao importar dados de usuarios novos...")
+
+| Código     | Descrição                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+| RN-C-01    | A funcionalidade de importação só está acessível para usuários com perfil **"Admin"**.                              |
+| RN-C-02    | Aceitar **apenas** arquivos no formato **.json**. Qualquer outro formato (ex: .pdf, .csv) → "Formato de arquivo inválido". |
+| RN-C-03    | O arquivo deve ser um **JSON válido** (sintaxe correta). Erros de sintaxe → "O arquivo não é um JSON válido".       |
+| RN-C-04    | Cada objeto de usuário deve conter **obrigatoriamente** as chaves `"matricula"` e `"email"`. Falta de qualquer uma → rejeitar importação. |
+| RN-C-05    | As chaves devem ter tipos corretos (ex: `"matricula"` deve ser número/string numérica válida).                     |
+| RN-C-06    | Se a matrícula **não existir** no banco, criar novo usuário com status **"Pendente"**.                              |
+| RN-C-07    | **Não** disparar automaticamente o e-mail de definição de senha ao criar usuário "Pendente" via importação.       |
+| RN-C-08    | Se a matrícula já existir, **não criar duplicata**.                                                                |
+| RN-C-09    | Se a matrícula já existir, **atualizar** os dados do usuário (ex: atualizar e-mail se diferente no JSON).          |
+
+## Regras de Negócio - Sistema de Login
+(Issue 3: "Quero acessar o sistema utilizando um e-mail ou matrícula...")
+
+| Código     | Descrição                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+| RN-L-01    | O usuário deve poder se autenticar usando **e-mail** ou **número de matrícula** no mesmo campo de login.            |
+| RN-L-02    | Os campos **"E-mail ou Matrícula"** e **"Senha"** são de preenchimento obrigatório.                                  |
+| RN-L-03    | Em caso de e-mail/matrícula ou senha incorretos, exibir mensagem genérica **"E-mail ou senha inválidos"** (nunca informar qual dos dois está errado). |
+| RN-L-04    | Usuários com perfil **"Admin"** devem ter a opção **"Gerenciamento"** exibida no menu lateral.                      |
+| RN-L-05    | Usuários com perfil diferente de "Admin" (ex: Aluno, Professor) **não devem** ver a opção "Gerenciamento".         |
+| RN-L-06    | O login só é permitido se o status da conta do usuário for **"Ativo"** (ou seja, após a primeira definição de senha). |
+
+## Quem ficou responsável por cada cenário BDD em relação as US/Issues?
 
 #[02](https://github.com/mariosantos-05/CAMAAR-G1/issues/2) Luís Filipe  
 #[03](https://github.com/mariosantos-05/CAMAAR-G1/issues/3) Luís Filipe  
