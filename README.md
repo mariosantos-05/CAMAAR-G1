@@ -61,7 +61,7 @@ As US desta sprint são:
 
 # Quais serão as regras de negócio para cada funcionalidade?
 ## Regras de Negócio - Redefinição de Senha
-(Issue 1: "Quero redefinir uma senha... a partir do e-mail recebido...")
+(Issue 13: "Quero redefinir uma senha... a partir do e-mail recebido...")
 
 | Código     | Descrição                                                                                                           |
 |------------|---------------------------------------------------------------------------------------------------------------------|
@@ -73,7 +73,7 @@ As US desta sprint são:
 | RN-RS-06   | A nova senha deve obedecer às regras de complexidade do sistema (ver RN-DS-02).                                    |
 
 ## Regras de Negócio - Definição de Senha (Primeiro Acesso)
-(Issue 2: "Quero definir uma senha... a partir do e-mail do sistema de solicitação de cadastro...")
+(Issue 11: "Quero definir uma senha... a partir do e-mail do sistema de solicitação de cadastro...")
 
 | Código     | Descrição                                                                                                           |
 |------------|---------------------------------------------------------------------------------------------------------------------|
@@ -98,7 +98,7 @@ As US desta sprint são:
 | RN-C-09    | Se a matrícula já existir, **atualizar** os dados do usuário (ex: atualizar e-mail se diferente no JSON).          |
 
 ## Regras de Negócio - Sistema de Login
-(Issue 3: "Quero acessar o sistema utilizando um e-mail ou matrícula...")
+(Issue 10: "Quero acessar o sistema utilizando um e-mail ou matrícula...")
 
 | Código     | Descrição                                                                                                           |
 |------------|---------------------------------------------------------------------------------------------------------------------|
@@ -110,7 +110,7 @@ As US desta sprint são:
 | RN-L-06    | O login só é permitido se o status da conta do usuário for **"Ativo"** (ou seja, após a primeira definição de senha). |
 
 ## Regras de Negócio - Criar Formulário (Template de Questões)
-(Issue 8: "Quero criar um template de formulário contendo as questões do formulário...")
+(Issue 09: "Quero criar um template de formulário contendo as questões do formulário...")
 
 | Código     | Descrição                                                                                          |
 |------------|----------------------------------------------------------------------------------------------------|
@@ -125,16 +125,16 @@ As US desta sprint são:
 | RN-CTF-01 | **Obrigatoriedade de Título**: Não é permitido criar ou salvar um template com o campo "Nome/Título" vazio. |
 | RN-CTF-02 | **Imutabilidade Histórica**: A edição de um template **não pode** alterar a estrutura ou os dados de formulários já respondidos (instâncias antigas permanecem inalteradas). |
 
-## Regras de Negócio - Editar Template
-(Issue 3: "Quero visualizar os templates criados")
+## Regras de Negócio - Visualizar Templates
+(Issue 03: "Quero visualizar os templates criados")
 
 | Código    | Descrição                                                                                          |
 |-----------|----------------------------------------------------------------------------------------------------|
 | RN-ET-01   | **Condicionalidade de Campos**: O campo "Turma" deve ser **obrigatório** quando o público-alvo for "Discentes" e **oculto** quando for "Docentes". |
 | RN-ET-02   | **Segmentação de Envio**: O formulário gerado deve ser enviado **apenas** para os usuários vinculados à turma selecionada. |
 
-## Regras de Negócio - Visualizar Templates
-(Issue 2: "Quero editar e/ou deletar um template que eu criei sem afetar...")
+## Regras de Negócio - Editar e Deletar Template
+(Issue 02: "Quero editar e/ou deletar um template que eu criei sem afetar...")
 
 | Código    | Descrição                                                                                          |
 |-----------|----------------------------------------------------------------------------------------------------|
@@ -142,7 +142,7 @@ As US desta sprint são:
 | RN-VT-02  | **Ações de Gerenciamento**: Cada item da lista deve exibir botões individuais de **"Editar"** e **"Deletar"**. |
 
 ## Regras de Negócio - Importação de Dados do SIGAA (Apenas Adicionar)
-(Issue 4: Importar dados do SIGAA)
+(Issue 04: Importar dados do SIGAA)
 (Quero importar dados de turmas, matérias e participantes do SIGAA caso não existam na base de dados atual)
 
 | Código    | Descrição                                                                                                           |
@@ -153,7 +153,7 @@ As US desta sprint são:
 | RN-IDS-16 | O arquivo .json deve ser sintaticamente válido. Erro de sintaxe → rejeição imediata com mensagem de erro clara. |
 
 ## Regras de Negócio - Gerenciamento de Relatórios e Resultados
-(Issue 7: Gerar relatório do administrador – Quero baixar um arquivo CSV contendo os resultados de um formulário)
+(Issue 07: Gerar relatório do administrador – Quero baixar um arquivo CSV contendo os resultados de um formulário)
 
 | Código    | Descrição                                                                                                           |
 |-----------|---------------------------------------------------------------------------------------------------------------------|
@@ -162,7 +162,7 @@ As US desta sprint são:
 | RN-GR-03  | Ao solicitar o download dos resultados, o sistema deve gerar e oferecer um arquivo no formato **CSV**.              |
 
 ## Regras de Negócio - Atualizar Dados Existentes (via SIGAA)
-(Issue 4: Quero atualizar a base de dados já existente com os dados atuais do SIGAA)
+(Issue 14: Quero atualizar a base de dados já existente com os dados atuais do SIGAA)
 
 | Código    | Descrição                                                                                                           |
 |-----------|---------------------------------------------------------------------------------------------------------------------|
