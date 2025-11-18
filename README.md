@@ -227,7 +227,7 @@ As US desta sprint são:
 | US / #16         | 3                   |
 | US / #17         | 3                   |
 | **Total**        | **Story Points**    |
-| **16 US/Issues** | **39 Story Points** |
+| **16 US/Issues** | **40 Story Points** |
 
 ---
 
