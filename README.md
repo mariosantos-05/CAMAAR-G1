@@ -42,22 +42,22 @@ Caroline, Célio, Luís Filipe e Mário.
 
 Nesta Sprint 1: 1° Etapa os integrantes irão Especificar os cenários BDD de acordo com as histórias de usuários, cada cenário BDD deve possuir pelo menos um cenário feliz e um triste.
 As US desta sprint são:  
-[02](https://github.com/mariosantos-05/CAMAAR-G1/issues/2)  
-[03](https://github.com/mariosantos-05/CAMAAR-G1/issues/3)  
-[04](https://github.com/mariosantos-05/CAMAAR-G1/issues/4)  
-[05](https://github.com/mariosantos-05/CAMAAR-G1/issues/5)  
-[06](https://github.com/mariosantos-05/CAMAAR-G1/issues/6)  
-[07](https://github.com/mariosantos-05/CAMAAR-G1/issues/7)  
-[08](https://github.com/mariosantos-05/CAMAAR-G1/issues/8)  
-[09](https://github.com/mariosantos-05/CAMAAR-G1/issues/9)  
-[10](https://github.com/mariosantos-05/CAMAAR-G1/issues/10)  
-[11](https://github.com/mariosantos-05/CAMAAR-G1/issues/11)  
-[12](https://github.com/mariosantos-05/CAMAAR-G1/issues/12)  
-[13](https://github.com/mariosantos-05/CAMAAR-G1/issues/13)  
-[14](https://github.com/mariosantos-05/CAMAAR-G1/issues/14)  
-[15](https://github.com/mariosantos-05/CAMAAR-G1/issues/15)  
-[16](https://github.com/mariosantos-05/CAMAAR-G1/issues/16)  
-[17](https://github.com/mariosantos-05/CAMAAR-G1/issues/17)
+[02 - Edição e deleção de templates](https://github.com/mariosantos-05/CAMAAR-G1/issues/2)  
+[03 - Visualização dos templates criados](https://github.com/mariosantos-05/CAMAAR-G1/issues/3)  
+[04 - Importar dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/4)  
+[05 - Responder formulário](https://github.com/mariosantos-05/CAMAAR-G1/issues/5)  
+[06 - Cadastrar usuários do sistema](https://github.com/mariosantos-05/CAMAAR-G1/issues/6)  
+[07 - Gerar relatório do Administrador](https://github.com/mariosantos-05/CAMAAR-G1/issues/7)  
+[08 - Criar template de formulário](https://github.com/mariosantos-05/CAMAAR-G1/issues/8)  
+[09 - Criar formulários de avaliação](https://github.com/mariosantos-05/CAMAAR-G1/issues/9)  
+[10 - Sistema de login](https://github.com/mariosantos-05/CAMAAR-G1/issues/10)  
+[11 - Sistema de definição de senha](https://github.com/mariosantos-05/CAMAAR-G1/issues/11)  
+[12 - Sistema de gerenciamento por departamento](https://github.com/mariosantos-05/CAMAAR-G1/issues/12)  
+[13 - Redefinição de senha](https://github.com/mariosantos-05/CAMAAR-G1/issues/13)  
+[14 - Atualizar base de dados com os dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/14)  
+[15 - Visualização de formlários para responder](https://github.com/mariosantos-05/CAMAAR-G1/issues/15)  
+[16 - Visualização de Resultado dos Formulários](https://github.com/mariosantos-05/CAMAAR-G1/issues/16)  
+[17 - Criação de formulário para docentes ou discentes](https://github.com/mariosantos-05/CAMAAR-G1/issues/17)
 
 # Quais serão as regras de negócio para cada funcionalidade?
 ## Regras de Negócio - Redefinição de Senha
