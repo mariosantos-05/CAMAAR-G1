@@ -83,7 +83,7 @@ As US desta sprint são:
 | RN-DS-04   | A conta só muda de status **"Pendente" → "Ativo"** após a definição bem-sucedida da senha (cadastro efetivado).   |
 
 ## Regras de Negócio - Cadastro de Usuários via Importação
-(Issue 4: "Quero cadastrar participantes... ao importar dados de usuarios novos...")
+(Issue 06: "Quero cadastrar participantes... ao importar dados de usuarios novos...")
 
 | Código     | Descrição                                                                                                           |
 |------------|---------------------------------------------------------------------------------------------------------------------|
