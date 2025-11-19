@@ -138,16 +138,16 @@ As US desta sprint são:
 
 | Código    | Descrição                                                                                          |
 |-----------|----------------------------------------------------------------------------------------------------|
-| RN-ET-01   | **Condicionalidade de Campos**: O campo "Turma" deve ser **obrigatório** quando o público-alvo for "Discentes" e **oculto** quando for "Docentes". |
-| RN-ET-02   | **Segmentação de Envio**: O formulário gerado deve ser enviado **apenas** para os usuários vinculados à turma selecionada. |
+| RN-VT-01   | **Condicionalidade de Campos**: O campo "Turma" deve ser **obrigatório** quando o público-alvo for "Discentes" e **oculto** quando for "Docentes". |
+| RN-VT-02   | **Segmentação de Envio**: O formulário gerado deve ser enviado **apenas** para os usuários vinculados à turma selecionada. |
 
 ## Regras de Negócio - Editar e Deletar Template
 (Issue 02: "Quero editar e/ou deletar um template que eu criei sem afetar...")
 
 | Código    | Descrição                                                                                          |
 |-----------|----------------------------------------------------------------------------------------------------|
-| RN-VT-01  | **Estado de Lista Vazia**: Quando não houver templates cadastrados, exibir a mensagem "Nenhum template foi criado" em vez de uma lista em branco. |
-| RN-VT-02  | **Ações de Gerenciamento**: Cada item da lista deve exibir botões individuais de **"Editar"** e **"Deletar"**. |
+| RN-ET-01  | **Estado de Lista Vazia**: Quando não houver templates cadastrados, exibir a mensagem "Nenhum template foi criado" em vez de uma lista em branco. |
+| RN-ET-02  | **Ações de Gerenciamento**: Cada item da lista deve exibir botões individuais de **"Editar"** e **"Deletar"**. |
 
 ## Regras de Negócio - Importação de Dados do SIGAA (Apenas Adicionar)
 (Issue 04: Importar dados do SIGAA)
