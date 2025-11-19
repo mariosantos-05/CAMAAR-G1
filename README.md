@@ -21,14 +21,22 @@ O projeto contempla funcionalidades de cadastro de usuários, redefinição de s
 
 # 🔰 Papéis na Sprint 1
 
-● Caroline, Célio, Luís Filipe e Mário - Especificar os cenários BDD das histórias de usuário usando o
-Cucumber.  
-● Mário - Abrir uma Pull Request com as especificações dos testes de aceitação
+● Especificar os cenários BDD das histórias de usuário usando o
+Cucumber.   
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.  
+
+● Abrir uma Pull Request com as especificações dos testes de aceitação
 (BDD) no repositório principal.  
-● Mário - Entregar arquivo .txt contendo um link para o repositório, o nome e a
+Responsável: Mário  
+
+● Entregar arquivo .txt contendo um link para o repositório, o nome e a
 matrícula dos integrantes.  
-● Caroline, Célio, Luís Filipe, Mário  - Criar um arquivo Markdown como Wiki, contendo
-as informações sobre a Sprint 1.
+Responsável: Mário    
+
+● Criar um arquivo Markdown como Wiki, contendo
+as informações sobre a Sprint 1.  
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+
 
 ## 🧑‍💼 Scrum Master
 
