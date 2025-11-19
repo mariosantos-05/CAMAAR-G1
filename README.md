@@ -23,11 +23,11 @@ O projeto contempla funcionalidades de cadastro de usuários, redefinição de s
 
 ● Caroline, Célio, Luís Filipe e Mário - Especificar os cenários BDD das histórias de usuário usando o
 Cucumber.  
-● A definir - Abrir uma Pull Request com as especificações dos testes de aceitação
+● Mário - Abrir uma Pull Request com as especificações dos testes de aceitação
 (BDD) no repositório principal.  
-● A definir - Entregar arquivo .txt contendo um link para o repositório, o nome e a
+● Mário - Entregar arquivo .txt contendo um link para o repositório, o nome e a
 matrícula dos integrantes.  
-● Luís Filipe - Adicionar um arquivo Markdown como Wiki no fork do grupo, contendo
+● Caroline, Célio, Luís Filipe, Mário  - Criar um arquivo Markdown como Wiki, contendo
 as informações sobre a Sprint 1.
 
 ## 🧑‍💼 Scrum Master
