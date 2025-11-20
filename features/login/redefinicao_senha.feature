@@ -1,3 +1,5 @@
+# language: pt
+
 Funcionalidade: Redefinição de senha
 	Como um Usuário
 	Eu quero redefinir uma senha para o meu usuário a partir do e-mail recebido

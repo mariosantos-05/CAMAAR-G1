@@ -1,3 +1,5 @@
+# language: pt
+
 Funcionalidade: Definição inicial de senha
 	Como um Usuário
 	Eu quero definir uma senha para o meu usuário a partir do e-mail do sistema de solicitação de cadastro

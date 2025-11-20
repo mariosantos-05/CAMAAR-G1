@@ -1,4 +1,4 @@
-# language: pt-br
+# language: pt
 
 Funcionalidade: Visualização e Download de Resultados de Avaliação
 	Como um administrador

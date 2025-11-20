@@ -1,3 +1,5 @@
+# language: pt
+
 Funcionalidade: Visualização dos templates criados 
 
 Cenário: Visualizar lista de templates existentes (Feliz)
