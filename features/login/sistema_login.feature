@@ -1,3 +1,5 @@
+# language: pt
+
 Funcionalidade: Autenticação de usuário no sistema
 	Como um Usuário do sistema
 	Eu quero acessar o sistema utilizando um e-mail ou matrícula e uma senha já cadastrada

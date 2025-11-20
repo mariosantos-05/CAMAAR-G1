@@ -1,4 +1,4 @@
-# language: pt-br
+# language: pt
 
 Funcionalidade: Visualização de resultados de avaliação restrita por departamento
 

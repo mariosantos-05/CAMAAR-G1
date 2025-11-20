@@ -1,4 +1,4 @@
-# language: pt-br
+# language: pt
 	
 Funcionalidade: Alimentação inicial da base de dados com JSON do SIGAA
 
