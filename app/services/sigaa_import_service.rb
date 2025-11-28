@@ -4,12 +4,11 @@ class SigaaImportService
   class InvalidFileError < StandardError; end
 
   REQUIRED_SUBJECT_KEYS = %w[code name class] 
-  
   REQUIRED_CLASS_KEYS = %w[classCode semester time]
   
   REQUIRED_MEMBER_FILE_KEYS = %w[code classCode semester dicente]
   
-  REQUIRED_STUDENT_KEYS = %w[nome matricula curso usuario email ocupacao formacao]
+  REQUIRED_STUDENT_KEYS = %w[nome matricula curso email ocupacao formacao]
 
   def initialize(file_path)
     @file_path = file_path
@@ -35,7 +34,7 @@ class SigaaImportService
         elsif entry.key?('dicente')
           process_members_file(entry, index)
         else
-          raise InvalidFileError, "O objeto na linha #{index + 1} não foi reconhecido (não possui chave 'class' nem 'dicente')."
+          raise InvalidFileError, "Objeto não reconhecido na linha #{index + 1}."
         end
       end
     end
@@ -54,56 +53,49 @@ class SigaaImportService
 
   def process_classes_file(entry, index)
     validate_keys!(entry, REQUIRED_SUBJECT_KEYS, "na Matéria (item #{index + 1})")
+    validate_keys!(entry['class'], REQUIRED_CLASS_KEYS, "na Turma")
 
-    validate_keys!(entry['class'], REQUIRED_CLASS_KEYS, "na Turma da matéria '#{entry['code']}'")
+    nome_completo = "#{entry['name']} (#{entry['code']} - #{entry['class']['classCode']})"
+    semestre = entry['class']['semester']
 
-    subject = Subject.find_or_create_by(code: entry['code']) do |s|
-      s.name = entry['name']
+    turma = Turma.find_or_create_by(nome: nome_completo, semestre: semestre) do |t|
+      t.is_active = true
     end
-    subject.update(name: entry['name'])
-
-    class_info = entry['class']
-    Turma.find_or_create_by(
-      class_code: class_info['classCode'],
-      semester: class_info['semester'],
-      subject: subject
-    ) do |t|
-      t.time = class_info['time']
-    end
+    
+    turma.update(nome: nome_completo)
   end
 
   def process_members_file(entry, index)
-    validate_keys!(entry, REQUIRED_MEMBER_FILE_KEYS, "no cabeçalho da Turma (item #{index + 1})")
+    validate_keys!(entry, REQUIRED_MEMBER_FILE_KEYS, "no cabeçalho da Turma")
 
     if entry['dicente']
-      entry['dicente'].each_with_index do |student_data, student_index|
-        validate_keys!(student_data, REQUIRED_STUDENT_KEYS, "no Aluno ##{student_index + 1} da turma '#{entry['code']}'")
+      entry['dicente'].each_with_index do |student_data, s_index|
+        validate_keys!(student_data, REQUIRED_STUDENT_KEYS, "no Aluno ##{s_index + 1}")
       end
     end
 
-    subject = Subject.find_by(code: entry['code'])
-    unless subject
-      return 
+    turma = Turma.where(semestre: entry['semester']).find do |t|
+      t.nome.include?(entry['code']) && t.nome.include?(entry['classCode'])
     end
 
-    turma = Turma.find_by(
-      subject: subject,
-      class_code: entry['classCode'],
-      semester: entry['semester']
-    )
-    return unless turma 
+    unless turma
+      return
+    end
 
-    entry['dicente'].each do |student_data|
-      member = Member.find_or_create_by(matricula: student_data['matricula']) do |m|
-        m.nome = student_data['nome']
-        m.curso = student_data['curso']
-        m.usuario = student_data['usuario']
-        m.email = student_data['email']
-        m.ocupacao = student_data['ocupacao']
-        m.formacao = student_data['formacao']
+    if entry['dicente']
+      entry['dicente'].each do |student_data|
+        usuario = Usuario.find_or_create_by(matricula: student_data['matricula']) do |u|
+          u.nome = student_data['nome']
+          u.email = student_data['email']
+          u.profile = 'Aluno'
+          u.status = true
+          u.departamento_id = 1
+        end
+
+        Vinculo.find_or_create_by(usuario: usuario, turma: turma) do |v|
+          v.papel_turma = 0 
+        end
       end
-      
-      turma.members << member unless turma.members.exists?(member.id)
     end
   end
 end

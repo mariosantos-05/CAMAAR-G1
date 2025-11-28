@@ -10,40 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_27_213521) do
-  create_table "members", force: :cascade do |t|
-    t.string "nome"
-    t.string "matricula"
-    t.string "curso"
-    t.string "usuario"
-    t.string "formacao"
-    t.string "ocupacao"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "members_turmas", id: false, force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_11_28_134249) do
+  create_table "forms", force: :cascade do |t|
+    t.integer "template_id", null: false
     t.integer "turma_id", null: false
-    t.integer "member_id", null: false
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
+    t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["template_id"], name: "index_forms_on_template_id"
+    t.index ["turma_id"], name: "index_forms_on_turma_id"
+  end
+
+  create_table "resposta", force: :cascade do |t|
+    t.integer "form_id", null: false
+    t.integer "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_resposta_on_form_id"
+    t.index ["usuario_id"], name: "index_resposta_on_usuario_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "titulo"
+    t.string "target_audience"
+    t.integer "criado_por_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["criado_por_id"], name: "index_templates_on_criado_por_id"
   end
 
   create_table "turmas", force: :cascade do |t|
-    t.string "class_code"
-    t.string "semester"
-    t.string "time"
-    t.integer "subject_id", null: false
+    t.string "nome"
+    t.string "semestre"
+    t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_turmas_on_subject_id"
   end
 
-  add_foreign_key "turmas", "subjects"
+  create_table "usuarios", force: :cascade do |t|
+    t.string "nome"
+    t.string "matricula"
+    t.string "email"
+    t.boolean "status"
+    t.string "profile"
+    t.integer "departamento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vinculos", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.integer "turma_id", null: false
+    t.integer "papel_turma"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["turma_id"], name: "index_vinculos_on_turma_id"
+    t.index ["usuario_id"], name: "index_vinculos_on_usuario_id"
+  end
+
+  add_foreign_key "forms", "templates"
+  add_foreign_key "forms", "turmas"
+  add_foreign_key "resposta", "forms"
+  add_foreign_key "resposta", "usuarios"
+  add_foreign_key "templates", "criado_pors"
+  add_foreign_key "vinculos", "turmas"
+  add_foreign_key "vinculos", "usuarios"
 end
