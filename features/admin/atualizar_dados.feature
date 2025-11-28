@@ -1,4 +1,4 @@
-# language: pt-br
+# language: pt
 
 Funcionalidade: Atualização da base de dados por importação de JSON do SIGAA
 

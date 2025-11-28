@@ -24,5 +24,34 @@
 
   <body>
     <%= yield %>
+    <div class="flash-container">
+      <% if notice %>
+        <div class="flash-message flash-success temp-alert">
+          <%= notice %>
+        </div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="flash-message flash-error temp-alert">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+
+    <script>
+      function setupAutoDismiss() {
+        const alerts = document.querySelectorAll('.temp-alert');
+        alerts.forEach(function(alertBox) {
+          setTimeout(function() {
+            alertBox.classList.add('fade-out');
+            setTimeout(function() {
+              alertBox.style.display = 'none';
+            }, 1000);
+          }, 3000); // 3 segundos na tela
+        });
+      }
+      document.addEventListener("turbo:load", setupAutoDismiss);
+      document.addEventListener("DOMContentLoaded", setupAutoDismiss);
+    </script>
   </body>
 </html>

@@ -1,0 +1,31 @@
+<div class="admin-container">
+  
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span>☰</span> Gerenciamento
+        </div>
+        <nav class="sidebar-menu">
+            <a href="#">Avaliações</a>
+            <a href="#" class="active">Gerenciamento</a> 
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-navbar">
+            <h2 style="font-size: 1.2rem; margin: 0; color: #333;">Gerenciamento</h2>
+            <div class="nav-search">
+                <input type="text" class="search-input" placeholder="Pesquisar...">
+                <div class="profile-circle">U</div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="action-card">
+                <%= link_to "Importar dados", import_sigaa_path, class: "btn-action btn-primary-green" %>
+                <button class="btn-action btn-secondary-green">Editar Templates</button>
+                <button class="btn-action btn-secondary-green">Enviar Formularios</button>
+                <button class="btn-action btn-secondary-green">Resultados</button>
+            </div>
+        </div>
+    </main>
+</div>

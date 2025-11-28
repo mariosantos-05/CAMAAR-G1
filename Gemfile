@@ -54,6 +54,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "rspec-rails"
 end
 
 # Testing gems
@@ -61,6 +62,7 @@ group :test do
   # Rails default system testing
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-rails"
 
   # Cucumber support
   gem "cucumber-rails", require: false

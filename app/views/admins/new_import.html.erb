@@ -1,0 +1,33 @@
+<div class="admin-container" style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
+  
+  <div class="action-card" style="width: 500px; text-align: left;">
+    <h2 style="text-align: center; color: #333; margin-top: 0;">Importar Dados do SIGAA</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">
+      Selecione o arquivo JSON de <b>Turmas</b> ou <b>Alunos</b>.
+    </p>
+
+    <%= form_with url: import_sigaa_path, local: true, multipart: true do |form| %>
+      
+      <% if flash[:alert] %>
+        <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 20px; text-align: center;">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <div style="margin-bottom: 20px;">
+        <%= form.label :file, "Arquivo JSON:", style: "display: block; margin-bottom: 8px; font-weight: bold; color: #333;" %>
+        
+        <%= form.file_field :file, accept: 'application/json', 
+            style: "width: 100%; box-sizing: border-box; display: block; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;" %>
+      </div>
+
+      <%= form.submit "Enviar Arquivo", class: "btn-action btn-primary-green", style: "margin-bottom: 15px;" %>
+      
+      <div style="text-align: center;">
+        <%= link_to "Voltar para o Menu", admin_management_path, style: "color: #666; text-decoration: none; font-size: 0.9rem;" %>
+      </div>
+
+    <% end %>
+  </div>
+
+</div>
