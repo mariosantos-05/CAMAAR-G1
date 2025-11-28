@@ -1,5 +1,4 @@
 <div class="admin-container">
-  
     <aside class="sidebar">
         <div class="sidebar-header">
             <span>☰</span> Gerenciamento
@@ -24,7 +23,7 @@
                 <%= link_to "Importar dados", import_sigaa_path, class: "btn-action btn-primary-green" %>
                 <button class="btn-action btn-secondary-green">Editar Templates</button>
                 <button class="btn-action btn-secondary-green">Enviar Formularios</button>
-                <button class="btn-action btn-secondary-green">Resultados</button>
+                <%= link_to "Resultados", admin_results_path, class: "btn-action btn-primary-green" %>
             </div>
         </div>
     </main>

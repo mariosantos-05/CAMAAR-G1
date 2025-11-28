@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa' 
   post 'importar_sigaa', to: 'admins#create_import'
 
+  get 'resultados', to: 'admins#results', as: 'admin_results'
+  get 'resultados/:turma_id/csv', to: 'admins#export_csv', as: 'export_results_csv'
+
+
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
