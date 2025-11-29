@@ -12,7 +12,8 @@ body {
 
 .admin-container {
   display: flex;
-  height: 100vh;
+  flex: 1;
+  height: calc(100vh - 60px);
   width: 100vw;
 }
 
@@ -23,15 +24,29 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 
-.sidebar-header {
-  padding: 20px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.sidebar.collapsed {
+  width: 0;
+  border: none;
+}
+
+.sidebar.collapsed .menu-text {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+  padding: 0;
+  height: 60px;
+}
+
+.sidebar.collapsed .sidebar-menu a {
+  display: none;
 }
 
 .sidebar-menu {
@@ -43,7 +58,7 @@ body {
   padding: 15px 20px;
   text-decoration: none;
   color: #333;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
 }
 
 .sidebar-menu a.active {
@@ -57,6 +72,7 @@ body {
   background-color: #e0e0e0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .top-navbar {
@@ -67,6 +83,8 @@ body {
   justify-content: space-between;
   padding: 0 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  z-index: 10;
+  flex-shrink: 0;
 }
 
 .nav-search {

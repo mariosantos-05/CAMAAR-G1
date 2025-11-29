@@ -1,21 +1,24 @@
-<div class="admin-container">
-  <aside class="sidebar">
-    <div class="sidebar-header"><span>☰</span> Gerenciamento</div>
-    <nav class="sidebar-menu">
-      <a href="#">Avaliações</a>
-      <a href="/gerenciamento" class="active" >Gerenciamento</a>
-    </nav>
-  </aside>
+<header class="top-navbar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
+        <h2 style="font-size: 1.2rem; margin: 0; color: #333;">Resultados</h2>
+    </div>
 
-  <main class="main-content">
-    <header class="top-navbar">
-      <h2 style="font-size: 1.2rem; margin: 0; color: #333;">Resultados</h2>
-      <div class="nav-search">
+    <div class="nav-search">
         <input type="text" class="search-input" placeholder="Pesquisar...">
         <div class="profile-circle">U</div>
-      </div>
-    </header>
+    </div>
+</header>
 
+<div class="admin-container">
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="#">Avaliações</a>
+            <a href="<%= admin_management_path %>" class="active">Gerenciamento</a> 
+        </nav>
+    </aside>
+
+  <main class="main-content">
     <div class="content-area" style="flex-direction: column; align-items: flex-start; padding: 40px; overflow-y: auto;">
       
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; width: 100%;">

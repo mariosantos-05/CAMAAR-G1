@@ -9,32 +9,23 @@
     <%= csp_meta_tag %>
 
     <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= yield %>
+    
     <div class="flash-container">
       <% if notice %>
-        <div class="flash-message flash-success temp-alert">
-          <%= notice %>
-        </div>
+        <div class="flash-message flash-success temp-alert"><%= notice %></div>
       <% end %>
-      
       <% if alert %>
-        <div class="flash-message flash-error temp-alert">
-          <%= alert %>
-        </div>
+        <div class="flash-message flash-error temp-alert"><%= alert %></div>
       <% end %>
     </div>
 
@@ -44,14 +35,30 @@
         alerts.forEach(function(alertBox) {
           setTimeout(function() {
             alertBox.classList.add('fade-out');
-            setTimeout(function() {
-              alertBox.style.display = 'none';
-            }, 1000);
-          }, 3000); // 3 segundos na tela
+            setTimeout(function() { alertBox.style.display = 'none'; }, 1000);
+          }, 3000);
         });
       }
-      document.addEventListener("turbo:load", setupAutoDismiss);
-      document.addEventListener("DOMContentLoaded", setupAutoDismiss);
+
+      function setupSidebar() {
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+
+        if (toggleBtn && sidebar) {
+          toggleBtn.onclick = function() {
+            sidebar.classList.toggle('collapsed');
+          };
+        }
+      }
+
+      document.addEventListener("turbo:load", () => {
+        setupAutoDismiss();
+        setupSidebar();
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        setupAutoDismiss();
+        setupSidebar();
+      });
     </script>
   </body>
 </html>
