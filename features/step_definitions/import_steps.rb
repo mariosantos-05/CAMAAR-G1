@@ -78,3 +78,30 @@ Então('eu devo continuar na página {string}') do |nome_pagina|
         expect(current_path).to eq(admin_management_path)
     end
 end
+
+Dado('existe uma aluna {string} com matrícula {string} e email {string}') do |nome, matricula, email|
+    Usuario.create!(
+        nome: nome,
+        matricula: matricula,
+        email: email,
+        profile: "Aluno",
+        status: true,
+        departamento_id: 1
+    )
+end
+
+Então('a aluna com matrícula {string} deve ter o email {string} no banco de dados') do |matricula, novo_email|
+    usuario = Usuario.find_by(matricula: matricula)
+    expect(usuario.email).to eq(novo_email)
+end
+
+Então('deve haver apenas {int} aluno com a matrícula {string} no sistema') do |quantidade, matricula|
+    expect(Usuario.where(matricula: matricula).count).to eq(quantidade)
+end
+
+Então('a aluna com matrícula {string} deve ter o email {string}') do |matricula, novo_email|
+    usuario = Usuario.find_by(matricula: matricula)
+
+    expect(usuario).to be_present, "Usuário com matrícula #{matricula} não encontrado."
+    expect(usuario.email).to eq(novo_email)
+end

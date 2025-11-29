@@ -5,9 +5,7 @@ class SigaaImportService
 
   REQUIRED_SUBJECT_KEYS = %w[code name class] 
   REQUIRED_CLASS_KEYS = %w[classCode semester time]
-  
   REQUIRED_MEMBER_FILE_KEYS = %w[code classCode semester dicente]
-  
   REQUIRED_STUDENT_KEYS = %w[nome matricula curso email ocupacao formacao]
 
   def initialize(file_path)
@@ -58,11 +56,9 @@ class SigaaImportService
     nome_completo = "#{entry['name']} (#{entry['code']} - #{entry['class']['classCode']})"
     semestre = entry['class']['semester']
 
-    turma = Turma.find_or_create_by(nome: nome_completo, semestre: semestre) do |t|
-      t.is_active = true
-    end
-    
-    turma.update(nome: nome_completo)
+    turma = Turma.find_or_initialize_by(nome: nome_completo, semestre: semestre)
+    turma.is_active = true
+    turma.save!
   end
 
   def process_members_file(entry, index)
@@ -71,6 +67,10 @@ class SigaaImportService
     if entry['dicente']
       entry['dicente'].each_with_index do |student_data, s_index|
         validate_keys!(student_data, REQUIRED_STUDENT_KEYS, "no Aluno ##{s_index + 1}")
+        
+        unless student_data['matricula'].to_s.match?(/^\d+$/)
+          raise InvalidFileError, "Erro no Aluno ##{s_index + 1}: A matrícula deve conter apenas números (Valor recebido: '#{student_data['matricula']}')."
+        end
       end
     end
 
@@ -78,23 +78,22 @@ class SigaaImportService
       t.nome.include?(entry['code']) && t.nome.include?(entry['classCode'])
     end
 
-    unless turma
-      return
-    end
+    return unless turma
 
-    if entry['dicente']
-      entry['dicente'].each do |student_data|
-        usuario = Usuario.find_or_create_by(matricula: student_data['matricula']) do |u|
-          u.nome = student_data['nome']
-          u.email = student_data['email']
-          u.profile = 'Aluno'
-          u.status = true
-          u.departamento_id = 1
-        end
+    entry['dicente'].each do |student_data|
+    
+      usuario = Usuario.find_or_initialize_by(matricula: student_data['matricula'].to_s)
+      
+      usuario.update!(
+        nome: student_data['nome'],
+        email: student_data['email'],
+        profile: 'Aluno',
+        status: true,
+        departamento_id: 1
+      )
 
-        Vinculo.find_or_create_by(usuario: usuario, turma: turma) do |v|
-          v.papel_turma = 0 
-        end
+      Vinculo.find_or_create_by(usuario: usuario, turma: turma) do |v|
+        v.papel_turma = 0 
       end
     end
   end
