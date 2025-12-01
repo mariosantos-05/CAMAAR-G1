@@ -1,10 +1,6 @@
-# features/step_definitions/results_steps.rb
-
 Dado('que existe uma turma {string} com {int} alunos') do |nome_turma, qtd_alunos|
-  # Cria a turma
   turma = Turma.create!(nome: nome_turma, semestre: "2021.2", is_active: true)
   
-  # Cria os alunos (Vínculos)
   qtd_alunos.times do |i|
     u = Usuario.create!(
       nome: "Aluno #{i}", 
@@ -26,17 +22,14 @@ Dado('eu estou na página {string}') do |pagina|
 end
 
 Quando('eu clico no botão "Baixar CSV" da turma {string}') do |nome_turma|
-  # Acha o bloco da turma pelo texto do título
   turma_element = find('h4', text: nome_turma).find(:xpath, '..')
   
-  # Clica no link dentro desse bloco
   within(turma_element) do
     click_link "Baixar CSV"
   end
 end
 
 Então('o download do arquivo deve ser iniciado') do
-  # Verifica se o cabeçalho da resposta indica um anexo CSV
   expect(page.response_headers['Content-Type']).to include('text/csv')
 end
 
@@ -47,17 +40,12 @@ Então('o nome do arquivo deve conter {string} e {string}') do |parte1, parte2|
 end
 
 Então('a página não deve fazer download') do
-  # Se não fez download, o content-type continua sendo HTML
   expect(page.response_headers['Content-Type']).to include('text/html')
 end
 
-# --- Lógica de Acesso Negado ---
-
 Dado('o meu perfil é {string}') do |perfil|
-  # Cria um objeto falso (Mock) que responde a .profile
   user_mock = double("User", profile: perfil)
 
-  # Injeta esse objeto falso no controller APENAS para este cenário
   allow_any_instance_of(AdminsController).to receive(:current_user).and_return(user_mock)
 end
 
@@ -68,4 +56,41 @@ end
 Então('eu devo ser redirecionado para a {string}') do |pagina|
   path = pagina == "Dashboard" ? '/gerenciamento' : pagina
   expect(current_path).to eq(path)
+end
+
+Dado('que existe um departamento {string} \(ID: {int}) e um departamento {string} \(ID: {int})') do |d1, id1, d2, id2|
+end
+
+Dado('que existe uma turma {string} do departamento {string}') do |nome_turma, departamento|
+  Turma.create!(nome: nome_turma, semestre: "2021.2", is_active: true)
+end
+
+Dado('que eu estou logado como {string} com perfil {string} e departamento {string} \(ID: {int})') do |email, perfil, _dept_nome, dept_id|
+
+  user_mock = double("User", profile: perfil, departamento_id: dept_id, email: email)
+  
+  allow_any_instance_of(AdminsController).to receive(:current_user).and_return(user_mock)
+
+  allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_mock)
+end
+
+Então('eu devo ver a turma {string}') do |nome_turma|
+  expect(page).to have_content(nome_turma)
+end
+
+Então('eu não devo ver a turma {string}') do |nome_turma|
+  expect(page).not_to have_content(nome_turma)
+end
+
+Quando('eu navego para a página {string}') do |nome_pagina|
+  case nome_pagina
+  when "Resultados"
+    visit '/resultados'
+  when "Gerenciamento", "Dashboard"
+    visit '/gerenciamento'
+  when "Importar Dados"
+    visit '/importar_sigaa'
+  else
+    raise "Caminho para a página '#{nome_pagina}' não foi definido nos steps."
+  end
 end

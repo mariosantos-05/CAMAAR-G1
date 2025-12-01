@@ -33,7 +33,18 @@ class AdminsController < ApplicationController
     end
 
     def results
-        @turmas = Turma.all
+        user = current_user 
+        
+        admin_dept_id = user&.departamento_id || 1 
+
+        prefixo_departamento = case admin_dept_id
+                            when 1 then "CIC"
+                            when 2 then "MAT"
+                            when 3 then "EST"
+                            else "CIC" 
+                            end
+
+        @turmas = Turma.where("nome LIKE ?", "%(#{prefixo_departamento}%")
     end
 
     def export_csv # TEM QUE MUDAR ESSA LÓGICA PARA GERAR O FORMULÁRIO REAL
