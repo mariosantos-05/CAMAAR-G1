@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get 'resultados', to: 'admins#results', as: 'admin_results'
   get 'resultados/:turma_id/csv', to: 'admins#export_csv', as: 'export_results_csv'
 
-
+  namespace :admins do
+    resources :forms, only: [:new, :create]
+  end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

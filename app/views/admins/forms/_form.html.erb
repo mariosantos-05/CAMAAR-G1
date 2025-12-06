@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h2 class="modal-title">Criar Formulário de Avaliação</h2>
+
+    <button class="modal-close" data-action="click->modal#close">&times;</button>
+</div>
+
+<div class="modal-body">
+
+    <%= form_with url: admins_forms_path, method: :post do %>
+
+    <div class="field">
+        <label>Escolha o Template:</label>
+        <%= select_tag :template_id,
+            options_from_collection_for_select(@templates, :id, :titulo),
+            prompt: "Selecione um template" %>
+    </div>
+
+    <div class="field">
+        <label>Selecione as Turmas:</label>
+
+        <% @turmas.each do |turma| %>
+        <div>
+            <%= check_box_tag "turma_ids[]", turma.id %>
+            <%= turma.nome %> — <%= turma.semestre %>
+        </div>
+        <% end %>
+    </div>
+
+    <%= submit_tag "Criar Formulários", class: "btn-action btn-primary-green" %>
+
+    <% end %>
+
+</div>
