@@ -1,32 +1,45 @@
 <div class="modal-header">
-    <h2 class="modal-title">Criar Formulário de Avaliação</h2>
+    <div class="template-row">
 
-    <button class="modal-close" data-action="click->modal#close">&times;</button>
+        <div class="template-center">
+            <label>Template:</label>
+            <%= select_tag :template_id,
+          options_from_collection_for_select(@templates, :id, :titulo),
+          prompt: "Template",
+          class: "select-template" %>
+        </div>
+
+        <button class="modal-close" data-action="click->modal#close">&times;</button>
+    </div>
 </div>
+
 
 <div class="modal-body">
 
-    <%= form_with url: admins_forms_path, method: :post do %>
+    <%= form_with url: admins_forms_path, method: :post, class: "form-wrapper" do %>
 
-    <div class="field">
-        <label>Escolha o Template:</label>
-        <%= select_tag :template_id,
-            options_from_collection_for_select(@templates, :id, :titulo),
-            prompt: "Selecione um template" %>
+    <div class="turmas-table-header">
+        <span></span>
+        <span>Nome</span>
+        <span>Semestre</span>
     </div>
 
-    <div class="field">
-        <label>Selecione as Turmas:</label>
-
+    <div class="turmas-table-body">
         <% @turmas.each do |turma| %>
-        <div>
-            <%= check_box_tag "turma_ids[]", turma.id %>
-            <%= turma.nome %> — <%= turma.semestre %>
+        <div class="turmas-row">
+            <div class="turmas-col">
+                <%= check_box_tag "turma_ids[]", turma.id, false, class: "turma-checkbox" %>
+            </div>
+
+            <span><%= turma.nome %></span>
+            <span><%= turma.semestre %></span>
         </div>
         <% end %>
     </div>
 
-    <%= submit_tag "Criar Formulários", class: "btn-action btn-primary-green" %>
+    <div class="submit-row">
+        <%= submit_tag "Enviar", class: "submit-btn" %>
+    </div>
 
     <% end %>
 
