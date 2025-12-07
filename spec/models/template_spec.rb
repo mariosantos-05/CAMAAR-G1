@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Template, type: :model do
-  # Testes de unidade
 
   context "Validações" do
     it "é inválido sem título (Cenário Triste)" do
