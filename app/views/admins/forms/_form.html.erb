@@ -1,46 +1,49 @@
-<div class="modal-header">
-    <div class="template-row">
+<div class="modal-body">
 
-        <div class="template-center">
-            <label>Template:</label>
-            <%= select_tag :template_id,
+    <div class="modal-body">
+
+        <%= form_with url: admins_forms_path,
+                  method: :post,
+                  class: "form-wrapper",
+                  data: { turbo: false } do %>
+
+
+        <div class="template-row">
+
+            <div class="template-center">
+                <label>Template:</label>
+                <%= select_tag :template_id,
           options_from_collection_for_select(@templates, :id, :titulo),
           prompt: "Template",
           class: "select-template" %>
-        </div>
-
-        <button class="modal-close" data-action="click->modal#close">&times;</button>
-    </div>
-</div>
-
-
-<div class="modal-body">
-
-    <%= form_with url: admins_forms_path, method: :post, class: "form-wrapper" do %>
-
-    <div class="turmas-table-header">
-        <span></span>
-        <span>Nome</span>
-        <span>Semestre</span>
-    </div>
-
-    <div class="turmas-table-body">
-        <% @turmas.each do |turma| %>
-        <div class="turmas-row">
-            <div class="turmas-col">
-                <%= check_box_tag "turma_ids[]", turma.id, false, class: "turma-checkbox" %>
             </div>
 
-            <span><%= turma.nome %></span>
-            <span><%= turma.semestre %></span>
+            <button class="modal-close" data-action="click->modal#close">&times;</button>
         </div>
+
+        <div class="turmas-table-header">
+            <span></span>
+            <span>Nome</span>
+            <span>Semestre</span>
+        </div>
+
+        <div class="turmas-table-body">
+            <% @turmas.each do |turma| %>
+            <div class="turmas-row">
+                <div class="turmas-col">
+                    <%= check_box_tag "turma_ids[]", turma.id, false, class: "turma-checkbox" %>
+                </div>
+
+                <span><%= turma.nome %></span>
+                <span><%= turma.semestre %></span>
+            </div>
+            <% end %>
+        </div>
+
+        <div class="submit-row">
+            <%= submit_tag "Enviar", class: "submit-btn" %>
+        </div>
+
         <% end %>
+
     </div>
-
-    <div class="submit-row">
-        <%= submit_tag "Enviar", class: "submit-btn" %>
-    </div>
-
-    <% end %>
-
-</div>
