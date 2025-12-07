@@ -4,7 +4,6 @@ class Template < ApplicationRecord
 
   attr_accessor :questions
 
-  # Validações cenários tristes do BDD
   validates :titulo, presence: { message: "O campo Título é obrigatório" }
   validates :titulo, format: { 
     with: /\A[a-zA-Z0-9\s\-\.]+\z/, 
