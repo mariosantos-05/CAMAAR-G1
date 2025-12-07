@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_07_213610) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_07_233036) do
   create_table "forms", force: :cascade do |t|
     t.integer "template_id", null: false
     t.integer "turma_id", null: false
