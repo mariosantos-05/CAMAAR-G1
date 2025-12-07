@@ -336,3 +336,64 @@ body {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
+
+.main-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  overflow-y: auto;
+}
+/* FORM ENVELOPE */
+.form-envelope {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* QUESTIONS */
+.question-card {
+  background: #e0e0e0;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+}
+
+.text-input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.radio-option {
+  margin-bottom: 0.25rem;
+}
+
+/* SUBMIT BUTTON */
+.submit-button {
+  position: absolute;
+  bottom: -25px;
+  right: -80px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #6a1b57;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

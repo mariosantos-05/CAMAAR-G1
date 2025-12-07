@@ -1,39 +1,55 @@
 <header class="top-navbar">
     <div style="display: flex; align-items: center; gap: 15px;">
         <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
-        <h2 style="font-size: 1.2rem; margin: 0; color: #333;">
-            Responder Formulário
+        <h2 class="navbar-title">
+            Avaliação - <%= @form.turma.nome %> - <%= @form.turma.semestre %>
         </h2>
     </div>
 
-    <div class="nav-search">
-        <div class="profile-circle"><%= current_user.nome.first.upcase %></div>
+    <div class="profile-circle">
+        <%= current_user.nome.first.upcase %>
     </div>
 </header>
 
-<div class="admin-container">
-    <aside class="sidebar" id="sidebar">
-        <nav class="sidebar-menu">
-            <a href="<%= avaliacoes_path %>">Avaliações</a>
-        </nav>
-    </aside>
+<div class="main-container">
+    <div class="form-envelope">
 
-    <main class="main-content">
-        <div class="content-area" style="padding: 40px;">
+        <% # Mockup de perguntas %>
+        <% questions = [
+      { type: "radio", text: "Como você avalia a disciplina?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] },
+      { type: "text", text: "Sugestões para melhoria:" },
+      { type: "text", text: "Comentário adicional:" },
+      { type: "radio", text: "Como você avalia o professor?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] }
+    ] %>
 
-            <h3><%= @fake_form.titulo %></h3>
-            <p><strong>Turma:</strong> <%= @fake_form.turma_nome %></p>
-
-            <hr>
-
-            <p style="color: #666;">
-                Aqui futuramente será exibido o formulário real.
+        <% questions.each_with_index do |q, index| %>
+        <div class="question-card">
+            <p class="question-text">
+                Pergunta <%= index + 1 %>: <%= q[:text] %>
             </p>
 
-            <button class="btn-action btn-primary-green" style="padding: 10px 20px;">
-                Enviar respostas (mock)
-            </button>
+            <% if q[:type] == "text" %>
+            <input type="text" placeholder="Digite sua resposta" class="text-input">
 
+            <% elsif q[:type] == "radio" %>
+            <% q[:options].each do |opt| %>
+            <div class="radio-option">
+                <label>
+                    <input type="radio" name="question_<%= index %>" value="<%= opt %>">
+                    <%= opt %>
+                </label>
+            </div>
+            <% end %>
+            <% end %>
         </div>
-    </main>
+        <% end %>
+
+        <%= button_to enviar_resposta_avaliacao_path(@form.id),
+          method: :post,
+          form: { "data-turbo" => false },
+          class: "submit-button" do %>
+        ➤
+        <% end %>
+
+    </div>
 </div>

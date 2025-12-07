@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  # Admin routes
   get 'gerenciamento', to: 'admins#management', as: 'admin_management'
-  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa' 
+  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa'
   post 'importar_sigaa', to: 'admins#create_import'
 
   get 'resultados', to: 'admins#results', as: 'admin_results'
@@ -10,10 +11,12 @@ Rails.application.routes.draw do
     resources :forms, only: [:new, :create]
   end
 
-  # NEW — route to render the form answering page
+  get "avaliacoes", to: "avaliacoes#index", as: "avaliacoes"
   get "avaliacoes/:turma_id/forms/:form_id/responder",
       to: "avaliacoes#responder",
       as: "responder_form"
 
-  get "avaliacoes", to: "avaliacoes#index", as: "avaliacoes"
+  post "avaliacoes/:form_id/enviar_resposta",
+       to: "avaliacoes#enviar_resposta",
+       as: "enviar_resposta_avaliacao"
 end
