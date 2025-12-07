@@ -34,31 +34,19 @@
                     <h4 style="margin-top: 0; color: #333;"><%= turma.nome %></h4>
 
                     <p style="color: #666; font-size: 0.9rem;">
-                        Formulários disponíveis:
-                        <strong><%= turma.forms.count %></strong>
+                        Formulários disponíveis: <strong><%= turma.forms.size %></strong>
                     </p>
 
-                    <% if current_user.profile == "Admin" %>
-                    <%= link_to admins_forms_path, 
-                  class: "btn-action btn-primary-green", 
-                  style: "width: auto; display: inline-block; padding: 8px 15px; font-size: 0.9rem;" do %>
-                    Gerenciar Formulários
-                    <% end %>
-                    <% else %>
                     <% turma.forms.each do |form| %>
-                    <%= link_to user_form_path(form),
-                    class: "btn-action btn-primary-green",
-                    style: "width: auto; margin-top: 5px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;" do %>
-                    Responder: <%= form.template.titulo %>
-                    <% end %>
-                    <% end %>
+                    <a href="#" class="btn-action btn-primary-green" style="margin-top: 8px; display: inline-block; padding: 8px 15px; font-size: 0.9rem;">
+                        Responder: <%= form.titulo %>
+                    </a>
                     <% end %>
 
                 </div>
                 <% end %>
 
             </div>
-
         </div>
     </main>
 </div>

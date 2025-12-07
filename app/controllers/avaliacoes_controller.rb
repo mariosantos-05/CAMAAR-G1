@@ -1,23 +1,26 @@
+require "ostruct"
+
 class AvaliacoesController < ApplicationController
   before_action :require_user
 
   def index
-    if current_user&.profile == "Admin"
-      # teacher/admin → classes they teach
-      turmas_ids = current_user.vinculos.where(papel_turma: 1).pluck(:turma_id)
-      @turmas = Turma.where(id: turmas_ids)
-    else
-      # student → classes they participate in
-      turmas_ids = current_user&.vinculos&.pluck(:turma_id) || []
-      @turmas = Turma.where(id: turmas_ids)
-    end
+    # Mock classes
+    @turmas = [
+      OpenStruct.new(
+        id: 1,
+        nome: "Cálculo I",
+        forms: [
+          OpenStruct.new(id: 11, titulo: "Avaliação do Professor"),
+          OpenStruct.new(id: 12, titulo: "Avaliação da Disciplina")
+        ]
+      ),
+
+    ]
   end
 
   private
 
   def require_user
-    unless current_user
-      redirect_to avaliacoes_path, alert: "Fake user not set. Use ENV['FAKE_ROLE'] = 'admin' or 'user'."
-    end
+    redirect_to "/", alert: "Fake user not configured." unless current_user
   end
 end
