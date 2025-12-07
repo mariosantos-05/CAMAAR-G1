@@ -1,0 +1,39 @@
+<header class="top-navbar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
+        <h2 style="font-size: 1.2rem; margin: 0; color: #333;">
+            Responder Formulário
+        </h2>
+    </div>
+
+    <div class="nav-search">
+        <div class="profile-circle"><%= current_user.nome.first.upcase %></div>
+    </div>
+</header>
+
+<div class="admin-container">
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="<%= avaliacoes_path %>">Avaliações</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-area" style="padding: 40px;">
+
+            <h3><%= @fake_form.titulo %></h3>
+            <p><strong>Turma:</strong> <%= @fake_form.turma_nome %></p>
+
+            <hr>
+
+            <p style="color: #666;">
+                Aqui futuramente será exibido o formulário real.
+            </p>
+
+            <button class="btn-action btn-primary-green" style="padding: 10px 20px;">
+                Enviar respostas (mock)
+            </button>
+
+        </div>
+    </main>
+</div>

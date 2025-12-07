@@ -18,6 +18,18 @@ class AvaliacoesController < ApplicationController
     ]
   end
 
+
+  def responder
+    @form_id = params[:id]
+
+    # mock form info
+    @fake_form = OpenStruct.new(
+      id: @form_id,
+      titulo: "Pesquisa de Satisfação - Exemplo",
+      turma_nome: "Turma Mockada"
+    )
+  end
+
   private
 
   def require_user

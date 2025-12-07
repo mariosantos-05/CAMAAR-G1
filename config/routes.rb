@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-
   get 'gerenciamento', to: 'admins#management', as: 'admin_management'
   get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa' 
   post 'importar_sigaa', to: 'admins#create_import'
@@ -15,13 +10,10 @@ Rails.application.routes.draw do
     resources :forms, only: [:new, :create]
   end
 
+  # NEW — route to render the form answering page
+  get "avaliacoes/:turma_id/forms/:form_id/responder",
+      to: "avaliacoes#responder",
+      as: "responder_form"
+
   get "avaliacoes", to: "avaliacoes#index", as: "avaliacoes"
-
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
