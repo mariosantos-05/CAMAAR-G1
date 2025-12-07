@@ -1,32 +1,39 @@
 require "ostruct"
-
 class AvaliacoesController < ApplicationController
   before_action :require_user
 
   def index
-    # Mock classes
-    @turmas = [
-      OpenStruct.new(
-        id: 1,
-        nome: "Cálculo I",
-        forms: [
-          OpenStruct.new(id: 11, titulo: "Avaliação do Professor"),
-          OpenStruct.new(id: 12, titulo: "Avaliação da Disciplina")
-        ]
-      ),
+    # Pega turmas que o usuário participa
+    @turmas = current_user.vinculos.includes(turma: :forms).map(&:turma)
 
-    ]
+    # Carrega os forms ativos de cada turma
+    @turmas = @turmas.map do |turma|
+      OpenStruct.new(
+        id: turma.id,
+        nome: turma.nome,
+        forms: turma.forms.where(is_active: true).map do |form|
+          OpenStruct.new(
+            id: form.id,
+            titulo: form.template.titulo
+          )
+        end
+      )
+    end
   end
 
-
   def responder
-    @form_id = params[:id]
+    @form = Form.includes(:template, :turma).find(params[:form_id])
 
-    # mock form info
+    # Apenas permite acessar se o usuário faz parte da turma
+    unless current_user.vinculos.exists?(turma_id: @form.turma_id)
+      redirect_to avaliacoes_path, alert: "Você não tem acesso a esse formulário."
+      return
+    end
+
     @fake_form = OpenStruct.new(
-      id: @form_id,
-      titulo: "Pesquisa de Satisfação - Exemplo",
-      turma_nome: "Turma Mockada"
+      id: @form.id,
+      titulo: @form.template.titulo,
+      turma_nome: @form.turma.nome
     )
   end
 
