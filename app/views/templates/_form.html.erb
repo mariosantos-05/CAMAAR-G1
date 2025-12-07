@@ -1,0 +1,29 @@
+<%= form_with(model: template, local: true, class: "action-card", style: "width: 100%; max-width: 600px; margin: 0 auto;") do |form| %>
+  
+  <% if template.errors.any? %>
+    <div class="flash-message flash-error" style="margin-bottom: 20px;">
+      <%= template.errors.full_messages.join(", ") %>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 20px;">
+    <%= form.label :titulo, "Nome do template/Título", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+    <%= form.text_field :titulo, class: "search-input", style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <label style="display: block; font-weight: bold; margin-bottom: 5px;">Questões</label>
+    <p style="font-size: 0.9rem; color: #666;">(Simulação: Adicione questões abaixo)</p>
+    <div style="background: #f9f9f9; padding: 10px; border: 1px dashed #ccc; margin-bottom: 10px;">
+      <input type="checkbox" name="template[questions][]" value="multipla_escolha" checked> Questão Múltipla Escolha
+    </div>
+    <div style="background: #f9f9f9; padding: 10px; border: 1px dashed #ccc;">
+      <input type="checkbox" name="template[questions][]" value="discursiva" checked> Questão Discursiva
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 10px;">
+    <%= form.submit "Salvar Template", class: "btn-action btn-primary-green" %>
+    <%= link_to "Cancelar", templates_path, class: "btn-action btn-secondary-green", style: "background-color: #ccc; color: #333;" %>
+  </div>
+<% end %>
