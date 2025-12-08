@@ -2,91 +2,11 @@
   <%= stylesheet_link_tag "admin_templates", "data-turbo-track": "reload" %>
 <% end %>
 
-<header class="top-navbar">
-  <div class="nav-left">
-    <span style="font-size: 24px;">☰</span>
-    <h2 style="font-size: 24px; font-weight: 400; margin: 0; color: #000;">Gerenciamento - Templates</h2>
-  </div>
-  <div class="nav-right">
-    <div style="width: 44px; height: 44px; background: #6C2365; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">U</div>
-  </div>
-</header>
-
-<div class="admin-container" style="position: relative;">
-  <aside class="sidebar">
-    <a href="#" class="sidebar-item">Avaliações</a>
-    <a href="<%= admin_management_path %>" class="sidebar-item active">Gerenciamento</a>
-  </aside>
-
-  <main class="main-content">
-    <div class="cards-grid" style="opacity: 0.3; pointer-events: none;">
-       <div class="template-card"><div class="card-title">Template 1</div></div>
-       <div class="template-card"><div class="card-title">Template 2</div></div>
+<%= render "shared_layout_structure" do %>
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <h3 style="margin: 0 0 15px 0; font-size: 18px; text-align: center;">Novo Template</h3>
+      <%= render "form", template: @template %>
     </div>
-
-    <div class="modal-overlay">
-      <div class="modal-content">
-        
-        <%= form_with(model: @template, local: true) do |form| %>
-          
-          <% if @template.errors.any? %>
-            <div style="color: red; font-size: 12px; text-align: center; margin-bottom: 10px;">
-              <%= @template.errors.full_messages.join(", ") %>
-            </div>
-          <% end %>
-
-          <div class="input-group">
-            <label class="input-label">Nome do template:</label>
-            <%= form.text_field :titulo, class: "input-field-line", placeholder: "Placeholder" %>
-          </div>
-
-          <div class="question-block">
-            <div class="question-title">Questão 1</div>
-            
-            <div class="input-group">
-              <label class="input-label">Tipo:</label>
-              <select class="custom-select">
-                <option>Radio</option>
-                <option>Texto</option>
-              </select>
-            </div>
-
-            <div class="input-group">
-              <label class="input-label">Texto:</label>
-              <input type="text" class="input-field-line" placeholder="Placeholder" name="template[questions][][text]">
-            </div>
-
-            <div class="input-group">
-              <label class="input-label">Opções:</label>
-              <input type="text" class="input-field-line" placeholder="Placeholder">
-            </div>
-            
-            <button type="button" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
-          </div>
-
-          <div class="question-block" style="margin-top: 15px;">
-            <div class="question-title">Questão 2</div>
-            
-            <div class="input-group">
-              <label class="input-label">Tipo:</label>
-              <select class="custom-select">
-                <option>Texto</option>
-              </select>
-            </div>
-
-            <div class="input-group">
-              <label class="input-label">Texto:</label>
-              <input type="text" class="input-field-line" placeholder="Placeholder" name="template[questions][][text]">
-            </div>
-          </div>
-
-          <button type="button" class="btn-add-question">+</button>
-
-          <%= form.submit "Criar", class: "btn-create" %>
-
-        <% end %>
-      </div>
-    </div>
-
-  </main>
-</div>
+  </div>
+<% end %>
