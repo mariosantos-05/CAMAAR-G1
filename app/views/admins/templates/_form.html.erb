@@ -1,4 +1,4 @@
-<%= form_with(model: template, local: true) do |form| %>
+<%= form_with(model: [:admins, template], local: true) do |form| %>
 
 <% if template.errors.any? %>
 <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">

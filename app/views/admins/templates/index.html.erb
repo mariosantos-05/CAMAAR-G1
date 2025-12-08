@@ -1,11 +1,7 @@
-<% content_for :head do %>
-<%= stylesheet_link_tag "admin_templates", "data-turbo-track": "reload" %>
-<% end %>
-
 <header class="top-navbar">
-    <div class="nav-left">
-        <span style="font-size: 24px; cursor: pointer;">☰</span>
-        <h2 style="font-size: 24px; font-weight: 400; margin: 0; color: #000;">Gerenciamento - Templates</h2>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
+        <h2 style="font-size: 1.2rem; margin: 0; color: #333;">Gerenciamento - Templates</h2>
     </div>
     <div class="nav-right">
         <input type="text" placeholder="Search" style="border-radius: 47px; border: 1px solid #8E8E8E; padding: 5px 15px; outline: none;">
@@ -14,9 +10,11 @@
 </header>
 
 <div class="admin-container">
-    <aside class="sidebar">
-        <a href="<%= avaliacoes_path %>" class="sidebar-item">Avaliações</a>
-        <a href="<%= admin_management_path %>" class="sidebar-item active">Gerenciamento</a>
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="<%= avaliacoes_path %>"> Avaliações</a>
+            <a href="<%= admin_management_path %>" class="active">Gerenciamento</a>
+        </nav>
     </aside>
 
     <main class="main-content">
@@ -30,7 +28,7 @@
         <% if @templates.empty? %>
 
         <div class="cards-grid">
-            <%= link_to new_template_path, class: "template-card add-card" do %>
+            <%= link_to new_admins_template_path, class: "template-card add-card" do %>
             <span class="plus-sign">+</span>
             <% end %>
         </div>

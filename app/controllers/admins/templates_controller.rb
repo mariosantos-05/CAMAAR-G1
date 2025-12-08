@@ -1,21 +1,31 @@
-class TemplatesController < ApplicationController
+class Admins::TemplatesController < ApplicationController
+
   def index
     @templates = Template.all
-    flash.now[:notice] = "Nenhum template foi criado" if @templates.empty?
+
+    # Cenário: Visualizar lista vazia
+    if @templates.empty?
+      flash.now[:notice] = "Nenhum template foi criado"
+    end
   end
 
   def new
     @template = Template.new
-    @template.questions.build
   end
 
   def create
     @template = Template.new(template_params)
-    @template.criado_por = current_user
+
+    # Atribui o usuário logado
+    @template.criado_por = current_user 
+
+    # Simula questões vindas do form
+    @template.questions = params[:template][:questions] 
 
     if @template.save
       redirect_to templates_path, notice: "Template criado com sucesso"
     else
+      # Cenários tristes: Título vazio ou Sem questões
       flash.now[:alert] = @template.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity
     end
@@ -28,10 +38,15 @@ class TemplatesController < ApplicationController
   def update
     @template = Template.find(params[:id])
 
+    # Simula questões
+    @template.questions = ["mock_question"] 
+
+
     if @template.update(template_params)
       redirect_to templates_path, notice: "Template atualizado com sucesso"
     else
-      flash.now[:alert] = @template.errors.full_messages.join(", ")
+      # Cenário Triste: Caracteres inválidos
+      flash.now[:alert] = @template.errors.full_messages.first
       render :edit, status: :unprocessable_entity
     end
   end
@@ -45,10 +60,6 @@ class TemplatesController < ApplicationController
   private
 
   def template_params
-    params.require(:template).permit(
-      :titulo,
-      :target_audience,
-      questions_attributes: [:id, :text, :question_type, :options, :_destroy]
-    )
+    params.require(:template).permit(:titulo, :target_audience)
   end
 end

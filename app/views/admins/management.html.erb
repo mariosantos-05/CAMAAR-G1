@@ -13,7 +13,7 @@
 <div class="admin-container">
     <aside class="sidebar" id="sidebar">
         <nav class="sidebar-menu">
-            <a href="<%= avaliacoes_path %>">Avaliações</a>
+            <a href="<%= avaliacoes_path %>"> Avaliações</a>
             <a href="<%= admin_management_path %>" class="active">Gerenciamento</a>
         </nav>
     </aside>
@@ -22,7 +22,7 @@
         <div class="content-area">
             <div class="action-card">
                 <%= link_to "Importar dados", import_sigaa_path, class: "btn-action btn-primary-green" %>
-                <button class="btn-action btn-secondary-green">Editar Templates</button>
+                <%= link_to "Editar Templates", admins_templates_path, class: "btn-action btn-primary-green" %>
                 <%= link_to "Criar Formulário", new_admins_form_path, data: { turbo_frame: "modal" }, class: "btn-action btn-primary-green" %>
                 <%= link_to "Resultados", admin_results_path, class: "btn-action btn-primary-green" %>
             </div>
