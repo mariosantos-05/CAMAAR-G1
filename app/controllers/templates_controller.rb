@@ -57,6 +57,11 @@ class TemplatesController < ApplicationController
   private
 
   def template_params
-    params.require(:template).permit(:titulo, :target_audience)
+    params.require(:template).permit(
+      :titulo,
+      :target_audience,
+      questions_attributes: [:id, :text, :question_type, :options, :_destroy]
+    )
   end
+
 end

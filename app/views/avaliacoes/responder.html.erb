@@ -14,13 +14,28 @@
 <div class="main-container">
     <div class="form-envelope">
 
-        <% # Mockup de perguntas %>
-        <% questions = [
-      { type: "radio", text: "Como você avalia a disciplina?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] },
-      { type: "text", text: "Sugestões para melhoria:" },
-      { type: "text", text: "Comentário adicional:" },
-      { type: "radio", text: "Como você avalia o professor?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] }
-    ] %>
+        <% @form.template.questions.each_with_index do |q, index| %>
+        <div class="question-card">
+            <p class="question-text">
+                Pergunta <%= index + 1 %>: <%= q.text %>
+            </p>
+
+            <% if q.question_type == "text" %>
+            <input type="text" name="answers[<%= q.id %>]" placeholder="Digite sua resposta" class="text-input">
+
+            <% elsif q.question_type == "radio" %>
+            <% q.options.each do |opt| %>
+            <div class="radio-option">
+                <label>
+                    <input type="radio" name="answers[<%= q.id %>]" value="<%= opt %>">
+                    <%= opt %>
+                </label>
+            </div>
+            <% end %>
+            <% end %>
+        </div>
+        <% end %>
+
 
         <% questions.each_with_index do |q, index| %>
         <div class="question-card">
