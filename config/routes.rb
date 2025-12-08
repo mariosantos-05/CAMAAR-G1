@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'resultados/:turma_id/csv', to: 'admins#export_csv', as: 'export_results_csv'
 
   namespace :admins do
+    resources :templates
     resources :forms, only: [:new, :create]
   end
 
