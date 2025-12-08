@@ -32,9 +32,6 @@ class AdminsController < ApplicationController
     end
   end
 
-  # ===========================
-  #        RESULTADOS
-  # ===========================
   def results
     user = current_user
     admin_dept_id = user&.departamento_id || 1
@@ -49,9 +46,6 @@ class AdminsController < ApplicationController
     @turmas = Turma.where("nome LIKE ?", "%(#{prefixo_departamento}%")
   end
 
-  # ===========================
-  #  VER RESPOSTAS DA TURMA
-  # ===========================
   def show_respostas
     @turma = Turma.find(params[:turma_id])
 
@@ -62,9 +56,6 @@ class AdminsController < ApplicationController
                    .includes(:usuario, form: { template: :questions })
   end
 
-  # ===========================
-  #     EXPORTAR CSV FINAL
-  # ===========================
   def export_csv
     @turma = Turma.find(params[:turma_id])
 
