@@ -1,46 +1,78 @@
-<div class="header-actions">
-  <h1>Meus Templates</h1>
-  <%= link_to "Novo Template", new_admins_template_path, class: "btn-action" %>
-</div>
+<header class="top-navbar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
+        <h2 style="font-size: 1.2rem; margin: 0; color: #333;">Gerenciamento - Templates</h2>
+    </div>
 
-<% if flash[:notice] %>
-  <div class="alert alert-success"><%= flash[:notice] %></div>
-<% end %>
+    <div class="nav-search">
+        <input type="text" class="search-input" placeholder="Pesquisar...">
+        <div class="profile-circle">U</div>
+    </div>
+</header>
 
-<% if @templates.empty? %>
-  <div class="empty-state">
-    <p>Nenhum template foi criado</p>
-  </div>
-<% else %>
-  <div class="cards-grid">
-    <% @templates.each do |template| %>
-      <div class="template-card">
-        <div class="card-header">
-          <h3><%= template.titulo %></h3>
-        </div>
-        <div class="card-body">
-          <p class="audience-badge"><%= template.target_audience %></p>
-          <p class="question-count"><%= template.questions.count %> questões</p>
-        </div>
+<div class="admin-container">
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="<%= avaliacoes_path %>"> Avaliações</a>
+            <a href="<%= admin_management_path %>" class="active">Gerenciamento</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
         
-        <div class="card-footer">
-            <div class="card-icons">
-                <%= link_to edit_admins_template_path(template), class: "icon-btn", title: "Editar" do %>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                  </svg>
-                <% end %>
+        <% if flash[:notice] %>
+            <div style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border-radius: 4px; text-align: center; border: 1px solid #c3e6cb;">
+                <%= flash[:notice] %>
+            </div>
+        <% end %>
 
-                <%= button_to admins_template_path(template), method: :delete, class: "icon-btn delete-btn", title: "Excluir", form: {style: "display:inline-block;"}, data: { confirm: "Tem certeza?" } do %>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  </svg>
+        <% if flash[:alert] %>
+            <div style="background: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px; border-radius: 4px; text-align: center; border: 1px solid #f5c6cb;">
+                <%= flash[:alert] %>
+            </div>
+        <% end %>
+
+        <% if @templates.empty? %>
+            <div class="empty-state-container" style="text-align: center; margin-top: 50px;">
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">Nenhum template foi criado</p>
+                
+                <%= link_to new_admins_template_path, class: "btn-action btn-primary-green", style: "text-decoration: none; display: inline-block;" do %>
+                    + Criar Primeiro Template
                 <% end %>
             </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+        <% else %>
+            <div class="cards-grid">
+                
+                <%= link_to new_admins_template_path, class: "template-card add-card", style: "display: flex; align-items: center; justify-content: center; text-decoration: none;" do %>
+                    <span class="plus-sign" style="font-size: 3rem; color: #aaa;">+</span>
+                <% end %>
+
+                <% @templates.each do |template| %>
+                    <div class="template-card">
+                        <div class="card-header">
+                            <div class="card-title" style="font-weight: bold; font-size: 1.1rem;"><%= template.titulo %></div>
+                            <div class="card-subtitle" style="color: #666; font-size: 0.9rem; margin-top: 5px;"><%= template.target_audience.presence || "Geral" %></div>
+                        </div>
+
+                        <div class="card-icons" style="margin-top: 15px; display: flex; gap: 10px; justify-content: flex-end;">
+                            <%= link_to edit_admins_template_path(template), class: "icon-btn", title: "Editar", style: "color: #333;" do %>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            <% end %>
+
+                            <%= button_to admins_template_path(template), method: :delete, class: "icon-btn delete-btn", style: "background: none; border: none; cursor: pointer; color: #dc3545;", form: {style: "display:inline-block;"}, data: { confirm: "Tem certeza que deseja deletar este template?" } do %>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+
+    </main>
+</div>
