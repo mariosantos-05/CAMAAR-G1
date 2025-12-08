@@ -21,4 +21,13 @@ Rails.application.routes.draw do
   post "avaliacoes/:form_id/enviar_resposta",
        to: "avaliacoes#enviar_resposta",
        as: "enviar_resposta_avaliacao"
+
+
+  get "turmas/:id/respostas", to: "results#show_respostas", as: :turma_respostas
+
+  get "admins/results/:turma_id/respostas", 
+    to: "admins#show_respostas", 
+    as: :admin_turma_respostas
+
+
 end

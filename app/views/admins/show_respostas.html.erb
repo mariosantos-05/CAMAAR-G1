@@ -1,0 +1,54 @@
+<header class="top-navbar">
+    <div style="display:flex; align-items:center; gap:15px;">
+        <span id="sidebar-toggle" style="cursor:pointer; font-size:1.6rem;">☰</span>
+        <h2 style="font-size:1.2rem; margin:0; color:#333;">
+            Respostas – <%= @turma.nome %>
+        </h2>
+    </div>
+</header>
+
+<div class="admin-container">
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="<%= avaliacoes_path %>">Avaliações</a>
+            <a href="<%= admin_management_path %>" class="active">Gerenciamento</a>
+        </nav>
+    </aside>
+
+    <main class="main-content" style="padding: 40px; overflow-y:auto;">
+
+        <% if @respostas.empty? %>
+        <p style="font-size:1rem; color:#444;">Nenhuma resposta foi enviada ainda.</p>
+        <% else %>
+
+        <% @respostas.each do |resp| %>
+        <div style="background:white; padding:20px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+
+            <h3 style="margin-top:0;">
+                <%= resp.usuario.nome %>
+            </h3>
+
+            <p style="color:#555; font-size:0.9rem;">
+                Enviado em: <strong><%= resp.created_at.strftime("%d/%m/%Y %H:%M") %></strong>
+            </p>
+
+            <hr>
+
+            <% resp.form.template.questions.each do |q| %>
+            <p style="font-size:0.95rem; color:#333;">
+                <strong><%= q.text %></strong>
+            </p>
+
+            <div style="background:#f6f6f6; padding:10px; border-radius:5px; margin-bottom:15px;">
+                <%= (resp.answers || {})[q.id.to_s] || "—" %>
+            </div>
+
+            <% end %>
+
+        </div>
+        <% end %>
+
+        <% end %>
+
+    </main>
+</div>

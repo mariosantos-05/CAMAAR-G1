@@ -24,15 +24,27 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; width: 100%;">
                 <% @turmas.each do |turma| %>
                 <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #6a1b57; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+
                     <h4 style="margin-top: 0; color: #333;"><%= turma.nome %></h4>
 
                     <p style="color: #666; font-size: 0.9rem;">
                         Respostas: <strong><%= turma.vinculos.count %></strong>
                     </p>
 
-                    <%= link_to export_results_csv_path(turma.id), class: "btn-action btn-primary-green", style: "width: auto; display: inline-block; padding: 8px 15px; font-size: 0.9rem;" do %>
+
+                    <%= link_to export_results_csv_path(turma.id),
+                                class: "btn-action btn-primary-green",
+                                style: "width: auto; display: inline-block; padding: 8px 15px; font-size: 0.9rem;" do %>
                     Baixar CSV
                     <% end %>
+
+
+                    <%= link_to admin_turma_respostas_path(turma.id),
+                                class: "btn-action btn-primary-green",
+                                style: "width: auto; display: inline-block; padding: 8px 15px; font-size: 0.9rem;" do %>
+                    Ver Respostas
+                    <% end %>
+
                 </div>
                 <% end %>
             </div>

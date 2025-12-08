@@ -13,6 +13,7 @@
 
 <div class="main-container">
     <div class="form-envelope">
+        <%= form_with url: enviar_resposta_avaliacao_path(@form.id), method: :post, local: true do %>
 
         <% @form.template.questions.each_with_index do |q, index| %>
         <div class="question-card">
@@ -36,35 +37,12 @@
         </div>
         <% end %>
 
-
-        <% questions.each_with_index do |q, index| %>
-        <div class="question-card">
-            <p class="question-text">
-                Pergunta <%= index + 1 %>: <%= q[:text] %>
-            </p>
-
-            <% if q[:type] == "text" %>
-            <input type="text" placeholder="Digite sua resposta" class="text-input">
-
-            <% elsif q[:type] == "radio" %>
-            <% q[:options].each do |opt| %>
-            <div class="radio-option">
-                <label>
-                    <input type="radio" name="question_<%= index %>" value="<%= opt %>">
-                    <%= opt %>
-                </label>
-            </div>
-            <% end %>
+        <div style="margin-top: 20px;">
+            <%= button_tag type: "submit", class: "submit-button" do %>
+            ➤
             <% end %>
         </div>
-        <% end %>
 
-        <%= button_to enviar_resposta_avaliacao_path(@form.id),
-          method: :post,
-          form: { "data-turbo" => false },
-          class: "submit-button" do %>
-        ➤
         <% end %>
-
     </div>
 </div>

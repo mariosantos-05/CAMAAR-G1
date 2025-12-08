@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_08_123405) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
   create_table "forms", force: :cascade do |t|
     t.integer "template_id", null: false
     t.integer "turma_id", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_123405) do
     t.integer "usuario_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "answers"
     t.index ["form_id"], name: "index_resposta_on_form_id"
     t.index ["usuario_id"], name: "index_resposta_on_usuario_id"
   end
