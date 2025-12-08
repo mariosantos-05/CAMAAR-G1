@@ -1,58 +1,111 @@
 <%= form_with(model: template, local: true) do |form| %>
-  
-  <% if template.errors.any? %>
-    <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">
-      <%= template.errors.full_messages.join(", ") %>
-    </div>
-  <% end %>
 
-  <div class="input-group">
+<% if template.errors.any? %>
+<div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">
+    <%= template.errors.full_messages.join(", ") %>
+</div>
+<% end %>
+
+<div class="input-group">
     <label class="input-label">Nome do template:</label>
     <%= form.text_field :titulo, class: "input-field-line", placeholder: "Ex: Avaliação 2024" %>
-  </div>
+</div>
 
-  <div class="question-block">
-    <div class="question-title">Questão 1</div>
-    
-    <div class="input-group">
-      <label class="input-label">Tipo:</label>
-      <select class="custom-select">
-        <option>Radio</option>
-        <option>Texto</option>
-      </select>
+
+<div id="questions-container">
+
+
+    <div class="question-block" data-index="0">
+        <div class="question-title">Questão 1</div>
+
+        <div class="input-group">
+            <label class="input-label">Tipo:</label>
+            <select name="template[questions_attributes][0][question_type]" class="custom-select">
+                <option value="radio">Radio</option>
+                <option value="text">Texto</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Texto:</label>
+            <input type="text" name="template[questions_attributes][0][text]" class="input-field-line" placeholder="Enunciado da questão...">
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Opções:</label>
+            <input type="text" name="template[questions_attributes][0][options]" class="input-field-line" placeholder="Opção A, Opção B...">
+        </div>
+
+        <button type="button" class="btn-single-add" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
     </div>
 
-    <div class="input-group">
-      <label class="input-label">Texto:</label>
-      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q1_text">
+    <div class="question-block" data-index="1" style="margin-top: 15px;">
+        <div class="question-title">Questão 2</div>
+
+        <div class="input-group">
+            <label class="input-label">Tipo:</label>
+            <select name="template[questions_attributes][1][question_type]" class="custom-select">
+                <option value="text">Texto</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Texto:</label>
+            <input type="text" name="template[questions_attributes][1][text]" class="input-field-line" placeholder="Enunciado da questão...">
+        </div>
     </div>
 
-    <div class="input-group">
-      <label class="input-label">Opções:</label>
-      <input type="text" class="input-field-line" placeholder="Opção A, Opção B..." name="mock_q1_options">
-    </div>
-    
-    <button type="button" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
-  </div>
+</div>
 
-  <div class="question-block" style="margin-top: 15px;">
-    <div class="question-title">Questão 2</div>
-    
-    <div class="input-group">
-      <label class="input-label">Tipo:</label>
-      <select class="custom-select">
-        <option>Texto</option>
-      </select>
-    </div>
 
-    <div class="input-group">
-      <label class="input-label">Texto:</label>
-      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q2_text">
-    </div>
-  </div>
+<button type="button" id="add-question" class="btn-add-question" title="Adicionar Questão">+</button>
 
-  <button type="button" class="btn-add-question" title="Adicionar Questão">+</button>
-
-  <%= form.submit (template.new_record? ? "Criar" : "Salvar"), class: "btn-create" %>
+<%= form.submit (template.new_record? ? "Criar" : "Salvar"), class: "btn-create" %>
 
 <% end %>
+
+
+<template id="question-template">
+    <div class="question-block" data-index="__INDEX__">
+        <div class="question-title">Nova Questão</div>
+
+        <div class="input-group">
+            <label class="input-label">Tipo:</label>
+            <select name="template[questions_attributes][__INDEX__][question_type]" class="custom-select">
+                <option value="radio">Radio</option>
+                <option value="text">Texto</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Texto:</label>
+            <input type="text" name="template[questions_attributes][__INDEX__][text]" class="input-field-line" placeholder="Enunciado da questão...">
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Opções:</label>
+            <input type="text" name="template[questions_attributes][__INDEX__][options]" class="input-field-line" placeholder="Opção A, Opção B...">
+        </div>
+    </div>
+</template>
+
+<script>
+    document.getElementById("add-question").addEventListener("click", addQuestion);
+
+    document.querySelectorAll(".btn-single-add").forEach(btn => {
+        btn.addEventListener("click", addQuestion);
+    });
+
+    function addQuestion() {
+        const container = document.getElementById("questions-container");
+        const index = container.children.length;
+
+        let template = document.getElementById("question-template").innerHTML;
+        template = template.replaceAll("__INDEX__", index);
+
+        const div = document.createElement("div");
+        div.innerHTML = template;
+
+        container.appendChild(div.firstElementChild);
+    }
+</script>

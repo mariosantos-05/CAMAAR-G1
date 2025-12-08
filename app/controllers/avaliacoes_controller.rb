@@ -39,26 +39,35 @@ class AvaliacoesController < ApplicationController
 
   def enviar_resposta
     form = Form.find(params[:form_id])
-
-
+    
     unless current_user.vinculos.exists?(turma_id: form.turma_id)
       redirect_to avaliacoes_path, alert: "Você não tem acesso a esse formulário."
       return
     end
-
-
+  
     if Resposta.exists?(form_id: form.id, usuario_id: current_user.id)
       redirect_to avaliacoes_path, alert: "Você já respondeu este formulário."
       return
     end
-
+  
+    normalized_answers = answers_params.transform_keys(&:to_s)
+  
     Resposta.create!(
       form_id: form.id,
-      usuario_id: current_user.id
+      usuario_id: current_user.id,
+      answers: normalized_answers
     )
-
+  
     redirect_to avaliacoes_path, notice: "Formulário enviado com sucesso!"
   end
+  
+  
+  private
+  
+  def answers_params
+    params.require(:answers).permit!.to_h
+  end
+
 
   private
 
