@@ -1,0 +1,58 @@
+<%= form_with(model: template, local: true) do |form| %>
+  
+  <% if template.errors.any? %>
+    <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">
+      <%= template.errors.full_messages.join(", ") %>
+    </div>
+  <% end %>
+
+  <div class="input-group">
+    <label class="input-label">Nome do template:</label>
+    <%= form.text_field :titulo, class: "input-field-line", placeholder: "Ex: Avaliação 2024" %>
+  </div>
+
+  <div class="question-block">
+    <div class="question-title">Questão 1</div>
+    
+    <div class="input-group">
+      <label class="input-label">Tipo:</label>
+      <select class="custom-select">
+        <option>Radio</option>
+        <option>Texto</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Texto:</label>
+      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q1_text">
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Opções:</label>
+      <input type="text" class="input-field-line" placeholder="Opção A, Opção B..." name="mock_q1_options">
+    </div>
+    
+    <button type="button" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
+  </div>
+
+  <div class="question-block" style="margin-top: 15px;">
+    <div class="question-title">Questão 2</div>
+    
+    <div class="input-group">
+      <label class="input-label">Tipo:</label>
+      <select class="custom-select">
+        <option>Texto</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Texto:</label>
+      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q2_text">
+    </div>
+  </div>
+
+  <button type="button" class="btn-add-question" title="Adicionar Questão">+</button>
+
+  <%= form.submit (template.new_record? ? "Criar" : "Salvar"), class: "btn-create" %>
+
+<% end %>
