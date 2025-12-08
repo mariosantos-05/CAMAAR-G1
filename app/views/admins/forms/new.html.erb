@@ -1,0 +1,10 @@
+<turbo-frame id="modal">
+    <div class="modal-overlay" data-controller="modal" data-action="click->modal#closeBackground">
+
+        <div class="modal-window" data-action="click->modal#stop">
+
+            <%= render "form" %>
+
+        </div>
+    </div>
+</turbo-frame>

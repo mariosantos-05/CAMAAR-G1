@@ -1,23 +1,24 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-
+  # Admin routes
   get 'gerenciamento', to: 'admins#management', as: 'admin_management'
-  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa' 
+  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa'
   post 'importar_sigaa', to: 'admins#create_import'
 
   get 'resultados', to: 'admins#results', as: 'admin_results'
   get 'resultados/:turma_id/csv', to: 'admins#export_csv', as: 'export_results_csv'
 
+  namespace :admins do
+    resources :forms, only: [:new, :create]
+  end
+
+  get "avaliacoes", to: "avaliacoes#index", as: "avaliacoes"
+  get "avaliacoes/:turma_id/forms/:form_id/responder",
+      to: "avaliacoes#responder",
+      as: "responder_form"
   resources :templates
   resources :forms, only: [:new, :create]
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  post "avaliacoes/:form_id/enviar_resposta",
+       to: "avaliacoes#enviar_resposta",
+       as: "enviar_resposta_avaliacao"
 end

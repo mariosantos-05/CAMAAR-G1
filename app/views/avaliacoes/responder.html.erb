@@ -1,0 +1,55 @@
+<header class="top-navbar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
+        <h2 class="navbar-title">
+            Avaliação - <%= @form.turma.nome %> - <%= @form.turma.semestre %>
+        </h2>
+    </div>
+
+    <div class="profile-circle">
+        <%= current_user.nome.first.upcase %>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="form-envelope">
+
+        <% # Mockup de perguntas %>
+        <% questions = [
+      { type: "radio", text: "Como você avalia a disciplina?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] },
+      { type: "text", text: "Sugestões para melhoria:" },
+      { type: "text", text: "Comentário adicional:" },
+      { type: "radio", text: "Como você avalia o professor?", options: ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] }
+    ] %>
+
+        <% questions.each_with_index do |q, index| %>
+        <div class="question-card">
+            <p class="question-text">
+                Pergunta <%= index + 1 %>: <%= q[:text] %>
+            </p>
+
+            <% if q[:type] == "text" %>
+            <input type="text" placeholder="Digite sua resposta" class="text-input">
+
+            <% elsif q[:type] == "radio" %>
+            <% q[:options].each do |opt| %>
+            <div class="radio-option">
+                <label>
+                    <input type="radio" name="question_<%= index %>" value="<%= opt %>">
+                    <%= opt %>
+                </label>
+            </div>
+            <% end %>
+            <% end %>
+        </div>
+        <% end %>
+
+        <%= button_to enviar_resposta_avaliacao_path(@form.id),
+          method: :post,
+          form: { "data-turbo" => false },
+          class: "submit-button" do %>
+        ➤
+        <% end %>
+
+    </div>
+</div>
