@@ -1,27 +1,33 @@
 <header class="top-navbar">
-  <div class="nav-left">
-    <span style="font-size: 24px; cursor: pointer;">☰</span>
-    <h2 style="font-size: 24px; font-weight: 400; margin: 0; color: #000;">Gerenciamento - Templates</h2>
-  </div>
-  <div class="nav-right">
-    <div style="width: 44px; height: 44px; background: #6C2365; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">U</div>
-  </div>
+    <div class="nav-left">
+        <span style="font-size: 24px; cursor: pointer;">☰</span>
+        <h2 style="font-size: 24px; font-weight: 400; margin: 0; color: #000;">Gerenciamento - Templates</h2>
+    </div>
+    <div class="nav-right">
+        <div style="width: 44px; height: 44px; background: #6C2365; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">U</div>
+    </div>
 </header>
 
 <div class="admin-container" style="position: relative;">
-  <aside class="sidebar">
-    <a href="#" class="sidebar-item">Avaliações</a>
-    <a href="<%= admin_management_path %>" class="sidebar-item active">Gerenciamento</a>
-  </aside>
+    <aside class="sidebar">
+        <a href="<%= avaliacoes_path %>" class="sidebar-item">Avaliações</a>
+        <a href="<%= admin_management_path %>" class="sidebar-item active">Gerenciamento</a>
+    </aside>
 
-  <main class="main-content">
-    <div class="cards-grid" style="opacity: 0.3; pointer-events: none;">
-       <div class="template-card"><div class="card-title">Template A</div></div>
-       <div class="template-card"><div class="card-title">Template B</div></div>
-       <div class="template-card"><div class="card-title">Template C</div></div>
-    </div>
+    <main class="main-content">
+        <div class="cards-grid" style="opacity: 0.3; pointer-events: none;">
+            <div class="template-card">
+                <div class="card-title">Template A</div>
+            </div>
+            <div class="template-card">
+                <div class="card-title">Template B</div>
+            </div>
+            <div class="template-card">
+                <div class="card-title">Template C</div>
+            </div>
+        </div>
 
-    <%= yield %>
+        <%= yield %>
 
-  </main>
+    </main>
 </div>
