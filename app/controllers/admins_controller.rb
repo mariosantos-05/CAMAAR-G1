@@ -33,17 +33,18 @@ class AdminsController < ApplicationController
   end
 
   def results
-    user = current_user
-    admin_dept_id = user&.departamento_id || 1
+    user = current_user 
+      
+    admin_dept_id = user&.departamento_id || 1 
 
     prefixo_departamento = case admin_dept_id
-                           when 1 then "CIC"
-                           when 2 then "MAT"
-                           when 3 then "EST"
-                           else "CIC"
-                           end
+                          when 1 then "CIC"
+                          when 2 then "MAT"
+                          when 3 then "EST"
+                          else "CIC"
+                          end
 
-    @turmas = Turma.where("nome LIKE ?", "%(#{prefixo_departamento}%")
+      @turmas = Turma.where("nome LIKE ?", "%(#{prefixo_departamento}%")
   end
 
   def show_respostas
@@ -59,42 +60,35 @@ class AdminsController < ApplicationController
   def export_csv
     @turma = Turma.find(params[:turma_id])
 
-    # Recupera os forms e respostas dessa turma
     forms = Form.where(turma_id: @turma.id)
+    
     respostas = Resposta
                   .where(form_id: forms.pluck(:id))
-                  .includes(:usuario, form: { template: :questions })
+                  .includes(form: { template: :questions })
 
     if respostas.empty?
-      redirect_to admin_results_path, alert: "Este formulário ainda não possui respostas"
+      redirect_to admin_results_path, alert: "Este formulário ainda não possui respostas."
       return
     end
 
-    # Pega todas as perguntas do template
-    perguntas = respostas.first.form.template.questions
+    perguntas = forms.first.template.questions.order(:id)
 
-    # Código da matéria
     codigo_materia = @turma.nome.match(/\((.*?)\s-/)&.captures&.first || "TURMA_#{@turma.id}"
-    filename = "resultados_#{codigo_materia}.csv"
+    filename = "resultados_anonimos_#{codigo_materia}.csv"
 
     csv_data = CSV.generate(headers: true) do |csv|
-      # Cabeçalho (dinâmico)
+
       csv << (
-        ["Matrícula", "Nome", "Email", "Perfil"] +
+        ["Data do Envio"] + 
         perguntas.map(&:text)
       )
 
-      # Respostas
       respostas.each do |resp|
-        user = resp.usuario
         respostas_user = (resp.answers || {})
 
         csv << (
           [
-            user.matricula,
-            user.nome,
-            user.email,
-            user.profile
+            resp.created_at.strftime("%d/%m/%Y %H:%M")
           ] +
           perguntas.map { |q| respostas_user[q.id.to_s] || "—" }
         )

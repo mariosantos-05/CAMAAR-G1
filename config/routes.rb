@@ -15,8 +15,6 @@ Rails.application.routes.draw do
   get "avaliacoes/:turma_id/forms/:form_id/responder",
       to: "avaliacoes#responder",
       as: "responder_form"
-  resources :templates
-  resources :forms, only: [:new, :create]
 
   post "avaliacoes/:form_id/enviar_resposta",
        to: "avaliacoes#enviar_resposta",

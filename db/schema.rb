@@ -21,42 +21,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
     t.index ["turma_id"], name: "index_forms_on_turma_id"
   end
 
-  create_table "issues", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "status"
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_issues_on_project_id"
-    t.index ["user_id"], name: "index_issues_on_user_id"
-  end
-
-  create_table "members", force: :cascade do |t|
-    t.string "nome"
-    t.string "matricula"
-    t.string "curso"
-    t.string "usuario"
-    t.string "formacao"
-    t.string "ocupacao"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "members_turmas", id: false, force: :cascade do |t|
-    t.integer "turma_id", null: false
-    t.integer "member_id", null: false
-  end
-
-  create_table "projects", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.integer "template_id", null: false
     t.string "text"
@@ -77,13 +41,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
     t.index ["usuario_id"], name: "index_resposta_on_usuario_id"
   end
 
-  create_table "subjects", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "templates", force: :cascade do |t|
     t.string "titulo"
     t.string "target_audience"
@@ -97,14 +54,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
     t.string "nome"
     t.string "semestre"
     t.boolean "is_active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -132,8 +81,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
 
   add_foreign_key "forms", "templates"
   add_foreign_key "forms", "turmas"
-  add_foreign_key "issues", "projects"
-  add_foreign_key "issues", "users"
   add_foreign_key "questions", "templates"
   add_foreign_key "resposta", "forms"
   add_foreign_key "resposta", "usuarios"

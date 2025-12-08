@@ -28,7 +28,7 @@
                     <h4 style="margin-top: 0; color: #333;"><%= turma.nome %></h4>
 
                     <p style="color: #666; font-size: 0.9rem;">
-                        Respostas: <strong><%= turma.vinculos.count %></strong>
+                        Respostas: <strong><%= Resposta.where(form_id: turma.forms.ids).count %></strong>
                     </p>
 
 

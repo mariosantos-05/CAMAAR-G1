@@ -1,7 +1,7 @@
 <header class="top-navbar">
     <div style="display: flex; align-items: center; gap: 15px;">
         <span id="sidebar-toggle" style="cursor: pointer; font-size: 1.6rem;">☰</span>
-        <h2 class="navbar-title">
+        <h2 style="font-size: 1.2rem; margin: 0; color: #333;" class="navbar-title">
             Avaliação - <%= @form.turma.nome %> - <%= @form.turma.semestre %>
         </h2>
     </div>
@@ -11,38 +11,49 @@
     </div>
 </header>
 
-<div class="main-container">
-    <div class="form-envelope">
-        <%= form_with url: enviar_resposta_avaliacao_path(@form.id), method: :post, local: true do %>
+<div class="admin-container">
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-menu">
+            <a href="<%= avaliacoes_path %>" class="active">Avaliações</a>
 
-        <% @form.template.questions.each_with_index do |q, index| %>
-        <div class="question-card">
-            <p class="question-text">
-                Pergunta <%= index + 1 %>: <%= q.text %>
-            </p>
+            <% if current_user.profile == "Admin" %>
+            <a href="<%= admin_management_path %>">Gerenciamento</a>
+            <% end %>
+        </nav>
+    </aside>
+    <div class="main-container">
+        <div class="form-envelope">
+            <%= form_with url: enviar_resposta_avaliacao_path(@form.id), method: :post, local: true do %>
 
-            <% if q.question_type == "text" %>
-            <input type="text" name="answers[<%= q.id %>]" placeholder="Digite sua resposta" class="text-input">
+            <% @form.template.questions.each_with_index do |q, index| %>
+            <div class="question-card">
+                <p class="question-text">
+                    Pergunta <%= index + 1 %>: <%= q.text %>
+                </p>
 
-            <% elsif q.question_type == "radio" %>
-            <% q.options.each do |opt| %>
-            <div class="radio-option">
-                <label>
-                    <input type="radio" name="answers[<%= q.id %>]" value="<%= opt %>">
-                    <%= opt %>
-                </label>
+                <% if q.question_type == "text" %>
+                <input type="text" name="answers[<%= q.id %>]" placeholder="Digite sua resposta" class="text-input">
+
+                <% elsif q.question_type == "radio" %>
+                <% q.options.each do |opt| %>
+                <div class="radio-option">
+                    <label>
+                        <input type="radio" name="answers[<%= q.id %>]" value="<%= opt %>">
+                        <%= opt %>
+                    </label>
+                </div>
+                <% end %>
+                <% end %>
             </div>
             <% end %>
+
+            <div style="margin-top: 20px;">
+                <%= button_tag type: "submit", class: "submit-button", style: "cursor: pointer;" do %>
+                ➤
+                <% end %>
+            </div>
+
             <% end %>
         </div>
-        <% end %>
-
-        <div style="margin-top: 20px;">
-            <%= button_tag type: "submit", class: "submit-button" do %>
-            ➤
-            <% end %>
-        </div>
-
-        <% end %>
     </div>
 </div>
