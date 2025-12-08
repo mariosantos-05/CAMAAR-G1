@@ -1,6 +1,5 @@
 class Admins::TemplatesController < ApplicationController
   
-  # Ação para listar os templates
   def index
     @templates = Template.all
 
@@ -27,8 +26,7 @@ class Admins::TemplatesController < ApplicationController
     if @template.save
       redirect_to admins_templates_path, notice: "Template criado com sucesso"
     else
-      # CORREÇÃO: Usa .map(&:message) para exibir apenas a mensagem traduzida ("O campo Título é obrigatório")
-      # O .uniq remove mensagens duplicadas caso existam
+
       flash.now[:alert] = @template.errors.map(&:message).uniq.join(", ")
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +42,7 @@ class Admins::TemplatesController < ApplicationController
     if @template.update(template_params)
       redirect_to admins_templates_path, notice: "Template atualizado com sucesso"
     else
-      # CORREÇÃO: Mesma lógica de mensagem limpa para a edição
+
       flash.now[:alert] = @template.errors.map(&:message).uniq.join(", ")
       render :edit, status: :unprocessable_entity
     end
@@ -62,8 +60,6 @@ class Admins::TemplatesController < ApplicationController
   private
 
   def template_params
-    # Permite os atributos do template e os atributos aninhados das questões
-    # O _destroy é essencial para permitir a exclusão de questões na edição
     params.require(:template).permit(
       :titulo, 
       :target_audience, 
