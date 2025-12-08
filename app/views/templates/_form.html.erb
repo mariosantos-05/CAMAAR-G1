@@ -1,29 +1,58 @@
-<%= form_with(model: template, local: true, class: "action-card", style: "width: 100%; max-width: 600px; margin: 0 auto;") do |form| %>
+<%= form_with(model: template, local: true) do |form| %>
   
   <% if template.errors.any? %>
-    <div class="flash-message flash-error" style="margin-bottom: 20px;">
+    <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">
       <%= template.errors.full_messages.join(", ") %>
     </div>
   <% end %>
 
-  <div style="margin-bottom: 20px;">
-    <%= form.label :titulo, "Nome do template/Título", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-    <%= form.text_field :titulo, class: "search-input", style: "width: 100%;" %>
+  <div class="input-group">
+    <label class="input-label">Nome do template:</label>
+    <%= form.text_field :titulo, class: "input-field-line", placeholder: "Ex: Avaliação 2024" %>
   </div>
 
-  <div style="margin-bottom: 20px;">
-    <label style="display: block; font-weight: bold; margin-bottom: 5px;">Questões</label>
-    <p style="font-size: 0.9rem; color: #666;">(Simulação: Adicione questões abaixo)</p>
-    <div style="background: #f9f9f9; padding: 10px; border: 1px dashed #ccc; margin-bottom: 10px;">
-      <input type="checkbox" name="template[questions][]" value="multipla_escolha" checked> Questão Múltipla Escolha
+  <div class="question-block">
+    <div class="question-title">Questão 1</div>
+    
+    <div class="input-group">
+      <label class="input-label">Tipo:</label>
+      <select class="custom-select">
+        <option>Radio</option>
+        <option>Texto</option>
+      </select>
     </div>
-    <div style="background: #f9f9f9; padding: 10px; border: 1px dashed #ccc;">
-      <input type="checkbox" name="template[questions][]" value="discursiva" checked> Questão Discursiva
+
+    <div class="input-group">
+      <label class="input-label">Texto:</label>
+      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q1_text">
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Opções:</label>
+      <input type="text" class="input-field-line" placeholder="Opção A, Opção B..." name="mock_q1_options">
+    </div>
+    
+    <button type="button" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
+  </div>
+
+  <div class="question-block" style="margin-top: 15px;">
+    <div class="question-title">Questão 2</div>
+    
+    <div class="input-group">
+      <label class="input-label">Tipo:</label>
+      <select class="custom-select">
+        <option>Texto</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Texto:</label>
+      <input type="text" class="input-field-line" placeholder="Enunciado da questão..." name="mock_q2_text">
     </div>
   </div>
 
-  <div style="display: flex; gap: 10px;">
-    <%= form.submit "Salvar Template", class: "btn-action btn-primary-green" %>
-    <%= link_to "Cancelar", templates_path, class: "btn-action btn-secondary-green", style: "background-color: #ccc; color: #333;" %>
-  </div>
+  <button type="button" class="btn-add-question" title="Adicionar Questão">+</button>
+
+  <%= form.submit (template.new_record? ? "Criar" : "Salvar"), class: "btn-create" %>
+
 <% end %>
