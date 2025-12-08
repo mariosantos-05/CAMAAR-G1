@@ -1,73 +1,57 @@
 <%= form_with(model: [:admins, template], local: true) do |form| %>
 
-<% if template.errors.any? %>
-<div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 15px;">
-    <%= template.errors.full_messages.join(", ") %>
-</div>
-<% end %>
+  <% if template.errors.any? %>
+    <div style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+        <%= template.errors.full_messages.join(", ") %>
+    </div>
+  <% end %>
 
-<div class="input-group">
-    <label class="input-label">Nome do template:</label>
-    <%= form.text_field :titulo, class: "input-field-line", placeholder: "Ex: Avaliação 2024" %>
-</div>
+  <div class="input-group">
+      <label class="input-label">Nome do template:</label>
+      <%= form.text_field :titulo, class: "input-field-line", placeholder: "Ex: Avaliação 2024" %>
+  </div>
 
+  <div id="questions-container">
+    <%= form.fields_for :questions do |q_form| %>
+      <div class="question-block" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+        <%= q_form.hidden_field :id %>
+        <%= q_form.hidden_field :_destroy, class: 'destroy-field' %>
 
-<div id="questions-container">
-
-
-    <div class="question-block" data-index="0">
-        <div class="question-title">Questão 1</div>
+        <div style="display: flex; justify-content: space-between;">
+          <div class="question-title">Questão</div>
+          <button type="button" class="btn-remove-question" style="background: #dc3545; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Excluir</button>
+        </div>
 
         <div class="input-group">
             <label class="input-label">Tipo:</label>
-            <select name="template[questions_attributes][0][question_type]" class="custom-select">
-                <option value="radio">Radio</option>
-                <option value="text">Texto</option>
-            </select>
+            <%= q_form.select :question_type, [['Radio', 'radio'], ['Texto', 'text']], {}, { class: "custom-select" } %>
         </div>
 
         <div class="input-group">
-            <label class="input-label">Texto:</label>
-            <input type="text" name="template[questions_attributes][0][text]" class="input-field-line" placeholder="Enunciado da questão...">
+            <label class="input-label">Enunciado:</label>
+            <%= q_form.text_field :text, class: "input-field-line", placeholder: "Digite a pergunta..." %>
         </div>
 
         <div class="input-group">
-            <label class="input-label">Opções:</label>
-            <input type="text" name="template[questions_attributes][0][options]" class="input-field-line" placeholder="Opção A, Opção B...">
+            <label class="input-label">Opções (separadas por vírgula):</label>
+            <%= q_form.text_field :options, value: (q_form.object.options.is_a?(Array) ? q_form.object.options.join(', ') : q_form.object.options), class: "input-field-line", placeholder: "Ex: Sim, Não, Talvez" %>
         </div>
+      </div>
+    <% end %>
+  </div>
 
-        <button type="button" class="btn-single-add" style="background: #6F6F6F; color: white; width: 20px; height: 20px; border-radius: 50%; border: none; margin: 0 auto; display: block; cursor: pointer;">+</button>
-    </div>
-
-    <div class="question-block" data-index="1" style="margin-top: 15px;">
-        <div class="question-title">Questão 2</div>
-
-        <div class="input-group">
-            <label class="input-label">Tipo:</label>
-            <select name="template[questions_attributes][1][question_type]" class="custom-select">
-                <option value="text">Texto</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label class="input-label">Texto:</label>
-            <input type="text" name="template[questions_attributes][1][text]" class="input-field-line" placeholder="Enunciado da questão...">
-        </div>
-    </div>
-
-</div>
-
-
-<button type="button" id="add-question" class="btn-add-question" title="Adicionar Questão">+</button>
-
-<%= form.submit (template.new_record? ? "Criar" : "Salvar"), class: "btn-create" %>
+  <button type="button" id="add-question" class="btn-secondary" style="margin-top: 10px;">+ Adicionar Questão</button>
+  <br><br>
+  <%= form.submit "Salvar Template", class: "btn-create" %>
 
 <% end %>
-
 
 <template id="question-template">
-    <div class="question-block" data-index="__INDEX__">
-        <div class="question-title">Nova Questão</div>
+    <div class="question-block" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between;">
+          <div class="question-title">Nova Questão</div>
+          <button type="button" class="btn-remove-new" onclick="this.closest('.question-block').remove()" style="background: #dc3545; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Excluir</button>
+        </div>
 
         <div class="input-group">
             <label class="input-label">Tipo:</label>
@@ -78,34 +62,39 @@
         </div>
 
         <div class="input-group">
-            <label class="input-label">Texto:</label>
-            <input type="text" name="template[questions_attributes][__INDEX__][text]" class="input-field-line" placeholder="Enunciado da questão...">
+            <label class="input-label">Enunciado:</label>
+            <input type="text" name="template[questions_attributes][__INDEX__][text]" class="input-field-line">
         </div>
 
         <div class="input-group">
-            <label class="input-label">Opções:</label>
-            <input type="text" name="template[questions_attributes][__INDEX__][options]" class="input-field-line" placeholder="Opção A, Opção B...">
+            <label class="input-label">Opções (separadas por vírgula):</label>
+            <input type="text" name="template[questions_attributes][__INDEX__][options]" class="input-field-line">
         </div>
     </div>
 </template>
 
 <script>
-    document.getElementById("add-question").addEventListener("click", addQuestion);
+    document.addEventListener("turbo:load", initForm);
+    document.addEventListener("DOMContentLoaded", initForm);
 
-    document.querySelectorAll(".btn-single-add").forEach(btn => {
-        btn.addEventListener("click", addQuestion);
-    });
+    function initForm() {
+        const addBtn = document.getElementById("add-question");
+        if(addBtn) {
+            addBtn.onclick = function() {
+                const container = document.getElementById("questions-container");
+                const id = new Date().getTime();
+                const html = document.getElementById("question-template").innerHTML.replace(/__INDEX__/g, id);
+                container.insertAdjacentHTML('beforeend', html);
+            };
+        }
 
-    function addQuestion() {
-        const container = document.getElementById("questions-container");
-        const index = container.children.length;
-
-        let template = document.getElementById("question-template").innerHTML;
-        template = template.replaceAll("__INDEX__", index);
-
-        const div = document.createElement("div");
-        div.innerHTML = template;
-
-        container.appendChild(div.firstElementChild);
+        // Lógica para esconder questões marcadas para exclusão (vindas do banco)
+        document.querySelectorAll(".btn-remove-question").forEach(btn => {
+            btn.onclick = function() {
+                const block = this.closest(".question-block");
+                block.querySelector(".destroy-field").value = "1";
+                block.style.display = "none";
+            }
+        });
     }
 </script>
