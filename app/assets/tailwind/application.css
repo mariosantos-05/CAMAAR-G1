@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@source "../../views";
+@source "../../helpers";
+@source "../../javascript";
+
+@theme {
+  /* Cores do Projeto (Extraídas do seu Config anterior) */
+  --color-brand-purple: #5D1F5D;
+  --color-brand-green: #22C55E;
+  --color-bg-main: #E5E5E5;
+  --color-surface-white: #FFFFFF;
+
+  /* Fonte */
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Garante altura total para o layout funcionar */
+html, body {
+  height: 100%;
+}

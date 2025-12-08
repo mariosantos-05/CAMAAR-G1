@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_27_213521) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_08_230657) do
   create_table "members", force: :cascade do |t|
     t.string "nome"
     t.string "matricula"
@@ -43,6 +43,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_213521) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_turmas_on_subject_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "matricula"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "status", default: false
+    t.string "profile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["matricula"], name: "index_users_on_matricula", unique: true
   end
 
   add_foreign_key "turmas", "subjects"

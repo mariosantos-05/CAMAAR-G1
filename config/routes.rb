@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 
   get 'gerenciamento', to: 'admins#management', as: 'admin_management'
-  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa' 
+  get 'importar_sigaa', to: 'admins#new_import', as: 'import_sigaa'
   post 'importar_sigaa', to: 'admins#create_import'
 
 
@@ -15,4 +15,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # Tela inicial (pode ser o login ou uma landing page)
+  root 'sessions#new'
+
+  # Issue #10: Login e Logout
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
+  # Issue #11: Primeiro Acesso (Definição de Senha)
+  resources :first_access, only: [:edit, :update]
+
+  # Issue #6: Importação (Admin)
+  get '/admin/import', to: 'imports#new', as: :admin_import
+  post '/admin/import', to: 'imports#create'
+
+  # Dashboards (apenas para redirecionamento)
+  get '/dashboard', to: 'dashboard#index', as: :user_dashboard
+  get '/admin/dashboard', to: 'admin#index', as: :admin_dashboard
 end
