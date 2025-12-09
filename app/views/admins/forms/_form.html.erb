@@ -13,9 +13,9 @@
             <div class="template-center">
                 <label>Template:</label>
                 <%= select_tag :template_id,
-          options_from_collection_for_select(@templates, :id, :titulo),
-          prompt: "Template",
-          class: "select-template" %>
+                    options_from_collection_for_select(@templates, :id, :titulo),
+                    prompt: "Selecione um template", 
+                    class: "select-template" %>
             </div>
 
             <button class="modal-close" data-action="click->modal#close">&times;</button>
