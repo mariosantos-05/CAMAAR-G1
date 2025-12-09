@@ -28,6 +28,6 @@ class FirstAccessController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:usuario).permit(:password, :password_confirmation)
   end
 end
