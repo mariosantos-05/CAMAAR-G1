@@ -24,9 +24,29 @@ Rails.application.routes.draw do
 
   get "turmas/:id/respostas", to: "results#show_respostas", as: :turma_respostas
 
-  get "admins/results/:turma_id/respostas", 
-    to: "admins#show_respostas", 
+  get "admins/results/:turma_id/respostas",
+    to: "admins#show_respostas",
     as: :admin_turma_respostas
 
+  # Defines the root path route ("/")
+  # root "posts#index"
 
+  # Tela inicial (pode ser o login ou uma landing page)
+  root 'sessions#new'
+
+  # Issue #10: Login e Logout
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
+  # Issue #11: Primeiro Acesso (Definição de Senha)
+  resources :first_access, only: [:edit, :update]
+
+  # Issue #6: Importação (Admin)
+  get '/admin/import', to: 'imports#new', as: :admin_import
+  post '/admin/import', to: 'imports#create'
+
+  # Dashboards (apenas para redirecionamento)
+  #get '/dashboard_placeholder', to: proc { [200, {}, ['Avaliações (Em construção)']] }, as: :avaliacoes
+  #get '/admin_placeholder', to: proc { [200, {}, ['Gerenciamento Admin (Em construção)']] }, as: :admin_management
 end

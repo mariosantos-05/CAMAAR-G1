@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
     t.index ["turma_id"], name: "index_forms_on_turma_id"
   end
 
+
   create_table "questions", force: :cascade do |t|
     t.integer "template_id", null: false
     t.string "text"
@@ -62,11 +63,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_08_135814) do
     t.string "nome"
     t.string "matricula"
     t.string "email"
+    t.string "password_digest"
     t.boolean "status"
     t.string "profile"
     t.integer "departamento_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["matricula"], name: "index_users_on_matricula", unique: true
   end
 
   create_table "vinculos", force: :cascade do |t|
