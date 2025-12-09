@@ -14,7 +14,7 @@ RSpec.describe "Autenticação", type: :request do
   describe "POST /login" do
     it "loga com sucesso e redireciona" do
       post login_path, params: { login: '190075384', password: 'Pass123()' }
-      expect(response).to redirect_to(user_dashboard_path) # Verifica se foi pro dashboard
+      expect(response).to redirect_to(avaliacoes_path) # Verifica se foi pro dashboard
     end
 
     it "falha com senha errada" do

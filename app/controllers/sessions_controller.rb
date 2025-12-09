@@ -36,6 +36,6 @@ class SessionsController < ApplicationController
 
   def destination_by_profile(user)
     # RN-L-04 e RN-L-05
-    user.profile == 'Admin' ? admin_dashboard_path : user_dashboard_path
+    user.profile == 'Admin' ? admin_management_path : avaliacoes_path
   end
 end

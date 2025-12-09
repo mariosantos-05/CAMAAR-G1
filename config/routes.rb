@@ -32,6 +32,6 @@ Rails.application.routes.draw do
   post '/admin/import', to: 'imports#create'
 
   # Dashboards (apenas para redirecionamento)
-  get '/dashboard', to: 'dashboard#index', as: :user_dashboard
-  get '/admin/dashboard', to: 'admin#index', as: :admin_dashboard
+  get '/dashboard_placeholder', to: proc { [200, {}, ['Avaliações (Em construção)']] }, as: :avaliacoes
+  #get '/admin_placeholder', to: proc { [200, {}, ['Gerenciamento Admin (Em construção)']] }, as: :admin_management
 end
