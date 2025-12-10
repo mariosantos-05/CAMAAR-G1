@@ -131,7 +131,7 @@ RSpec.describe "Templates", type: :request do
     it "remove o template" do
       template_mock = double("Template", id: 1)
       allow(Template).to receive(:find).with("1").and_return(template_mock)
-      expect(template_mock).to receive(:destroy)
+      expect(template_mock).to receive(:destroy).and_return(true)
 
       delete admins_template_path(1)
 
