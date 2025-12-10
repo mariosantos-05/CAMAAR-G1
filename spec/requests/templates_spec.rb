@@ -32,7 +32,7 @@ RSpec.describe "Templates", type: :request do
         get admins_templates_path
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Nenhum template criado")
+        expect(response.body).to include("Nenhum template foi criado")
       end
     end
   end
