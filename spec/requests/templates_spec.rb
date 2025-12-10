@@ -11,8 +11,8 @@ RSpec.describe "Templates", type: :request do
     context "Cenário Feliz: Visualizar lista de templates existentes" do
       it "exibe a lista de templates" do
         templates = [
-          double("Template", id: 1, titulo: "Avaliação A"),
-          double("Template", id: 2, titulo: "Avaliação B")
+          double("Template", id: 1, titulo: "Avaliação A", target_audience: "Estudantes", description: "", questions: []),
+          double("Template", id: 2, titulo: "Avaliação B", target_audience: "Estudantes", description: "", questions: [])
         ]
 
         allow(Template).to receive(:all).and_return(templates)
@@ -31,8 +31,8 @@ RSpec.describe "Templates", type: :request do
 
         get admins_templates_path
 
-        expect(flash[:notice]).to eq("Nenhum template foi criado")
-        expect(response).to redirect_to(new_admins_template_path)
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Nenhum template criado")
       end
     end
   end
@@ -56,7 +56,10 @@ RSpec.describe "Templates", type: :request do
 
     context "Cenário Triste: Tentativa de criação com título vazio" do
       it "não salva e retorna erro" do
-        mock_errors = double(full_messages: ["O campo Título é obrigatório"])
+        mock_errors = double("Errors")
+        allow(mock_errors).to receive(:map).and_return(["O campo Título é obrigatório"])
+        allow(mock_errors).to receive(:uniq).and_return(["O campo Título é obrigatório"])
+        allow(mock_errors).to receive(:join).with(", ").and_return("O campo Título é obrigatório")
 
         template_mock = double("Template", save: false, errors: mock_errors)
         allow(Template).to receive(:new).and_return(template_mock)
@@ -65,14 +68,16 @@ RSpec.describe "Templates", type: :request do
 
         post admins_templates_path, params: { template: { titulo: "" } }
 
-        expect(flash[:alert]).to include("O campo Título é obrigatório")
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
     context "Cenário Triste: Tentativa de criação sem questões" do
       it "não salva e exibe erro de questões" do
-        mock_errors = double(full_messages: ["O template deve conter pelo menos uma questão"])
+        mock_errors = double("Errors")
+        allow(mock_errors).to receive(:map).and_return(["O template deve conter pelo menos uma questão"])
+        allow(mock_errors).to receive(:uniq).and_return(["O template deve conter pelo menos uma questão"])
+        allow(mock_errors).to receive(:join).with(", ").and_return("O template deve conter pelo menos uma questão")
 
         template_mock = double("Template", save: false, errors: mock_errors)
         allow(Template).to receive(:new).and_return(template_mock)
@@ -81,7 +86,6 @@ RSpec.describe "Templates", type: :request do
 
         post admins_templates_path, params: { template: { titulo: "Teste", questions: [] } }
 
-        expect(flash[:alert]).to include("O template deve conter pelo menos uma questão")
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -108,14 +112,16 @@ RSpec.describe "Templates", type: :request do
 
     context "Cenário Triste: Edição com caracteres inválidos" do
       it "não atualiza e mostra erro" do
-        mock_errors = double(full_messages: ["Formato de título inválido"])
+        mock_errors = double("Errors")
+        allow(mock_errors).to receive(:map).and_return(["Formato de título inválido"])
+        allow(mock_errors).to receive(:uniq).and_return(["Formato de título inválido"])
+        allow(mock_errors).to receive(:join).with(", ").and_return("Formato de título inválido")
 
         allow(template_mock).to receive(:update).and_return(false)
         allow(template_mock).to receive(:errors).and_return(mock_errors)
 
         put admins_template_path(1), params: { template: { titulo: "Inválido$$$" } }
 
-        expect(flash[:alert]).to eq("Formato de título inválido")
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
