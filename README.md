@@ -15,6 +15,49 @@
 
 Implementar cada User Story (US) previamente especificada na Sprint 1 nos arquivos `.feature`.
 
+# 🔰 Papéis na Sprint 2
+
+
+● A implementação das features cujos cenários BDD especificados na segunda etapa da Sprint 1
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+
+● Os respectivos testes em RSpec implementados com sucesso.
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+
+● A documentação das features na Wiki do repositório (com os respectivos responsáveis)
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+
+● O kanban das issues distribuídas entre as lanes: Backlog   - Doing  - Done - Accepted usando a própria interface de projetos do GitHub.
+Responsável: Célio
+
+● O link do repositório do Github do grupo com todas as informações acima atualizadas.
+Responsável: Mário    
+
+● Abrir uma Pull Request com as especificações dos testes de aceitação
+(BDD) no repositório principal.  
+Responsável: Mário ou Célio
+
+● Entregar arquivo .txt contendo um link para o repositório, o nome e a
+matrícula dos integrantes.  
+Responsável: Mário    
+
+● Criar um arquivo Markdown como Wiki, contendo
+as informações sobre a Sprint 1.  
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+
+
+## 🧑‍💼 Scrum Master
+
+Caroline
+
+## 🧑‍💻 Product Owner
+
+Célio
+
+## 🧑‍💻 Produção
+
+Caroline, Célio, Luís Filipe e Mário.
+
 
 # Quais funcionalidades foram desenvolvidas?
 
