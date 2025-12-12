@@ -54,12 +54,18 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "factory_bot_rails"
+  gem "flog", "4.8.0"
+  gem "nio4r"
+  gem "pristine"
+  gem "websocket-driver"
+  gem "rdoc"
 
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "rubycritic", require: false
 end
 
 # Testing gems
@@ -67,6 +73,8 @@ group :test do
   # Rails default system testing
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
+  gem "rails-controller-testing"
 
 
   # Cucumber support

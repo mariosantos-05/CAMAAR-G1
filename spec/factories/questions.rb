@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :question do
-    template { nil }
-    text { "MyString" }
-    question_type { "MyString" }
-    options { "MyText" }
+    association :template
+    text { "Pergunta Teste" }
+    question_type { "text" }
+    options { "" }
   end
 end

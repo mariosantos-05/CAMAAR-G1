@@ -1,19 +1,22 @@
 FactoryBot.define do
-  factory :usuario do
+  # Define explicitamente que esta factory cria um 'Usuario'
+  factory :usuario, class: 'Usuario' do
     sequence(:nome) { |n| "Usuario Teste #{n}" }
-    sequence(:matricula) { |n| "000#{n}" }
+    sequence(:matricula) { |n| "202500#{n}" }
     sequence(:email) { |n| "usuario#{n}@teste.com" }
     status { true }
-    profile { "aluno" }
-    departamento_id { 1 }  # ajuste conforme necessário
-  end
-
-  factory :admin, class: "Usuario" do
-    nome { "Admin Teste" }
-    matricula { "0000" }
-    email { "admin@teste.com" }
-    status { true }
-    profile { "admin" }
     departamento_id { 1 }
+    
+    # SENHA FORTE: Para passar no regex do seu model
+    password { "Teste@1234" }
+    
+    profile { "Aluno" }
+
+    # Sub-factory para Admin
+    factory :admin do
+      nome { "Admin Teste" }
+      profile { "Admin" }
+      email { "admin@teste.com" }
+    end
   end
 end

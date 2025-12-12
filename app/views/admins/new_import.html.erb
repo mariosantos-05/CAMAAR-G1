@@ -21,7 +21,7 @@
     <main class="main-content">
         <div class="content-area">
             <div class="action-card" style="width: 500px; text-align: left;">
-                <h2 style="text-align: center; color: #333; margin-top: 0;">Importar Dados do SIGAA</h2>
+                <h2 style="text-align: center; color: #333; margin-top: 0; font-size: 1.5rem; font-weight: bold;">Importar Dados do SIGAA</h2>
                 <p style="text-align: center; color: #666; margin-bottom: 30px;">
                     Selecione o arquivo JSON de <b>Turmas</b> ou <b>Alunos</b>.
                 </p>
@@ -37,8 +37,8 @@
                 <div style="margin-bottom: 20px;">
                     <%= form.label :file, "Arquivo JSON:", style: "display: block; margin-bottom: 8px; font-weight: bold; color: #333;" %>
 
-                    <%= form.file_field :file, accept: 'application/json', 
-                style: "width: 100%; box-sizing: border-box; display: block; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;" %>
+                    <%= form.file_field :file, id: 'file', accept: 'application/json',
+                style: "width: 100%; box-sizing: border-box; display: block; padding: 12px; color: #666; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; cursor: pointer;" %>
                 </div>
 
                 <%= form.submit "Enviar Arquivo", class: "btn-action btn-primary-green", style: "margin-bottom: 15px;" %>

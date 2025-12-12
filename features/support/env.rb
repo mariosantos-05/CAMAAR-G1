@@ -62,3 +62,22 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Capybara.register_driver :selenium_firefox_headless do |app|
+  options = Selenium::WebDriver::Firefox::Options.new
+  # 1. Ativa o modo Headless
+  options.add_argument('-headless') 
+  
+  # 2. Desativa logs excessivos do driver
+  # (Esta opção pode variar dependendo da versão do Geckodriver)
+  options.log_level = :warn
+  
+  Capybara::Selenium::Driver.new(
+    app, 
+    browser: :firefox, 
+    options: options
+  )
+end
+
+# Define o driver padrão para JavaScript como o headless do Firefox
+Capybara.javascript_driver = :selenium_firefox_headless
