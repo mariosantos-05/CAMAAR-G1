@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,AvaliacoesController">
 
 
-    <meta name="description" content="Documentation for the AvaliacoesController class">
+    <meta name="description" content="class AvaliacoesController: Controller responsável por gerenciar avaliações e respostas dos usuários.">
 
 
 
@@ -121,6 +121,8 @@
 
   <section class="description">
     
+<p>Controller responsável por gerenciar avaliações e respostas dos usuários.</p>
+
   </section>
 
 
@@ -164,39 +166,29 @@
         <div class="method-description">
 
           <div class="method-source-code" id="enviar_resposta-source">
-            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enviar_resposta</span>
   <span class="ruby-identifier">form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:form_id</span>])
 
-  <span class="ruby-comment"># Verifica permissão</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">vinculos</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">turma_id:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">turma_id</span>)
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">avaliacoes_path</span>, <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Você não tem acesso a esse formulário.&quot;</span>
-    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você não tem acesso a esse formulário.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_has_access?</span>(<span class="ruby-identifier">form</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">already_responded?</span>(<span class="ruby-identifier">form</span>)
+
+  <span class="ruby-identifier">answers</span> = <span class="ruby-identifier">normalized_answers</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">answers</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">responder_form_path</span>(<span class="ruby-identifier">form</span>.<span class="ruby-identifier">turma_id</span>, <span class="ruby-identifier">form</span>.<span class="ruby-identifier">id</span>),
+                       <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Preencha os campos obrigatórios.&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># 🚨 Impede que o aluno envie novamente (segurança)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-constant">Resposta</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">form_id:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">usuario_id:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">avaliacoes_path</span>, <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">normalized_answers</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:answers</span>] <span class="ruby-operator">||</span> {}
-
-  <span class="ruby-comment"># 👉 Aqui criamos o registro dizendo que ESTE aluno respondeu</span>
-  <span class="ruby-constant">Resposta</span>.<span class="ruby-identifier">create!</span>(
-    <span class="ruby-value">form_id:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">id</span>,
-    <span class="ruby-value">usuario_id:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>,
-    <span class="ruby-value">answers:</span> <span class="ruby-identifier">normalized_answers</span>
-  )
-
-  <span class="ruby-comment"># ❗ Nada de destruir o form — cada aluno responde o mesmo form</span>
+  <span class="ruby-constant">Resposta</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">form_id:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">usuario_id:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">answers:</span> <span class="ruby-identifier">answers</span>)
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">avaliacoes_path</span>, <span class="ruby-value">notice:</span> <span class="ruby-string">&quot;Formulário enviado com sucesso!&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          
+          <p>Processa o envio das respostas do formulário</p>
+
+<p>@param <a href=":form_id">params</a> [Integer] ID do formulário @param <a href=":answers">params</a> [Hash] Respostas enviadas pelo usuário @return [void] @note Cria um registro de <a href="Resposta.html"><code>Resposta</code></a> no banco de dados. Redireciona em caso de erros ou sucesso.</p>
 
 
         </div>
@@ -232,31 +224,17 @@
         <div class="method-description">
 
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
-  <span class="ruby-ivar">@turmas</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">vinculos</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">turma:</span> <span class="ruby-value">:forms</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:turma</span>)
-
-  <span class="ruby-ivar">@turmas</span> = <span class="ruby-ivar">@turmas</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">turma</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>(
-      <span class="ruby-value">id:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">id</span>,
-      <span class="ruby-value">nome:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">nome</span>,
-      <span class="ruby-value">semestre:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">semestre</span>,
-      <span class="ruby-value">forms:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">forms</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">is_active:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
-        <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>(
-          <span class="ruby-value">id:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">id</span>,
-          <span class="ruby-value">titulo:</span> <span class="ruby-identifier">form</span>.<span class="ruby-identifier">template</span>.<span class="ruby-identifier">titulo</span>,
-          <span class="ruby-value">turma_nome:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">nome</span>,
-          <span class="ruby-value">semestre:</span> <span class="ruby-identifier">turma</span>.<span class="ruby-identifier">semestre</span>
-        )
-      <span class="ruby-keyword">end</span>
-    )
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@turmas</span> = <span class="ruby-identifier">current_user_turmas_with_active_forms</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          
+          <p>Lista todas as turmas do usuário com seus formulários ativos</p>
+
+<p>@return [Array&lt;OpenStruct&gt;] Array de turmas com formulários ativos @note Cada turma é representada como OpenStruct com id, nome, semestre e forms.</p>
 
 
         </div>
@@ -292,27 +270,20 @@
         <div class="method-description">
 
           <div class="method-source-code" id="responder-source">
-            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/avaliacoes_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">responder</span>
   <span class="ruby-ivar">@form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:template</span>, <span class="ruby-value">:turma</span>).<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:form_id</span>])
 
-  <span class="ruby-comment"># Verifica se o usuário participa da turma</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">vinculos</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">turma_id:</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">turma_id</span>)
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">avaliacoes_path</span>, <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Você não tem acesso a esse formulário.&quot;</span>
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># 🚨 Impede que responda mais de 1 vez</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-constant">Resposta</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">form_id:</span> <span class="ruby-ivar">@form</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">usuario_id:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">avaliacoes_path</span>, <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você não tem acesso a esse formulário.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_has_access?</span>(<span class="ruby-ivar">@form</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">already_responded?</span>(<span class="ruby-ivar">@form</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          
+          <p>Exibe o formulário para o usuário responder</p>
+
+<p>@param <a href=":form_id">params</a> [Integer] ID do formulário a ser respondido @return [void] @note Redireciona o usuário caso ele não tenha acesso ou já tenha respondido.</p>
 
 
         </div>

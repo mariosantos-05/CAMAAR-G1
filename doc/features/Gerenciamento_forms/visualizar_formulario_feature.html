@@ -9,7 +9,7 @@
 
 
   <meta name="keywords" content="ruby,documentation,visualizar_formulario.feature">
-  <meta name="description" content="visualizar_formulario.feature: Visualizar formulários não respondidos para turmas matriculadas Dado que eu estou logado como Participante E que eu estou matriculado ">
+  <meta name="description" content="visualizar_formulario.feature: # language: pt Funcionalidade: Visualização de formulários para responder Como Participante de uma turma Quero visualizar os formulários não resp">
 
 
 
@@ -278,9 +278,49 @@
 
       <li><a href="../../tmp/local_secret_txt.html">local_secret</a></li>
 
+      <li><a href="../../tmp/pids/server_pid.html">server.pid</a></li>
+
       <li><a href="../../tmp/restart_txt.html">restart</a></li>
 
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/templates_controller_html.html">templates_controller.html</a></li>
+
       <li><a href="../../tmp/rubycritic/app/controllers/admins_controller_html.html">admins_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/application_controller_html.html">application_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/avaliacoes_controller_html.html">avaliacoes_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/first_access_controller_html.html">first_access_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/sessions_controller_html.html">sessions_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/helpers/application_helper_html.html">application_helper.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/jobs/application_job_html.html">application_job.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/mailers/application_mailer_html.html">application_mailer.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/application_record_html.html">application_record.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/form_html.html">form.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/question_html.html">question.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/resposta_html.html">resposta.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/subject_html.html">subject.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/template_html.html">template.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/turma_html.html">turma.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/usuario_html.html">usuario.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/vinculo_html.html">vinculo.html</a></li>
 
       <li><a href="../../tmp/rubycritic/app/services/sigaa_import_service_html.html">sigaa_import_service.html</a></li>
 
@@ -318,6 +358,8 @@
 
       <li><a href="../../tmp/rubycritic/overview_html.html">overview.html</a></li>
 
+      <li><a href="../../tmp/rubycritic/report_json.html">report.json</a></li>
+
       <li><a href="../../tmp/rubycritic/simple_cov_index_html.html">simple_cov_index.html</a></li>
 
       <li><a href="../../tmp/rubycritic/smells_index_html.html">smells_index.html</a></li>
@@ -339,26 +381,28 @@
 
 <main role="main" aria-label="Page features/Gerenciamento_forms/visualizar_formulario.feature">
 
+<p># language: pt</p>
+
 <p>Funcionalidade: Visualização de formulários para responder</p>
 
-<pre>Eu como Participante de uma turma
+<pre>Como Participante de uma turma
 Quero visualizar os formulários não respondidos das turmas em que estou matriculado
-A fim de poder escolher qual irei responder
+Para poder escolher qual irei responder
 
 Cenário: Visualizar formulários não respondidos para turmas matriculadas
-    Dado que eu estou logado como Participante
-    E que eu estou matriculado nas turmas &quot;Turma A&quot; e &quot;Turma B&quot;
-    E que existem formulários não respondidos para essas turmas
-    Quando eu acesso a seção de formulários disponíveis
-    Então eu devo ver os formulários não respondidos para &quot;Turma A&quot; e &quot;Turma B&quot;
-    E eu devo ver uma mensagem indicando o número de formulários pendentes &quot;Você tem 2 formulários para responder.&quot;
+  Dado que eu estou logado como Participante
+  E que eu estou matriculado nas turmas &quot;Turma A&quot; e &quot;Turma B&quot;
+  E que existem formulários não respondidos para essas turmas
+  Quando eu acesso a seção de formulários disponíveis
+  Então eu devo ver os formulários não respondidos das turmas &quot;Turma A&quot; e &quot;Turma B&quot;
+  E eu devo ver a indicação de que existem 2 formulários pendentes
 
 Cenário: Nenhum formulário pendente
-    Dado que eu estou logado como Participante
-    E que eu estou matriculado nas turmas &quot;Turma A&quot; e &quot;Turma B&quot;
-    E que não existem formulários pendentes
-    Quando eu acesso a seção &quot;Formulários Disponíveis&quot;
-    Então eu devo ver a mensagem &quot;Você não possui formulários pendentes.&quot;</pre>
+  Dado que eu estou logado como Participante
+  E que eu estou matriculado nas turmas &quot;Turma A&quot; e &quot;Turma B&quot;
+  E que não existem formulários pendentes
+  Quando eu acesso a seção de formulários disponíveis
+  Então eu devo ver a indicação de que não existem formulários pendentes</pre>
 
 </main>
 </body>

@@ -129,6 +129,8 @@
     
 <p>Controlador responsável pela orquestração das funcionalidades administrativas. Gerencia o painel de controle, visualização de resultados por departamento, importação de dados via integração SIGAA e exportação de relatórios em CSV.</p>
 
+<p>@see <a href="ApplicationController.html"><code>ApplicationController</code></a></p>
+
   </section>
 
 
@@ -172,32 +174,27 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create_import-source">
-            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_import</span>
   <span class="ruby-identifier">uploaded_file</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:file</span>]
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_missing_file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">uploaded_file</span>.<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-comment"># O tratamento de exceções foi encapsulado para isolamento de responsabilidade</span>
   <span class="ruby-identifier">attempt_import_process</span>(<span class="ruby-identifier">uploaded_file</span>.<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          <p>Processa a requisição de upload para importação de dados do SIGAA. Valida a presença do arquivo e delega o processamento para métodos auxiliares para manter a complexidade ciclomática baixa.</p>
+          <p>Processa a requisição de upload para importação de dados do SIGAA. Valida a presença do arquivo e delega o processamento de validação/persistência ao método ‘attempt_import_process`.</p>
 
-<p>Args:</p>
+<p>@param params [Hash] Contém o arquivo enviado (‘<a href=":file">params</a>`).</p>
 
-<pre>params[:file] (ActionDispatch::Http::UploadedFile): O arquivo JSON enviado.</pre>
+<p>@return [void] Redireciona o fluxo da requisição.</p>
 
-<p>Returns:</p>
+<p>@note Efeitos Colaterais:</p>
 
-<pre>Redireciona para a rota apropriada (sucesso ou falha) com mensagens flash.</pre>
-
-<p>Side Effects:</p>
-
-<pre>Acesso ao sistema de arquivos (leitura temporária).
-Invocação do serviço de persistência no banco de dados.</pre>
+<pre>- Redireciona caso o arquivo esteja ausente.
+- Chama o método de importação.</pre>
 
 
         </div>
@@ -233,9 +230,8 @@ Invocação do serviço de persistência no banco de dados.</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="export_csv-source">
-            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">export_csv</span>
-  <span class="ruby-comment"># Define @turma explicitamente para contexto da view e métodos auxiliares</span>
   <span class="ruby-ivar">@turma</span> = <span class="ruby-constant">Turma</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:turma_id</span>])
   
   <span class="ruby-identifier">questions</span>, <span class="ruby-identifier">answers</span> = <span class="ruby-identifier">load_export_data</span>
@@ -248,20 +244,17 @@ Invocação do serviço de persistência no banco de dados.</pre>
 
 
 
-          <p>Orquestra a geração e o download do relatório de respostas em formato CSV.</p>
+          <p>Monta a geração e o download do relatório de respostas em formato CSV.</p>
 
-<p>Args:</p>
+<p>@param params [Hash] Deve conter ‘<a href=":turma_id">params</a>` (Integer).</p>
 
-<pre>params[:turma_id] (Integer): Identificador primário da turma alvo.</pre>
+<p>@return [void] Inicia o download do arquivo CSV (stream) ou redireciona.</p>
 
-<p>Returns:</p>
+<p>@note Efeitos Colaterais:</p>
 
-<pre>Inicia o download do arquivo CSV (stream) ou redireciona caso não haja dados.</pre>
-
-<p>Side Effects:</p>
-
-<pre>Gera um arquivo em memória.
-Define @turma como variável de instância.</pre>
+<pre>- Define `@turma`.
+- Gera um arquivo CSV em memória e o envia ao navegador.
+- Redireciona para `admin_results_path` com `alert` se a turma não tiver respostas.</pre>
 
 
         </div>
@@ -297,7 +290,7 @@ Define @turma como variável de instância.</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="management-source">
-            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">management</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -416,19 +409,14 @@ Define @turma como variável de instância.</pre>
 
 
 
-          <p>Recupera e lista as turmas acadêmicas, filtrando pelo departamento do administrador.</p>
+          <p>Recupera e lista as turmas acadêmicas, filtrando pelo departamento do administrador logado.</p>
 
-<p>Args:</p>
+<p>@return [void] Renderiza a view ‘results’.</p>
 
-<pre>Nenhum (utiliza `current_user` da sessão para determinar o contexto).</pre>
+<p>@note Efeitos Colaterais:</p>
 
-<p>Returns:</p>
-
-<pre>Renderiza a view &#39;results&#39;, disponibilizando a variável de instância @turmas.</pre>
-
-<p>Side Effects:</p>
-
-<pre>Executa consultas de leitura no banco de dados (SELECT na tabela Turma).</pre>
+<pre>- Define a variável de instância `@turmas` com as turmas filtradas.
+- Executa consulta de leitura no banco de dados (Turma).</pre>
 
 
         </div>
@@ -464,7 +452,7 @@ Define @turma como variável de instância.</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="show_respostas-source">
-            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_respostas</span>
   <span class="ruby-ivar">@turma</span> = <span class="ruby-constant">Turma</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:turma_id</span>])
   <span class="ruby-identifier">forms</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">turma_id:</span> <span class="ruby-ivar">@turma</span>.<span class="ruby-identifier">id</span>)
@@ -477,17 +465,14 @@ Define @turma como variável de instância.</pre>
 
           <p>Recupera e exibe as respostas detalhadas submetidas para uma turma específica.</p>
 
-<p>Args:</p>
+<p>@param params [Hash] Deve conter ‘<a href=":turma_id">params</a>` (Integer).</p>
 
-<pre>params[:turma_id] (Integer): Identificador primário da turma.</pre>
+<p>@return [void] Renderiza a view ‘show_respostas’.</p>
 
-<p>Returns:</p>
+<p>@note Efeitos Colaterais:</p>
 
-<pre>Renderiza a view &#39;show_respostas&#39; com as variáveis @turma e @respostas carregadas.</pre>
-
-<p>Side Effects:</p>
-
-<pre>Executa consultas complexas (includes) no banco de dados para evitar N+1 queries.</pre>
+<pre>- Define variáveis de instância `@turma` e `@respostas`.
+- Executa consultas complexas (`includes`) no banco de dados para evitar N+1 queries.</pre>
 
 
         </div>
