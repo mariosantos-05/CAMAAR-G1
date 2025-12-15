@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
-
   # ADICIONE ESTA LINHA: Define que este controller usa o layout isolado
-  layout 'auth'
+  layout "auth"
 
   def new
   end
@@ -24,7 +23,7 @@ class SessionsController < ApplicationController
         redirect_to edit_first_access_path(user), alert: "Sua conta ainda não foi ativada."
         return
       end
-    # 3. Tentativa de Login
+      # 3. Tentativa de Login
       if user.authenticate(params[:password])
         session[:usuario_id] = user.id
         redirect_to destination_by_profile(user)
@@ -48,6 +47,6 @@ class SessionsController < ApplicationController
 
   def destination_by_profile(user)
     # RN-L-04 e RN-L-05
-    user.profile == 'Admin' ? admin_management_path : avaliacoes_path
+    user.profile == "Admin" ? admin_management_path : avaliacoes_path
   end
 end

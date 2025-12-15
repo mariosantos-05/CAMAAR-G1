@@ -9,7 +9,7 @@
 
 
   <meta name="keywords" content="ruby,documentation,responder_formulario.feature">
-  <meta name="description" content="responder_formulario.feature: Responder formulário de avaliação para uma turma Dado que eu estou logado como Participante E que eu estou matriculado na turma &quot;Turma A&quot; ">
+  <meta name="description" content="responder_formulario.feature: # language: pt Funcionalidade: Responder formulário Como Participante de uma turma Quero responder o questionário sobre a turma em que estou matr">
 
 
 
@@ -278,9 +278,49 @@
 
       <li><a href="../../tmp/local_secret_txt.html">local_secret</a></li>
 
+      <li><a href="../../tmp/pids/server_pid.html">server.pid</a></li>
+
       <li><a href="../../tmp/restart_txt.html">restart</a></li>
 
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/templates_controller_html.html">templates_controller.html</a></li>
+
       <li><a href="../../tmp/rubycritic/app/controllers/admins_controller_html.html">admins_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/application_controller_html.html">application_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/avaliacoes_controller_html.html">avaliacoes_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/first_access_controller_html.html">first_access_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/sessions_controller_html.html">sessions_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/helpers/application_helper_html.html">application_helper.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/jobs/application_job_html.html">application_job.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/mailers/application_mailer_html.html">application_mailer.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/application_record_html.html">application_record.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/form_html.html">form.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/question_html.html">question.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/resposta_html.html">resposta.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/subject_html.html">subject.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/template_html.html">template.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/turma_html.html">turma.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/usuario_html.html">usuario.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/vinculo_html.html">vinculo.html</a></li>
 
       <li><a href="../../tmp/rubycritic/app/services/sigaa_import_service_html.html">sigaa_import_service.html</a></li>
 
@@ -318,6 +358,8 @@
 
       <li><a href="../../tmp/rubycritic/overview_html.html">overview.html</a></li>
 
+      <li><a href="../../tmp/rubycritic/report_json.html">report.json</a></li>
+
       <li><a href="../../tmp/rubycritic/simple_cov_index_html.html">simple_cov_index.html</a></li>
 
       <li><a href="../../tmp/rubycritic/smells_index_html.html">smells_index.html</a></li>
@@ -339,44 +381,31 @@
 
 <main role="main" aria-label="Page features/Gerenciamento_forms/responder_formulario.feature">
 
+<p># language: pt</p>
+
 <p>Funcionalidade: Responder formulário</p>
 
-<pre class="ruby"><span class="ruby-constant">Eu</span> <span class="ruby-identifier">como</span> <span class="ruby-constant">Participante</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">uma</span> <span class="ruby-identifier">turma</span>
-<span class="ruby-constant">Quero</span> <span class="ruby-identifier">responder</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">questionário</span> <span class="ruby-identifier">sobre</span> <span class="ruby-identifier">a</span> <span class="ruby-identifier">turma</span> <span class="ruby-identifier">em</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">estou</span> <span class="ruby-identifier">matriculado</span>
-<span class="ruby-constant">A</span> <span class="ruby-identifier">fim</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">submeter</span> <span class="ruby-identifier">minha</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">da</span> <span class="ruby-identifier">turma</span>
-</pre>
+<pre>Como Participante de uma turma
+Quero responder o questionário sobre a turma em que estou matriculado
+Para submeter minha avaliação da turma
 
-<p>Cenário: Responder formulário de avaliação para uma turma</p>
+Contexto:
+  Dado que eu estou logado como Participante
+  E que eu estou matriculado na turma &quot;Turma A&quot;
+  E que existe um formulário de avaliação ativo para a turma &quot;Turma A&quot;
 
-<pre class="ruby"><span class="ruby-constant">Dado</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">estou</span> <span class="ruby-identifier">logado</span> <span class="ruby-identifier">como</span> <span class="ruby-constant">Participante</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">estou</span> <span class="ruby-identifier">matriculado</span> <span class="ruby-identifier">na</span> <span class="ruby-identifier">turma</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">existe</span> <span class="ruby-identifier">um</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">disponível</span> <span class="ruby-identifier">para</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">Quando</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">acesso</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">para</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">preencho</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">com</span> <span class="ruby-identifier">as</span> <span class="ruby-identifier">respostas</span> <span class="ruby-identifier">necessárias</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">clico</span> <span class="ruby-identifier">em</span> <span class="ruby-string">&quot;Enviar Formulário&quot;</span>
-<span class="ruby-constant">Então</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">sistema</span> <span class="ruby-identifier">deve</span> <span class="ruby-identifier">registrar</span> <span class="ruby-identifier">minhas</span> <span class="ruby-identifier">respostas</span> <span class="ruby-identifier">para</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">devo</span> <span class="ruby-identifier">ver</span> <span class="ruby-identifier">uma</span> <span class="ruby-identifier">mensagem</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">confirmação</span> <span class="ruby-string">&quot;Seu formulário foi enviado com sucesso.&quot;</span>
-</pre>
+Cenário: Responder formulário de avaliação com sucesso
+  Quando eu acesso o formulário de avaliação da turma &quot;Turma A&quot;
+  E eu preencho o formulário com respostas válidas
+  E eu envio o formulário de avaliação
+  Então o sistema deve registrar minhas respostas
+  E eu devo ver a mensagem de confirmação do envio do formulário
 
-<p>Cenário: Tentativa de enviar formulário sem preencher campos obrigatórios</p>
-
-<pre class="ruby"><span class="ruby-constant">Dado</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">estou</span> <span class="ruby-identifier">logado</span> <span class="ruby-identifier">como</span> <span class="ruby-constant">Participante</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">existe</span> <span class="ruby-identifier">um</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">ativo</span> <span class="ruby-identifier">para</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">Quando</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">acesso</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">de</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">envio</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">sem</span> <span class="ruby-identifier">preencher</span> <span class="ruby-identifier">os</span> <span class="ruby-identifier">campos</span> <span class="ruby-identifier">obrigatórios</span>
-<span class="ruby-constant">Então</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">devo</span> <span class="ruby-identifier">ver</span> <span class="ruby-identifier">uma</span> <span class="ruby-identifier">mensagem</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">erro</span> <span class="ruby-identifier">indicando</span> <span class="ruby-identifier">os</span> <span class="ruby-identifier">campos</span> <span class="ruby-identifier">faltantes</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">as</span> <span class="ruby-identifier">respostas</span> <span class="ruby-identifier">não</span> <span class="ruby-identifier">devem</span> <span class="ruby-identifier">ser</span> <span class="ruby-identifier">registradas</span>
-</pre>
-
-<p>Cenário: Tentativa de enviar formulário sem preencher campos obrigatórios</p>
-
-<pre class="ruby"><span class="ruby-constant">Dado</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">estou</span> <span class="ruby-identifier">logado</span> <span class="ruby-identifier">como</span> <span class="ruby-constant">Participante</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">que</span> <span class="ruby-identifier">existe</span> <span class="ruby-identifier">um</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">ativo</span> <span class="ruby-identifier">para</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">Quando</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">acesso</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">avaliação</span> <span class="ruby-identifier">de</span> <span class="ruby-string">&quot;Turma A&quot;</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">envio</span> <span class="ruby-identifier">o</span> <span class="ruby-identifier">formulário</span> <span class="ruby-identifier">sem</span> <span class="ruby-identifier">preencher</span> <span class="ruby-identifier">os</span> <span class="ruby-identifier">campos</span> <span class="ruby-identifier">obrigatórios</span>
-<span class="ruby-constant">Então</span> <span class="ruby-identifier">eu</span> <span class="ruby-identifier">devo</span> <span class="ruby-identifier">ver</span> <span class="ruby-identifier">uma</span> <span class="ruby-identifier">mensagem</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">erro</span> <span class="ruby-identifier">indicando</span> <span class="ruby-identifier">os</span> <span class="ruby-identifier">campos</span> <span class="ruby-identifier">faltantes</span>
-<span class="ruby-constant">E</span> <span class="ruby-identifier">as</span> <span class="ruby-identifier">respostas</span> <span class="ruby-identifier">não</span> <span class="ruby-identifier">devem</span> <span class="ruby-identifier">ser</span> <span class="ruby-identifier">registradas</span>
-</pre>
+Cenário: Tentativa de envio sem preencher campos obrigatórios
+  Quando eu acesso o formulário de avaliação da turma &quot;Turma A&quot;
+  E eu envio o formulário de avaliação sem preencher os campos obrigatórios
+  Então eu devo ver uma mensagem de erro de campos obrigatórios
+  E as respostas não devem ser registradas</pre>
 
 </main>
 </body>

@@ -31,7 +31,7 @@ RSpec.describe Resposta, type: :model do
 
       hash = resposta.answers_hash
 
-      expect(hash["pergunta_1"]).to eq("Sim") 
+      expect(hash["pergunta_1"]).to eq("Sim")
       expect(hash[:pergunta_1]).to eq("Sim")
     end
   end

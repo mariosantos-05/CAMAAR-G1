@@ -1,3 +1,4 @@
+# language: pt
 Funcionalidade: Edição e Deleção de Templates
 
 Cenário: Edição de nome de template usado em formulário antigo (Feliz)

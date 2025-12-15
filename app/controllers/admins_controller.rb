@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 # Controlador responsável pela orquestração das funcionalidades administrativas.
 # Gerencia o painel de controle, visualização de resultados por departamento,
@@ -94,7 +94,7 @@ class AdminsController < ApplicationController
   #   - Redireciona para `admin_results_path` com `alert` se a turma não tiver respostas.
   def export_csv
     @turma = Turma.find(params[:turma_id])
-    
+
     questions, answers = load_export_data
     return redirect_empty_turma if answers.empty?
 
@@ -114,14 +114,14 @@ class AdminsController < ApplicationController
   #   - Redireciona para `root_path` com 'Acesso negado' se perfil não for 'Admin'.
   def require_admin
     return redirect_to(login_path, alert: "Você precisa fazer login para acessar essa área.") unless current_user
-    redirect_to(root_path, alert: "Acesso negado") unless current_user.profile == 'Admin'
+    redirect_to(root_path, alert: "Acesso negado") unless current_user.profile == "Admin"
   end
 
   # Auxiliar: Redirecionamento padrão para falha de ausência de arquivo.
   #
   # @return [void] Redireciona para `import_sigaa_path`.
   def redirect_missing_file
-    redirect_to import_sigaa_path, alert: 'Nenhum arquivo selecionado.'
+    redirect_to import_sigaa_path, alert: "Nenhum arquivo selecionado."
   end
 
   # Encapsula a lógica de chamada do Serviço de Importação e tratamento de erros.
@@ -139,26 +139,26 @@ class AdminsController < ApplicationController
   # @raise [StandardError] O serviço pode lançar erros de parsing, estrutura ou validação.
   def attempt_import_process(path)
     SigaaImportService.new(path).call
-    redirect_to admin_management_path, notice: 'Dados importados com sucesso!'
-    
+    redirect_to admin_management_path, notice: "Dados importados com sucesso!"
+
     rescue StandardError => e
-      
+
       generic_alert = "Erro de Validação"
       mensagem_alerta = generic_alert
-      
+
       nome_arquivo_enviado = params[:file]&.original_filename.to_s
-      
+
       if nome_arquivo_enviado.include?("turmas_tipo_errado.json")
           mensagem_alerta = "A matrícula deve conter apenas números"
-      
+
       elsif e.message.match?(/Array|lista|hash|objeto/i)
           mensagem_alerta = "#{generic_alert} O JSON deve ser uma lista (Array) de objetos"
-        
+
       elsif e.message.match?(/matricula|ausente|vazio/i)
           mensagem_alerta = "#{generic_alert} O campo obrigatório 'matricula' está ausente ou vazio"
 
       elsif e.message.match?(/parse error|unexpected token|JSON/i)
-        mensagem_alerta = 'O arquivo não é um JSON válido'
+        mensagem_alerta = "O arquivo não é um JSON válido"
 
       else
         mensagem_alerta = generic_alert
@@ -179,8 +179,8 @@ class AdminsController < ApplicationController
   def load_export_data
     forms = Form.where(turma_id: @turma.id)
     respostas = Resposta.where(form_id: forms.pluck(:id)).includes(form: { template: :questions })
-    
-    [forms.first&.template&.questions&.order(:id) || [], respostas]
+
+    [ forms.first&.template&.questions&.order(:id) || [], respostas ]
   end
 
   # Auxiliar: Redirecionamento caso a turma não possua dados para exportar.
@@ -199,7 +199,7 @@ class AdminsController < ApplicationController
   # @note Efeitos Colaterais:
   #   - Envia headers HTTP para download de arquivo.
   def send_csv_file(content)
-    safe_name = @turma.nome.gsub(/[^0-9A-Za-z.\-\(\) ]/, '')
+    safe_name = @turma.nome.gsub(/[^0-9A-Za-z.\-\(\) ]/, "")
     filename = "resultados_#{safe_name}.csv"
 
     send_data content, filename: filename, type: "text/csv"
@@ -213,7 +213,7 @@ class AdminsController < ApplicationController
   # @return [String] Conteúdo CSV final.
   def generate_csv_string(questions, answers)
     CSV.generate(headers: true) do |csv_doc|
-      csv_doc << ["Data"] + questions.map(&:text)
+      csv_doc << [ "Data" ] + questions.map(&:text)
       answers.each { |resp| csv_doc << build_csv_row(resp, questions) }
     end
   end
@@ -226,11 +226,11 @@ class AdminsController < ApplicationController
   # @return [Array] Dados da linha, iniciando pela data e seguidos pelas respostas.
   def build_csv_row(resposta, questions)
     user_answers = resposta.answers || {}
-    
-    row_data = questions.map do |question| 
+
+    row_data = questions.map do |question|
       user_answers[question.id.to_s] || "-"
     end
-    
-    [resposta.created_at.strftime("%d/%m/%Y")] + row_data
+
+    [ resposta.created_at.strftime("%d/%m/%Y") ] + row_data
   end
 end

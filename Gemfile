@@ -59,7 +59,6 @@ group :development, :test do
   gem "pristine"
   gem "websocket-driver"
   gem "rdoc"
-
 end
 
 group :development do

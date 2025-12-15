@@ -6,10 +6,10 @@ FactoryBot.define do
     sequence(:email) { |n| "usuario#{n}@teste.com" }
     status { true }
     departamento_id { 1 }
-    
+
     # SENHA FORTE: Para passar no regex do seu model
     password { "Teste@1234" }
-    
+
     profile { "Aluno" }
 
     # Sub-factory para Admin

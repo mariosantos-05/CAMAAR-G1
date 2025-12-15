@@ -9,7 +9,7 @@
 
 
   <meta name="keywords" content="ruby,documentation,criar_formulario.feature">
-  <meta name="description" content="criar_formulario.feature: Funcionalidade: Criação de formulário para docentes ou dicentes Cenário: Enviar formulário para Discentes de uma turma específica (Feliz) Dado qu">
+  <meta name="description" content="criar_formulario.feature: Tentativa de criação sem selecionar turmas Quando eu seleciono o template &quot;Avaliacao Semestral&quot; E eu clico em &quot;Enviar&quot; Então nenhum formul">
 
 
 
@@ -278,9 +278,49 @@
 
       <li><a href="../../tmp/local_secret_txt.html">local_secret</a></li>
 
+      <li><a href="../../tmp/pids/server_pid.html">server.pid</a></li>
+
       <li><a href="../../tmp/restart_txt.html">restart</a></li>
 
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/admins/templates_controller_html.html">templates_controller.html</a></li>
+
       <li><a href="../../tmp/rubycritic/app/controllers/admins_controller_html.html">admins_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/application_controller_html.html">application_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/avaliacoes_controller_html.html">avaliacoes_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/first_access_controller_html.html">first_access_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/forms_controller_html.html">forms_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/controllers/sessions_controller_html.html">sessions_controller.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/helpers/application_helper_html.html">application_helper.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/jobs/application_job_html.html">application_job.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/mailers/application_mailer_html.html">application_mailer.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/application_record_html.html">application_record.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/form_html.html">form.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/question_html.html">question.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/resposta_html.html">resposta.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/subject_html.html">subject.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/template_html.html">template.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/turma_html.html">turma.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/usuario_html.html">usuario.html</a></li>
+
+      <li><a href="../../tmp/rubycritic/app/models/vinculo_html.html">vinculo.html</a></li>
 
       <li><a href="../../tmp/rubycritic/app/services/sigaa_import_service_html.html">sigaa_import_service.html</a></li>
 
@@ -318,6 +358,8 @@
 
       <li><a href="../../tmp/rubycritic/overview_html.html">overview.html</a></li>
 
+      <li><a href="../../tmp/rubycritic/report_json.html">report.json</a></li>
+
       <li><a href="../../tmp/rubycritic/simple_cov_index_html.html">simple_cov_index.html</a></li>
 
       <li><a href="../../tmp/rubycritic/smells_index_html.html">smells_index.html</a></li>
@@ -339,30 +381,37 @@
 
 <main role="main" aria-label="Page features/template_formularios/criar_formulario.feature">
 
-<p>Funcionalidade: Criação de formulário para docentes ou dicentes</p>
+<p># language: pt</p>
 
-<p>Cenário: Enviar formulário para Discentes de uma turma específica (Feliz)</p>
+<p>Funcionalidade: Criar formulário de avaliação</p>
 
-<pre>Dado que estou criando um novo formulário a partir de um template
-Quando seleciono a opção &quot;Discentes&quot; no campo de público-alvo
-E seleciono uma turma válida &quot;Turma A - Engenharia&quot;
-E clico no botão &quot;Enviar&quot;
-Então o formulário deve ser enviado especificamente para os alunos daquela turma</pre>
+<pre>Como Administrador
+Quero criar formulários baseados em templates
+Para avaliar o desempenho das turmas no semestre atual
 
-<p>Cenário: Enviar formulário para Docentes (Feliz)</p>
+Contexto:
+  Dado que estou logado como Administrador
+  E que existe um template chamado &quot;Avaliacao Semestral&quot;
+  E que existem turmas ativas cadastradas
 
-<pre>Dado que estou criando um novo formulário
-Quando seleciono a opção &quot;Docentes&quot; no campo de público-alvo
-Então o formulário deve ser enviado especificamente para os professores
-E o campo de seleção de turma deve ficar oculto ou opcional</pre>
+Cenário: Criar formulário para turmas selecionadas
+  Quando eu seleciono o template &quot;Avaliacao Semestral&quot;
+  E eu seleciono as turmas &quot;Turma A&quot;, &quot;Turma B&quot; e &quot;Turma C&quot;
+  E eu clico em &quot;Enviar&quot;
+  Então formulários devem ser criados para as turmas selecionadas
+  E devo ver a mensagem &quot;Formulários criados com sucesso!&quot;
 
-<p>Cenário: Tentativa de criar sem selecionar público (Triste)</p>
+Cenário: Tentativa de criação sem selecionar turmas
+  Quando eu seleciono o template &quot;Avaliacao Semestral&quot;
+  E eu clico em &quot;Enviar&quot;
+  Então nenhum formulário deve ser criado
+  E devo ver a mensagem de erro &quot;Selecione um template e pelo menos uma turma.&quot;
 
-<pre>Dado que preenchi os dados básicos do formulário
-E não selecionei nem &quot;Docente&quot; nem &quot;Discente&quot;
-Quando tento clicar em &quot;Enviar&quot;
-Então o sistema deve exibir o erro &quot;Selecione o público-alvo da avaliação&quot;
-E não deve enviar o formulário</pre>
+Cenário: Tentativa de criação sem selecionar template
+  Quando eu seleciono as turmas &quot;Turma A&quot; e &quot;Turma B&quot;
+  E eu clico em &quot;Enviar&quot;
+  Então nenhum formulário deve ser criado
+  E devo ver a mensagem de erro &quot;Selecione um template e pelo menos uma turma.&quot;</pre>
 
 </main>
 </body>

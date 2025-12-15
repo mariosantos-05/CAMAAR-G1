@@ -1,21 +1,30 @@
-Funcionalidade: Criação de formulário para docentes ou dicentes
+# language: pt
 
-Cenário: Enviar formulário para Discentes de uma turma específica (Feliz)
-    Dado que estou criando um novo formulário a partir de um template
-    Quando seleciono a opção "Discentes" no campo de público-alvo
-    E seleciono uma turma válida "Turma A - Engenharia"
-    E clico no botão "Enviar"
-    Então o formulário deve ser enviado especificamente para os alunos daquela turma
+Funcionalidade: Criar formulário de avaliação
+  Como Administrador
+  Quero criar formulários baseados em templates
+  Para avaliar o desempenho das turmas no semestre atual
 
-Cenário: Enviar formulário para Docentes (Feliz)
-    Dado que estou criando um novo formulário
-    Quando seleciono a opção "Docentes" no campo de público-alvo
-    Então o formulário deve ser enviado especificamente para os professores
-    E o campo de seleção de turma deve ficar oculto ou opcional
+  Contexto:
+    Dado que estou logado como Administrador
+    E que existe um template chamado "Avaliacao Semestral"
+    E que existem turmas ativas cadastradas
 
-Cenário: Tentativa de criar sem selecionar público (Triste)
-    Dado que preenchi os dados básicos do formulário
-    E não selecionei nem "Docente" nem "Discente"
-    Quando tento clicar em "Enviar"
-    Então o sistema deve exibir o erro "Selecione o público-alvo da avaliação"
-    E não deve enviar o formulário
+  Cenário: Criar formulário para turmas selecionadas
+    Quando eu seleciono o template "Avaliacao Semestral"
+    E eu seleciono as turmas "Turma A", "Turma B" e "Turma C"
+    E eu clico em "Enviar"
+    Então formulários devem ser criados para as turmas selecionadas
+    E devo ver a mensagem "Formulários criados com sucesso!"
+
+  Cenário: Tentativa de criação sem selecionar turmas
+    Quando eu seleciono o template "Avaliacao Semestral"
+    E eu clico em "Enviar"
+    Então nenhum formulário deve ser criado
+    E devo ver a mensagem de erro "Selecione um template e pelo menos uma turma."
+
+  Cenário: Tentativa de criação sem selecionar template
+    Quando eu seleciono as turmas "Turma A" e "Turma B"
+    E eu clico em "Enviar"
+    Então nenhum formulário deve ser criado
+    E devo ver a mensagem de erro "Selecione um template e pelo menos uma turma."

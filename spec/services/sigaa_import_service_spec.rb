@@ -17,21 +17,21 @@ RSpec.describe SigaaImportService do
       it "erro quando o arquivo não é um JSON válido" do
         path = Rails.root.join("spec/fixtures/files/invalid.json")
         File.write(path, "{ isso nao eh json }")
-        
+
         service = SigaaImportService.new(path.to_s)
-        
+
         expect { service.call }.to raise_error(SigaaImportService::InvalidFileError, /não é um JSON válido/)
       end
 
       it "erro quando o JSON não é uma lista (Array)" do
         path = create_json_file("not_array.json", { objeto: "unico" })
         service = SigaaImportService.new(path)
-        
+
         expect { service.call }.to raise_error(SigaaImportService::InvalidFileError, /deve ser uma lista/)
       end
 
       it "erro quando falta chave obrigatória na Turma" do
-        data = [{ "class" => { "semester" => "2025.1" }, "name" => "Matematica" }] 
+        data = [ { "class" => { "semester" => "2025.1" }, "name" => "Matematica" } ]
         path = create_json_file("missing_keys.json", data)
         service = SigaaImportService.new(path)
 
@@ -55,7 +55,7 @@ RSpec.describe SigaaImportService do
         service = SigaaImportService.new(path)
 
         expect { service.call }.to change(Turma, :count).by(1)
-        
+
         turma = Turma.last
         expect(turma.nome).to eq("Engenharia de Software (CIC001 - A)")
         expect(turma.semestre).to eq("2025.1")

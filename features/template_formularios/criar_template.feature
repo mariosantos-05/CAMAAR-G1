@@ -1,7 +1,9 @@
+# language: pt
 Funcionalidade: Criar template de formulário  
 
 Cenário: Criação de template com dados válidos (Feliz)
     Dado que estou na página de criação de templates
+    E que estou na tela de criação de formulário
     E preencho o campo "Nome do template" com "Avaliação 2024"
     E adiciono um tipo de questão de múltipla escolha
     E adiciono um tipo de questão discursiva

@@ -1,4 +1,4 @@
-require 'json'
+require "json"
 
 class SigaaImportService
   class InvalidFileError < StandardError; end
@@ -43,7 +43,7 @@ class SigaaImportService
   def parse_json_file
     content = File.read(@file_path)
     data = JSON.parse(content)
-    
+
     raise InvalidFileError, "O JSON deve ser uma lista (Array) de objetos." unless data.is_a?(Array)
     data
   rescue JSON::ParserError
@@ -56,9 +56,9 @@ class SigaaImportService
   # Returns: nil.
   # Side Effects: Nenhum direto.
   def process_entry(entry, index)
-    if entry.key?('class')
+    if entry.key?("class")
       process_classes_file(entry, index)
-    elsif entry.key?('dicente')
+    elsif entry.key?("dicente")
       process_members_file(entry, index)
     else
       raise InvalidFileError, "Objeto não reconhecido na linha #{index + 1}."
@@ -72,11 +72,11 @@ class SigaaImportService
   # Side Effects: Cria registro na tabela Turma.
   def process_classes_file(entry, index)
     validate_keys!(entry, REQUIRED_SUBJECT_KEYS, "na Matéria (item #{index + 1})")
-    validate_keys!(entry['class'], REQUIRED_CLASS_KEYS, "na Turma")
+    validate_keys!(entry["class"], REQUIRED_CLASS_KEYS, "na Turma")
 
     nome_completo = "#{entry['name']} (#{entry['code']} - #{entry['class']['classCode']})"
-    
-    turma = Turma.find_or_initialize_by(nome: nome_completo, semestre: entry['class']['semester'])
+
+    turma = Turma.find_or_initialize_by(nome: nome_completo, semestre: entry["class"]["semester"])
     turma.is_active = true
     turma.save!
   end
@@ -103,8 +103,8 @@ class SigaaImportService
   # Side Effects: Nenhum.
   def validate_members_payload(entry, index)
     validate_keys!(entry, REQUIRED_MEMBER_FILE_KEYS, "no cabeçalho da Turma")
-    validate_students_data(entry['dicente']) if entry['dicente']
-    validate_keys!(entry['docente'], REQUIRED_TEACHER_KEYS, "no Docente") if entry['docente']
+    validate_students_data(entry["dicente"]) if entry["dicente"]
+    validate_keys!(entry["docente"], REQUIRED_TEACHER_KEYS, "no Docente") if entry["docente"]
   end
 
   # Itera sobre as listas e chama a persistência individual.
@@ -113,12 +113,12 @@ class SigaaImportService
   # Returns: nil.
   # Side Effects: Chama process_single_user.
   def persist_members(entry, turma)
-    process_single_user(entry['docente'], 'Professor', turma, 1) if entry['docente']
-    
-    return unless entry['dicente']
-    
-    entry['dicente'].each do |student| 
-      process_single_user(student, 'Aluno', turma, 0)
+    process_single_user(entry["docente"], "Professor", turma, 1) if entry["docente"]
+
+    return unless entry["dicente"]
+
+    entry["dicente"].each do |student|
+      process_single_user(student, "Aluno", turma, 0)
     end
   end
 
@@ -130,8 +130,8 @@ class SigaaImportService
   def validate_students_data(students_list)
     students_list.each_with_index do |student, index|
       validate_keys!(student, REQUIRED_STUDENT_KEYS, "no Aluno ##{index + 1}")
-      
-      unless student['matricula'].to_s.match?(/^\d+$/)
+
+      unless student["matricula"].to_s.match?(/^\d+$/)
         raise InvalidFileError, "Erro no Aluno ##{index + 1}: A matrícula deve conter apenas números."
       end
     end
@@ -143,8 +143,8 @@ class SigaaImportService
   # Returns: Turma ou nil.
   # Side Effects: Consulta ao banco.
   def find_turma(entry)
-    Turma.where(semestre: entry['semester']).find do |t|
-      t.nome.include?(entry['code']) && t.nome.include?(entry['classCode'])
+    Turma.where(semestre: entry["semester"]).find do |t|
+      t.nome.include?(entry["code"]) && t.nome.include?(entry["classCode"])
     end
   end
 
@@ -154,7 +154,7 @@ class SigaaImportService
   # Returns: Vinculo.
   # Side Effects: DB Save.
   def process_single_user(data, profile, turma, papel)
-    matricula = data['matricula'] || data['usuario']
+    matricula = data["matricula"] || data["usuario"]
     return if matricula.blank?
 
     usuario = persist_usuario(matricula.to_s, data, profile)
@@ -168,12 +168,12 @@ class SigaaImportService
   # Side Effects: DB Save.
   def persist_usuario(matricula, data, profile)
     usuario = Usuario.find_or_initialize_by(matricula: matricula)
-    
+
     setup_new_user(usuario, profile) if usuario.new_record?
 
     # Atualiza dados cadastrais
-    usuario.nome = data['nome']
-    usuario.email = data['email']
+    usuario.nome = data["nome"]
+    usuario.email = data["email"]
     usuario.save!
     usuario
   end

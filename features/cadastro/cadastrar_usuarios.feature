@@ -1,3 +1,5 @@
+# language: pt
+
 Funcionalidade: Cadastro de usuários do SIGAA via importação de dados
 	Como um Administrador
 	Eu quero cadastrar participantes de turmas do SIGAA ao importar dados de usuarios novos

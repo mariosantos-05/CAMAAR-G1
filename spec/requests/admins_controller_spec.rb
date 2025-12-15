@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe AdminsController, type: :controller do
   let(:admin) { create(:admin) }
   let(:aluno) { create(:usuario, profile: 'Aluno') }
-  
+
   let(:turma) { create(:turma, nome: "Turma Teste (CIC - 2025)") }
   let(:turma_vazia) { create(:turma) }
-  
+
   let(:template) { create(:template, criado_por: admin) }
   let(:question) { template.questions.first }
   let!(:form) { create(:form, turma: turma, template: template) }
-  
-  let!(:resposta) { 
-    create(:resposta, form: form, usuario: aluno, answers: { question.id.to_s => "Resposta X" }) 
+
+  let!(:resposta) {
+    create(:resposta, form: form, usuario: aluno, answers: { question.id.to_s => "Resposta X" })
   }
 
   context "quando não há usuário logado" do
@@ -74,7 +74,7 @@ RSpec.describe AdminsController, type: :controller do
     describe "GET #show_respostas" do
       it "exibe as respostas da turma corretamente" do
         get :show_respostas, params: { turma_id: turma.id }
-        
+
         expect(response).to have_http_status(:ok)
         expect(assigns(:respostas)).to include(resposta)
       end
@@ -109,7 +109,7 @@ RSpec.describe AdminsController, type: :controller do
         it "redireciona com erro quando o JSON é inválido" do
           allow(service_mock).to receive(:call).and_raise(JSON::ParserError)
           post :create_import, params: { file: fake_file }
-          
+
           expect(response).to redirect_to(import_sigaa_path)
           expect(flash[:alert]).to include("não é um JSON válido")
         end
@@ -121,9 +121,9 @@ RSpec.describe AdminsController, type: :controller do
           expect(response).to redirect_to(import_sigaa_path)
           expect(flash[:alert]).to include("Ocorreu um erro inesperado")
         end
-        
+
         it "reclama se não enviar arquivo" do
-          post :create_import, params: {} 
+          post :create_import, params: {}
           expect(flash[:alert]).to include("Nenhum arquivo")
         end
       end
