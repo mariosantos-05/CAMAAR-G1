@@ -1,3 +1,22 @@
+##
+# = Templates Request Spec
+#
+# Esta suíte de testes verifica o comportamento do controlador de Templates
+# no namespace Admins.
+#
+# == Visão Geral
+#
+# Utiliza +RSpec+ e mocks (+instance_double+) para isolar a lógica do controlador
+# das dependências de banco de dados reais, garantindo testes unitários de fluxo
+# mais rápidos e previsíveis.
+#
+# == Cenários Cobertos
+#
+# * Listagem de templates (Index)
+# * Criação de templates (Create) - Caminhos feliz e triste
+# * Atualização de templates (Update) - Caminhos feliz e triste
+# * Remoção de templates (Destroy)
+#
 require 'rails_helper'
 
 RSpec.describe "Templates", type: :request do

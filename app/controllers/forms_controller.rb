@@ -1,8 +1,28 @@
+##
+# = Forms Controller
+#
+# Controlador responsável pela criação pública de formulários de avaliação,
+# permitindo que usuários (Docentes ou Discentes) instanciem avaliações baseadas
+# em templates predefinidos.
+#
 class FormsController < ApplicationController
+  ##
+  # Inicializa um novo objeto Form para exibição na view.
   def new
     @form = Form.new
   end
 
+  ##
+  # Processa a criação de um formulário.
+  #
+  # == Lógica de Negócio
+  #
+  # * Verifica se o +target_audience+ foi selecionado.
+  # * Valida a presença de +turma_id+ para discentes.
+  # * Instancia o formulário como ativo (+is_active: true+).
+  #
+  # Redireciona para a listagem em caso de sucesso ou re-renderiza +new+ em caso de falha.
+  #
   def create
     # Cenário Triste: Tentativa de criar sem selecionar público
     if params[:target_audience].blank?

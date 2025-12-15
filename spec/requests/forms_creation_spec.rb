@@ -1,3 +1,14 @@
+##
+# = Form Creation Request Spec
+#
+# Testa o fluxo de criação de formulários públicos.
+#
+# == Regras de Negócio Testadas
+#
+# * +Discentes+: Exige a presença de uma turma (+turma_id+).
+# * +Docentes+: Pode ignorar a turma dependendo da lógica de negócio.
+# * Validação de parâmetros obrigatórios como +target_audience+.
+#
 require 'rails_helper'
 
 RSpec.describe "Form Creation", type: :request do
