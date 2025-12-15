@@ -5,26 +5,28 @@ Funcionalidade: Criar formulário de avaliação
   Quero criar um formulário baseado em um template
   Para avaliar o desempenho das turmas no semestre atual
 
+
   Contexto:
     Dado que estou logado como Administrador
-    E que existe um template chamado "Avaliação Semestral"
+    E que existe um template chamado "Avaliacao Semestral"
     E que existem turmas ativas cadastradas
+    E que estou na tela de criação de formulário
 
   Cenário: Criar formulário de avaliação para turmas selecionadas
-    Quando eu seleciono o template "Avaliação Semestral"
+    Quando eu seleciono o template "Avaliacao Semestral"
     E eu seleciono as turmas "Turma A", "Turma B" e "Turma C"
-    E eu clico em "Criar Formulário"
+    E eu envio o formulário
     Então formulários devem ser criados para as turmas selecionadas
     E devo ver a mensagem "Formulários criados com sucesso!"
 
   Cenário: Tentativa de criação sem selecionar turmas
-    Quando eu seleciono o template "Avaliação Semestral"
-    E eu clico em "Criar Formulário"
+    Quando eu seleciono o template "Avaliacao Semestral"
+    E eu envio o formulário
     Então nenhum formulário deve ser criado
     E devo ver a mensagem de erro "Selecione um template e pelo menos uma turma."
 
   Cenário: Tentativa de criação sem selecionar template
     Quando eu seleciono as turmas "Turma A" e "Turma B"
-    E eu clico em "Criar Formulário"
+    E eu envio o formulário
     Então nenhum formulário deve ser criado
     E devo ver a mensagem de erro "Selecione um template e pelo menos uma turma."

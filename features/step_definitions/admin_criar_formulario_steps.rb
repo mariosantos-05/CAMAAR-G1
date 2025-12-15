@@ -1,53 +1,58 @@
-Dado("que estou logado como Administrador") do
-  @admin = Usuario.create!(
-    nome: "Admin",
-    email: "admin@test.com",
-    password: "123456",
-    profile: "Admin"
-  )
+# frozen_string_literal: true
 
-  login_as(@admin, scope: :usuario)
+Dado("que estou logado como Administrador") do
+  @admin = create(:admin)
+
+  visit login_path
+
+  fill_in "login", with: @admin.email
+  fill_in "password", with: "Teste@1234"
+
+  click_button "Entrar"
+end
+
+Dado("que estou na tela de criação de formulário") do
+  visit admin_management_path
+  click_link "Criar Formulário"
+
+  # Garante que o modal foi carregado
+  expect(page).to have_selector("select#template_id")
 end
 
 Dado("que existe um template chamado {string}") do |titulo|
-  @template = Template.create!(
+  @template = create(
+    :template,
     titulo: titulo,
-    criado_por: @admin,
-    questions_attributes: [
-      { text: "Como você avalia a disciplina?", question_type: "radio", options: ["Boa", "Regular", "Ruim"] }
-    ]
+    criado_por: @admin
   )
 end
 
 Dado("que existem turmas ativas cadastradas") do
-  @turmas = [
-    Turma.create!(nome: "Turma A", semestre: "2024.1", is_active: true),
-    Turma.create!(nome: "Turma B", semestre: "2024.1", is_active: true),
-    Turma.create!(nome: "Turma C", semestre: "2024.1", is_active: true)
-  ]
+  create(:turma, nome: "Turma A")
+  create(:turma, nome: "Turma B")
+  create(:turma, nome: "Turma C")
 end
 
 Quando("eu seleciono o template {string}") do |titulo|
-  visit admin_management_path
   select titulo, from: "template_id"
 end
 
 Quando("eu seleciono as turmas {string}, {string} e {string}") do |t1, t2, t3|
   [t1, t2, t3].each do |nome|
-    turma = Turma.find_by(nome: nome)
+    turma = Turma.find_by!(nome: nome)
     check("turma_ids[]", option: turma.id)
   end
 end
 
 Quando("eu seleciono as turmas {string} e {string}") do |t1, t2|
   [t1, t2].each do |nome|
-    turma = Turma.find_by(nome: nome)
+    turma = Turma.find_by!(nome: nome)
     check("turma_ids[]", option: turma.id)
   end
 end
 
-Quando("eu clico em {string}") do |botao|
-  click_button botao
+Quando("eu envio o formulário") do
+  click_button "Enviar"
 end
 
 Então("formulários devem ser criados para as turmas selecionadas") do
