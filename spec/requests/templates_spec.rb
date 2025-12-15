@@ -40,7 +40,7 @@ RSpec.describe "Templates", type: :request do
   describe "POST /admins/templates (Criação)" do
     context "Cenário Feliz: Criação com dados válidos" do
       it "cria o template e redireciona" do
-        template_params = { titulo: "Avaliação 2024", questions: ["q1", "q2"] }
+        template_params = { titulo: "Avaliação 2024", questions: [ "q1", "q2" ] }
         template_mock = double("Template", save: true)
 
         allow(Template).to receive(:new).and_return(template_mock)
@@ -57,8 +57,8 @@ RSpec.describe "Templates", type: :request do
     context "Cenário Triste: Tentativa de criação com título vazio" do
       it "não salva e retorna erro" do
         mock_errors = double("Errors")
-        allow(mock_errors).to receive(:map).and_return(["O campo Título é obrigatório"])
-        allow(mock_errors).to receive(:uniq).and_return(["O campo Título é obrigatório"])
+        allow(mock_errors).to receive(:map).and_return([ "O campo Título é obrigatório" ])
+        allow(mock_errors).to receive(:uniq).and_return([ "O campo Título é obrigatório" ])
         allow(mock_errors).to receive(:join).with(", ").and_return("O campo Título é obrigatório")
 
         template_mock = double("Template", save: false, errors: mock_errors)
@@ -75,8 +75,8 @@ RSpec.describe "Templates", type: :request do
     context "Cenário Triste: Tentativa de criação sem questões" do
       it "não salva e exibe erro de questões" do
         mock_errors = double("Errors")
-        allow(mock_errors).to receive(:map).and_return(["O template deve conter pelo menos uma questão"])
-        allow(mock_errors).to receive(:uniq).and_return(["O template deve conter pelo menos uma questão"])
+        allow(mock_errors).to receive(:map).and_return([ "O template deve conter pelo menos uma questão" ])
+        allow(mock_errors).to receive(:uniq).and_return([ "O template deve conter pelo menos uma questão" ])
         allow(mock_errors).to receive(:join).with(", ").and_return("O template deve conter pelo menos uma questão")
 
         template_mock = double("Template", save: false, errors: mock_errors)
@@ -113,8 +113,8 @@ RSpec.describe "Templates", type: :request do
     context "Cenário Triste: Edição com caracteres inválidos" do
       it "não atualiza e mostra erro" do
         mock_errors = double("Errors")
-        allow(mock_errors).to receive(:map).and_return(["Formato de título inválido"])
-        allow(mock_errors).to receive(:uniq).and_return(["Formato de título inválido"])
+        allow(mock_errors).to receive(:map).and_return([ "Formato de título inválido" ])
+        allow(mock_errors).to receive(:uniq).and_return([ "Formato de título inválido" ])
         allow(mock_errors).to receive(:join).with(", ").and_return("Formato de título inválido")
 
         allow(template_mock).to receive(:update).and_return(false)

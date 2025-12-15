@@ -40,7 +40,7 @@ RSpec.describe "Admins::FormsController", type: :request do
       expect {
         post admins_forms_path, params: {
           template_id: template.id,
-          turma_ids: [turma.id]
+          turma_ids: [ turma.id ]
         }
       }.to change(Form, :count).by(1)
 

@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   # Retorna true se o usuário logado é Admin
   def admin?
-    logged_in? && current_user.profile == 'Admin'
+    logged_in? && current_user.profile == "Admin"
   end
 
   # Filtro de segurança para usar com 'before_action' nos controllers de Admin

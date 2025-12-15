@@ -38,14 +38,14 @@ Quando("eu seleciono o template {string}") do |titulo|
 end
 
 Quando("eu seleciono as turmas {string}, {string} e {string}") do |t1, t2, t3|
-  [t1, t2, t3].each do |nome|
+  [ t1, t2, t3 ].each do |nome|
     turma = Turma.find_by!(nome: nome)
     check("turma_ids[]", option: turma.id)
   end
 end
 
 Quando("eu seleciono as turmas {string} e {string}") do |t1, t2|
-  [t1, t2].each do |nome|
+  [ t1, t2 ].each do |nome|
     turma = Turma.find_by!(nome: nome)
     check("turma_ids[]", option: turma.id)
   end

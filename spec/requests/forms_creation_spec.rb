@@ -4,11 +4,9 @@ RSpec.describe "Form Creation", type: :request do
   describe "POST /forms" do
     context "Cenário Feliz: Enviar para Discentes com turma" do
       it "envia formulário com sucesso" do
-       
         allow_any_instance_of(Form).to receive(:save).and_return(true)
         post forms_path, params: { target_audience: "Discentes", turma_id: "1", template_id: "1" }
-        expect(response).to redirect_to(forms_path) 
-        
+        expect(response).to redirect_to(forms_path)
       end
     end
 
@@ -17,7 +15,7 @@ RSpec.describe "Form Creation", type: :request do
         allow_any_instance_of(Form).to receive(:save).and_return(true)
 
         post forms_path, params: { target_audience: "Docentes", template_id: "1" }
-        
+
         expect(response).to redirect_to(forms_path)
       end
     end

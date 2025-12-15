@@ -63,7 +63,7 @@ class Admins::TemplatesController < ApplicationController
   def set_template
     @template = Template.find(params[:id])
   end
-  
+
   def render_error_response(view_template)
     flash.now[:alert] = @template.errors.map(&:message).uniq.join(", ")
     render view_template, status: :unprocessable_entity

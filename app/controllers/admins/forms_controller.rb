@@ -7,7 +7,6 @@
 # @see Template
 # @see Turma
 class Admins::FormsController < ApplicationController
-
   # Exibe o formulário para criação de novos formulários administrativos.
   #
   # Carrega:

@@ -1,5 +1,5 @@
 Dado("que eu estou matriculado nas turmas {string} e {string}") do |t1, t2|
-  [t1, t2].each do |nome_turma|
+  [ t1, t2 ].each do |nome_turma|
     turma = create(:turma, nome: nome_turma)
     create(:vinculo, usuario: @usuario, turma: turma)
   end

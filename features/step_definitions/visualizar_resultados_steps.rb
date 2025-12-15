@@ -20,7 +20,7 @@ Dado("que eu estou logado como Administrador") do
 end
 
 Dado("que existem formulários criados para as turmas {string} e {string}") do |turma1, turma2|
-  [turma1, turma2].each do |nome|
+  [ turma1, turma2 ].each do |nome|
     turma = create(:turma, nome: "#{nome} (CIC)")
     template = create(:template)
     create(:form, turma: turma, template: template, is_active: true)
@@ -73,14 +73,14 @@ Então("eu devo ver os formulários criados para todas as turmas") do
 end
 
 Então("eu devo ver a contagem de respostas para cada turma") do
-  ["Turma A", "Turma B"].each do |turma|
+  [ "Turma A", "Turma B" ].each do |turma|
     card = find(:xpath, "//h4[contains(text(),'#{turma}')]/parent::div")
     expect(card).to have_content("Respostas:")
   end
 end
 
 Então("eu devo ver links para {string} e {string} para cada turma") do |csv, respostas|
-  ["Turma A", "Turma B"].each do |turma|
+  [ "Turma A", "Turma B" ].each do |turma|
     card = find(:xpath, "//h4[contains(text(),'#{turma}')]/parent::div")
     expect(card).to have_link(csv)
     expect(card).to have_link(respostas)

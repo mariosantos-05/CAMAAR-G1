@@ -13,6 +13,6 @@ class Usuario < ApplicationRecord
 
     def password_complexity
     return if password =~ /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/
-    errors.add :password, 'deve ter no mínimo 8 caracteres, maiúsculas, minúsculas e números'
+    errors.add :password, "deve ter no mínimo 8 caracteres, maiúsculas, minúsculas e números"
   end
 end

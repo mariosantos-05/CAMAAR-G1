@@ -59,7 +59,7 @@ Before do
     File.write('spec/fixtures/files/turmas_sem_matricula.json', [
         {
         "code" => "CIC0097", "classCode" => "A", "semester" => "2021.2",
-        "dicente" => [{ "nome" => "Sem Matricula", "email" => "teste@teste.com" }]
+        "dicente" => [ { "nome" => "Sem Matricula", "email" => "teste@teste.com" } ]
         }
     ].to_json)
 
@@ -68,21 +68,21 @@ Before do
     File.write('spec/fixtures/files/turmas_tipo_errado.json', [
         {
         "code" => "CIC0097", "classCode" => "A", "semester" => "2021.2",
-        "dicente" => [{ 
-            "nome" => "Errado", 
-            "matricula" => "TEXTO_EM_VEZ_DE_NUMERO", 
+        "dicente" => [ {
+            "nome" => "Errado",
+            "matricula" => "TEXTO_EM_VEZ_DE_NUMERO",
             "email" => "a@a.com",
-            "curso" => "Ciência da Computação", 
-            "ocupacao" => "Discente",           
-            "formacao" => "Graduação"           
-        }]
+            "curso" => "Ciência da Computação",
+            "ocupacao" => "Discente",
+            "formacao" => "Graduação"
+        } ]
         }
     ].to_json)
 end
 
 Dado('que eu estou logado como {string}') do |email|
     matricula_unica = email.include?('admin') ? "000000" : email.hash.abs.to_s[0..8]
-    
+
     perfil = email.include?('admin') ? 'Admin' : 'Professor'
 
     @user = Usuario.find_or_create_by!(email: email) do |u|
@@ -98,7 +98,7 @@ Dado('que eu estou logado como {string}') do |email|
     fill_in 'Email', with: email
     fill_in 'Senha', with: 'Teste@1234'
     click_button 'Entrar'
-    
+
     if page.has_content?("Entrar") || page.has_field?("Senha")
         puts "HTML da página atual: #{page.html}"
         raise "O Login falhou para #{email}!"
@@ -108,7 +108,7 @@ end
 Dado('o banco de dados não contém nenhuma disciplina ou aluno') do
     Vinculo.destroy_all
     Turma.destroy_all
-    
+
     if @user
         Usuario.where.not(id: @user.id).destroy_all
     else
@@ -129,13 +129,13 @@ Dado('que eu estou na página {string}') do |nome_pagina|
     case nome_pagina
     when "Importar Dados do SIGAA"
         visit import_sigaa_path
-        
+
     when "Gerenciamento", "Dashboard"
         visit admin_management_path
-        
+
     when "Resultados"
         visit admin_results_path
-        
+
     else
         raise "Erro: A página '#{nome_pagina}' não foi mapeada no step definition."
     end
@@ -149,14 +149,14 @@ Quando('eu seleciono o arquivo {string}') do |nome_arquivo|
         conteudo_tipo_errado = [
             {
             "code" => "CIC0097", "classCode" => "A", "semester" => "2021.2",
-            "dicente" => [{ 
-                "nome" => "Errado", 
+            "dicente" => [ {
+                "nome" => "Errado",
                 "matricula" => "KIM TAEYEON",
                 "email" => "a@a.com",
-                "curso" => "Ciência da Computação", 
-                "ocupacao" => "Discente",           
-                "formacao" => "Graduação"           
-            }]
+                "curso" => "Ciência da Computação",
+                "ocupacao" => "Discente",
+                "formacao" => "Graduação"
+            } ]
             }
         ].to_json
         File.write(caminho, conteudo_tipo_errado)
@@ -165,19 +165,19 @@ Quando('eu seleciono o arquivo {string}') do |nome_arquivo|
         conteudo_correto = [
             {
             "code" => "FALHA01", "classCode" => "A", "semester" => "2021.2",
-            "dicente" => [{ "nome" => "TAEYEON", "email" => "teste@teste.com", "curso" => "CC" }]
+            "dicente" => [ { "nome" => "TAEYEON", "email" => "teste@teste.com", "curso" => "CC" } ]
             }
         ].to_json
         File.write(caminho, conteudo_correto)
-    
+
     elsif nome_arquivo.match?(/csv|errado|txt|pdf|sintaxe|json_errado/)
         File.write(caminho, "json inválido")
 
     elsif nome_arquivo.match?(/objeto|hash|unico|estrutura|nao_lista/)
         File.write(caminho, { "TAEYEON" => "NOVO ÁLBUM" }.to_json)
-    
+
     elsif nome_arquivo.match?(/aleatorio|desconhecido|random/)
-        conteudo_aleatorio = [{ "VOCALISTA" => "TAEYEON", "ARTISTA" => 8000 }] 
+        conteudo_aleatorio = [ { "VOCALISTA" => "TAEYEON", "ARTISTA" => 8000 } ]
         File.write(caminho, conteudo_aleatorio.to_json)
 
     elsif !File.exist?(caminho)
@@ -197,19 +197,19 @@ end
 
 Então(/^a disciplina "([^"]*)" \(([^)]*)\) deve existir no sistema$/) do |nome, codigo|
     codigo_limpo = codigo.gsub('"', '')
-    
+
     turma = Turma.where("nome LIKE ?", "%#{nome}%").first
-    
+
     expect(turma).to be_present, "A disciplina '#{nome}' não foi encontrada na tabela Turmas."
-    
+
     expect(turma.nome).to include(codigo_limpo)
 end
 
 Então(/^o aluno "([^"]*)" \(([^)]*)\) deve existir no sistema$/) do |nome, matricula|
     matricula_limpa = matricula.to_s.gsub('"', '')
-    
+
     usuario = Usuario.find_by(matricula: matricula_limpa)
-    
+
     expect(usuario).to be_present, "O aluno '#{nome}' (Matrícula: #{matricula_limpa}) não foi encontrado."
     expect(usuario.nome).to eq(nome)
     expect(usuario.profile).to eq('Aluno')
@@ -217,7 +217,7 @@ end
 
 Então(/^o aluno "([^"]*)" \(([^)]*)\) não deve existir no sistema$/) do |nome, matricula|
     matricula_limpa = matricula.to_s.gsub('"', '')
-    
+
     usuario = Usuario.find_by(matricula: matricula_limpa)
     expect(usuario).to be_nil
 end

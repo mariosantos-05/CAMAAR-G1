@@ -22,7 +22,7 @@ class AvaliacoesController < ApplicationController
     @form = Form.includes(:template, :turma).find(params[:form_id])
 
     return redirect_with_alert("Você não tem acesso a esse formulário.") unless user_has_access?(@form)
-    return redirect_with_alert("Você já respondeu este formulário.") if already_responded?(@form)
+    redirect_with_alert("Você já respondeu este formulário.") if already_responded?(@form)
   end
 
   # Processa o envio das respostas do formulário

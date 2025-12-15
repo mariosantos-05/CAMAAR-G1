@@ -10,12 +10,12 @@ Dado('que existe uma turma {string} com {int} alunos') do |nome_turma, qtd_aluno
     t.semestre = "2021.2"
     t.is_active = true
   end
-  
+
   # 2. Garante Admin
-  admin = Usuario.find_by(profile: 'Admin') 
+  admin = Usuario.find_by(profile: 'Admin')
   unless admin
      admin = Usuario.create!(
-       nome: "Admin Temp", email: "temp@admin.com", matricula: "99999", 
+       nome: "Admin Temp", email: "temp@admin.com", matricula: "99999",
        profile: "Admin", status: true, password: "Teste@1234", departamento_id: 1
      )
   end
@@ -27,7 +27,7 @@ Dado('que existe uma turma {string} com {int} alunos') do |nome_turma, qtd_aluno
   template.criado_por = admin
   template.target_audience = "Alunos"
   template.save(validate: false) # <--- PULA A VALIDAÇÃO "Deve ter uma questão"
-  
+
   # 4. Garante Pergunta (Agora que o template tem ID, podemos criar a pergunta)
   pergunta = Question.where(template: template, text: "Questão 1").first_or_create!(question_type: "text")
 
@@ -48,7 +48,7 @@ Dado('que existe uma turma {string} com {int} alunos') do |nome_turma, qtd_aluno
       password: "Teste@1234",
       departamento_id: 1
     )
-    
+
     # Vincula
     Vinculo.create!(usuario: aluno, turma: @turma, papel_turma: 0)
 
@@ -71,9 +71,9 @@ end
 Dado('que eu estou logado como {string} com perfil {string} e departamento {string} \(ID: {int})') do |email, perfil, _dept_nome, dept_id|
   @user = Usuario.find_or_create_by!(email: email) do |u|
     u.nome = "Usuário Teste"
-    
+
     u.matricula = "#{dept_id}#{Time.now.to_i.to_s[-5..-1]}#{rand(10..99)}"
-    
+
     u.profile = perfil
     u.departamento_id = dept_id
     u.status = true
@@ -124,7 +124,7 @@ end
 Quando('eu clico no botão "Baixar CSV" da turma {string}') do |nome_turma|
   # Localiza a linha da tabela ou div que tem o nome da turma
   turma_element = find('tr, div', text: nome_turma, match: :first)
-  
+
   within(turma_element) do
     # Clica no link de CSV
     find("a[href*='csv']").click
@@ -142,7 +142,7 @@ end
 Então('o download do arquivo deve ser iniciado') do
   if page.response_headers['Content-Type'].to_s.include?('text/html')
     puts "DEBUG: O sistema retornou HTML em vez de CSV. Conteúdo:"
-    puts page.body 
+    puts page.body
   end
 
   expect(page.response_headers['Content-Type']).to include('text/csv')
@@ -160,11 +160,11 @@ end
 
 Então('eu devo ser redirecionado para a {string}') do |pagina|
   path_esperado = case pagina
-                  when "Gerenciamento" then admin_management_path
-                  when "Login" then login_path
-                  when "Dashboard", "Home", "Página Inicial" then root_path
-                  else pagina
-                  end
+  when "Gerenciamento" then admin_management_path
+  when "Login" then login_path
+  when "Dashboard", "Home", "Página Inicial" then root_path
+  else pagina
+  end
   expect(current_path).to eq(path_esperado)
 end
 
