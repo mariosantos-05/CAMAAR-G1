@@ -28,6 +28,9 @@ Responsáveis: Caroline, Célio, Luís Filipe e Mário.
 ● A documentação das features na Wiki do repositório (com os respectivos responsáveis)
 Responsáveis: Caroline, Célio, Luís Filipe e Mário.
 
+● O kanban das issues distribuídas entre as lanes: Backlog - Doing - Done - Accepted usando a própria interface de projetos do GitHub. 
+Responsável: Célio
+
 ● O link do repositório do Github do grupo com todas as informações acima atualizadas.
 Responsável: Mário    
 
