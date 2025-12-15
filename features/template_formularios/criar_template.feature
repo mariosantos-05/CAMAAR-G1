@@ -1,3 +1,4 @@
+# language: pt
 Funcionalidade: Criar template de formulário  
 
 Cenário: Criação de template com dados válidos (Feliz)

@@ -1,13 +1,13 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/carol/CAMAAR-G1/app/helpers/application_helper.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/form.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/form.rb": {
         "lines": [
           1,
           1,
@@ -15,14 +15,14 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/application_record.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/question.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/question.rb": {
         "lines": [
           1,
           1,
@@ -46,7 +46,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/resposta.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/resposta.rb": {
         "lines": [
           1,
           1,
@@ -59,7 +59,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/template.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/template.rb": {
         "lines": [
           1,
           1,
@@ -87,7 +87,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/turma.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/turma.rb": {
         "lines": [
           1,
           1,
@@ -96,7 +96,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/usuario.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/usuario.rb": {
         "lines": [
           1,
           1,
@@ -118,7 +118,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/models/vinculo.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/vinculo.rb": {
         "lines": [
           1,
           1,
@@ -126,44 +126,18 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/controllers/admins_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/admins_controller.rb": {
         "lines": [
           1,
           null,
           null,
           null,
           null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           1,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
-          1,
-          1,
-          null,
           null,
           null,
           null,
@@ -178,6 +152,30 @@
           1,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
           null,
           null,
           null,
@@ -194,7 +192,6 @@
           1,
           4,
           4,
-          null,
           null,
           3,
           null,
@@ -208,7 +205,6 @@
           null,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -226,9 +222,7 @@
           null,
           null,
           null,
-          null,
           1,
-          null,
           2,
           null,
           2,
@@ -239,6 +233,8 @@
           null,
           null,
           1,
+          null,
+          null,
           null,
           null,
           null,
@@ -252,8 +248,19 @@
           null,
           null,
           null,
+          null,
+          null,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -299,31 +306,33 @@
           null,
           null,
           null,
-          null,
           1,
           2,
           2,
-          null,
           null,
           2,
           null,
           null,
           null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           1,
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
           1,
           null,
           1,
-          null,
-          null,
           null,
           null,
           null,
@@ -336,8 +345,6 @@
           1,
           1,
           2,
-          null,
-          null,
           null,
           null,
           null,
@@ -359,7 +366,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/controllers/application_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -402,7 +409,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/services/sigaa_import_service.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/services/sigaa_import_service.rb": {
         "lines": [
           1,
           null,
@@ -622,27 +629,34 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/controllers/admins/templates_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/admins/templates_controller.rb": {
         "lines": [
           1,
           null,
           1,
+          null,
+          null,
+          1,
+          2,
+          null,
           2,
           null,
           null,
-          2,
-          1,
-          null,
-          null,
           null,
           1,
-          0,
+          null,
+          null,
           null,
           null,
           1,
           0,
-          null,
           0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
           null,
           null,
           1,
@@ -654,27 +668,20 @@
           null,
           null,
           2,
-          2,
           null,
           null,
-          null,
-          1,
-          0,
           null,
           null,
           1,
           2,
-          null,
-          2,
           1,
           null,
           null,
           1,
-          1,
           null,
           null,
           null,
-          1,
+          null,
           1,
           1,
           1,
@@ -684,6 +691,16 @@
           null,
           null,
           1,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          3,
+          3,
+          null,
           null,
           1,
           5,
@@ -695,7 +712,7 @@
           null
         ]
       },
-      "/home/carol/CAMAAR-G1/app/controllers/admins/forms_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/admins/forms_controller.rb": {
         "lines": [
           0,
           0,
@@ -747,7 +764,7 @@
         ],
         "branches": {}
       },
-      "/home/carol/CAMAAR-G1/app/controllers/avaliacoes_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/avaliacoes_controller.rb": {
         "lines": [
           0,
           null,
@@ -835,7 +852,7 @@
         ],
         "branches": {}
       },
-      "/home/carol/CAMAAR-G1/app/controllers/first_access_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/first_access_controller.rb": {
         "lines": [
           0,
           null,
@@ -873,7 +890,7 @@
         ],
         "branches": {}
       },
-      "/home/carol/CAMAAR-G1/app/controllers/forms_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/forms_controller.rb": {
         "lines": [
           0,
           0,
@@ -909,7 +926,7 @@
         ],
         "branches": {}
       },
-      "/home/carol/CAMAAR-G1/app/controllers/sessions_controller.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/controllers/sessions_controller.rb": {
         "lines": [
           0,
           null,
@@ -967,7 +984,7 @@
         ],
         "branches": {}
       },
-      "/home/carol/CAMAAR-G1/app/models/subject.rb": {
+      "/home/mario/projetos/classes/CAMAAR-G1/app/models/subject.rb": {
         "lines": [
           0,
           0,
@@ -976,6 +993,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1765572983
+    "timestamp": 1765762451
   }
 }
