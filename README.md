@@ -61,7 +61,7 @@ Caroline
 Célio
 
 ## 🧑‍💻 Produção
-=======
+
 Luís Filipe
 
 ## Refatoração, Cobertura de testes, Cucumber e Documentação
@@ -253,7 +253,7 @@ As US desta sprint são:
 [14 - Atualizar base de dados com os dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/14)
 [15 - Visualização de formlários para responder](https://github.com/mariosantos-05/CAMAAR-G1/issues/15)
 [16 - Visualização de Resultado dos Formulários](https://github.com/mariosantos-05/CAMAAR-G1/issues/16)
-=======
+
 ## 5. `templates_controller`
 
 ### Tabela de Comparação por Método
