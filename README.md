@@ -21,7 +21,7 @@ O presente relatório detalha as atividades e os resultados alcançados pela equ
 Responsável: Mário
 ## Arquivo txt contendo um link para o repositório, o nome e a matrícula dos integrantes:
 
-Responsável: Mário
+Responsável: Caroline
 ## Arquivo Markdown (Wiki):
 
 Responsáveis: Caroline, Célio, Luís Filipe e Mário.
