@@ -181,6 +181,11 @@ No `Rubycritic`, o resultado foi:
 |---|---|---|---|
 |`first_access_controller.rb`|8.5|8.5|Refatorado|
 
+
+# Como realizar o acesso e testar o sistema?
+
+As instruções se encontram no arquivo ./Como Usar.md basta acessá-lo e utilizar o guia disponível lá.
+
 # Quais funcionalidades foram desenvolvidas?
 
 
