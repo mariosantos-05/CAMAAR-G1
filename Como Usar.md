@@ -13,8 +13,7 @@ Este guia descreve o fluxo necessário para configurar o ambiente, realizar o pr
 2.  **Prepare o banco de dados**:
 
     ```bash
-    bin/rails db:migrate
-    bin/rails db:seed
+    bin/rails db:reset
     ```
 
 3.  **Execute o sistema**:
