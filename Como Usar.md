@@ -2,19 +2,34 @@
 
 Este guia descreve o fluxo necessário para configurar o ambiente, realizar o primeiro acesso administrativo, popular o banco de dados e executar as baterias de testes e métricas de qualidade.
 
-## 1\. Configuração Inicial do Banco de Dados
+## Opção 1: Rodar Localmente (Recomendada para desenvolvimento)
 
-Antes de iniciar a aplicação, é necessário garantir que o usuário **Administrador** exista. O sistema possui um *seed* configurado para criar este usuário padrão.
+1.  **Instale as dependências** (caso ainda não tenha feito):
 
-Execute o comando no terminal:
+    ```bash
+    bundle install
+    ```
 
-```bash
-bin/rails db:seed
-```
+2.  **Prepare o banco de dados**:
 
-> **Nota:** Este comando cria o usuário Admin caso ele não exista. Se o banco estiver vazio, pode-se usar `bin/rails db:setup`.
+    ```bash
+    bin/rails db:migrate
+    bin/rails db:seed
+    ```
 
------
+3.  **Execute o sistema**:
+    Use o comando abaixo, que lê o seu arquivo `Procfile.dev`:
+
+    ```bash
+    ./bin/dev
+    ```
+
+    *Acesse em: `http://localhost:3000`*
+
+## 1\. Login Inicial
+
+Antes de iniciar a aplicação como aluno ou professor, é necessário acessar como **Administrador**. O sistema possui um *seed* configurado para criar este usuário padrão, que é criado rodando os comandos anteriores.
+
 
 ## 2\. Fluxo de Acesso e Utilização
 
