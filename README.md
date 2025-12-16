@@ -168,7 +168,7 @@ No `Rubycritic`, o resultado foi:
 
 No `Rubycritic`, o resultado foi:
 
-**Tabela:** Comparação da complexidade/método antes e depois da refatoração do arquivo `AvaliacoesController.rb`
+**Tabela:** Comparação da complexidade/método antes e depois da refatoração do arquivo `templates_controller.rb`
 
 |**Arquivo**|**Complexidade/método (Antes)**|**Complexidade/método (Depois)**|**Resultado**|
 |---|---|---|---|
