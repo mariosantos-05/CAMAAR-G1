@@ -16,32 +16,38 @@
 
 O presente relatório detalha as atividades e os resultados alcançados pela equipe durante a Sprint 3. O objetivo principal foi consolidar a qualidade e a manutenibilidade do código-fonte criado, efetuar a refatoração do Código, simplificando e isolando a lógica de negócios mais complexa, com o foco em melhorar as métricas de qualidade, como o ABC Score e a Complexidade Ciclomática, conforme exigido pelas normas técnicas. Além disso, a documentação do código-fonte visa assegurar que ele esteja plenamente documentado (utilizando sintaxe RDoc) e que a interface de usuário (UI) seja clara e funcional.
 
-# 🔰 Papéis na Sprint 3
+## Pull Request com o código finalizado:
 
+Responsável: Mário
+## Arquivo txt contendo um link para o repositório, o nome e a matrícula dos integrantes:
 
-● A implementação das features cujos cenários BDD especificados na segunda etapa da Sprint 1
+Responsável: Mário
+## Arquivo Markdown (Wiki):
+
+Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+## Refatoração, Cobertura de testes, Cucumber e Documentação
+
 Responsáveis: Caroline, Célio, Luís Filipe e Mário.
 
-● Os respectivos testes em RSpec implementados com sucesso.
-Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+## Scrum Master
 
-● A documentação das features na Wiki do repositório (com os respectivos responsáveis)
-Responsáveis: Caroline, Célio, Luís Filipe e Mário.
+Mário
 
-● O kanban das issues distribuídas entre as lanes: Backlog - Doing - Done - Accepted usando a própria interface de projetos do GitHub. Responsável: Célio
+## Product Owner
+Caroline, Célio, Luís Filipe e Mário.
 
-● O link do repositório do Github do grupo com todas as informações acima atualizadas.
+## O link do repositório do Github do grupo com todas as informações acima atualizadas.
 Responsável: Mário
 
-● Abrir uma Pull Request com as especificações dos testes de aceitação
+## Abrir uma Pull Request com as especificações dos testes de aceitação
 (BDD) no repositório principal.
 Responsável: Mário ou Célio
 
-● Entregar arquivo .txt contendo um link para o repositório, o nome e a
+## Entregar arquivo .txt contendo um link para o repositório, o nome e a
 matrícula dos integrantes.
 Responsável: Mário
 
-● Criar um arquivo Markdown como Wiki, contendo
+## Criar um arquivo Markdown como Wiki, contendo
 as informações sobre a Sprint 3.
 Responsáveis: Caroline, Célio, Luís Filipe e Mário.
 
@@ -55,8 +61,38 @@ Caroline
 Célio
 
 ## 🧑‍💻 Produção
+=======
+Luís Filipe
+
+## Refatoração, Cobertura de testes, Cucumber e Documentação
 
 Caroline, Célio, Luís Filipe e Mário.
+
+#  🧑‍💻 Código desenvolvido pela equipe deve aderir aos seguintes critérios:
+
+## ABC Score < 20 por método
+- Se algum método tiver resultado >= 20 ou próximo de 20, deve ser refatorado.
+
+## Cobertura dos testes (RSpec) > 90%
+- Anotar os valores de cobertura dos controllers e models.
+- A cobertura de cada controller/model implementado pelo grupo deve estar >90%.
+
+## Happy Path e Sad Path nas features do Cucumber/Rspec
+- Todos os casos de testes devem conter tanto o Happy Path, quanto o Sad
+Path.
+- As features do Cucumber já definidas não devem ser alteradas.
+
+## Documentação do código com RDoc
+● Para cada método criado deve ser feito:
+- Uma breve descrição do que faz o método
+- O método recebe argumentos? Se sim, quais/o que?
+- O método retorna algum valor? Possui mais de uma possibilidade de
+retorno?
+- O método possui algum efeito colateral? (Redireciona para alguma página?
+Faz alterações no
+banco de dados?)
+- Rodar o comando, conforme a documentação da gema, e analisar os
+resultados
 
 # Refatoração
 
@@ -153,6 +189,18 @@ No `Rubycritic`, o resultado foi:
 |---|---|---|---|
 |`AvaliacoesController.rb`|19.8|7.9|Refatorado|
 
+## 5. `templates_controller`
+
+### Tabela de Comparação por Método
+
+No `Rubycritic`, o resultado foi:
+
+**Tabela:** Comparação da complexidade/método antes e depois da refatoração do arquivo `templates_controller.rb`
+
+|**Arquivo**|**Complexidade/método (Antes)**|**Complexidade/método (Depois)**|**Resultado**|
+|---|---|---|---|
+|`templates_controller.rb`|8.4|4.5|Refatorado|
+
 ## 6. `sessions_controller`
 
 ### Tabela de Comparação por Método
@@ -190,6 +238,36 @@ As instruções se encontram no arquivo ./Como Usar.md basta acessá-lo e utiliz
 
 
 As US desta sprint são:
+[02 - Edição e deleção de templates](https://github.com/mariosantos-05/CAMAAR-G1/issues/2)
+[03 - Visualização dos templates criados](https://github.com/mariosantos-05/CAMAAR-G1/issues/3)
+[04 - Importar dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/4)
+[05 - Responder formulário](https://github.com/mariosantos-05/CAMAAR-G1/issues/5)
+[06 - Cadastrar usuários do sistema](https://github.com/mariosantos-05/CAMAAR-G1/issues/6)
+[07 - Gerar relatório do Administrador](https://github.com/mariosantos-05/CAMAAR-G1/issues/7)
+[08 - Criar template de formulário](https://github.com/mariosantos-05/CAMAAR-G1/issues/8)
+[09 - Criar formulários de avaliação](https://github.com/mariosantos-05/CAMAAR-G1/issues/9)
+[10 - Sistema de login](https://github.com/mariosantos-05/CAMAAR-G1/issues/10)
+[11 - Sistema de definição de senha](https://github.com/mariosantos-05/CAMAAR-G1/issues/11)
+[12 - Sistema de gerenciamento por departamento](https://github.com/mariosantos-05/CAMAAR-G1/issues/12)
+[13 - Redefinição de senha](https://github.com/mariosantos-05/CAMAAR-G1/issues/13)
+[14 - Atualizar base de dados com os dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/14)
+[15 - Visualização de formlários para responder](https://github.com/mariosantos-05/CAMAAR-G1/issues/15)
+[16 - Visualização de Resultado dos Formulários](https://github.com/mariosantos-05/CAMAAR-G1/issues/16)
+=======
+## 5. `templates_controller`
+
+### Tabela de Comparação por Método
+
+No `Rubycritic`, o resultado foi:
+
+**Tabela:** Comparação da complexidade/método antes e depois da refatoração do arquivo `templates_controller.rb`
+
+|**Arquivo**|**Complexidade/método (Antes)**|**Complexidade/método (Depois)**|**Resultado**|
+|---|---|---|---|
+|`templates_controller.rb`|8.4|4.5|Refatorado|
+
+# Quais funcionalidades foram desenvolvidas?
+
 [02 - Edição e deleção de templates](https://github.com/mariosantos-05/CAMAAR-G1/issues/2)
 [03 - Visualização dos templates criados](https://github.com/mariosantos-05/CAMAAR-G1/issues/3)
 [04 - Importar dados do SIGAA](https://github.com/mariosantos-05/CAMAAR-G1/issues/4)
