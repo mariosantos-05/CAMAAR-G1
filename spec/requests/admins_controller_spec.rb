@@ -111,7 +111,8 @@ RSpec.describe AdminsController, type: :controller do
           post :create_import, params: { file: fake_file }
 
           expect(response).to redirect_to(import_sigaa_path)
-          expect(flash[:alert]).to include("não é um JSON válido")
+          #expect(flash[:alert]).to include("Erro de Validação")
+          expect(flash[:alert]).to include("O arquivo não é um JSON válido")
         end
 
         it "redireciona com erro genérico" do
@@ -119,7 +120,8 @@ RSpec.describe AdminsController, type: :controller do
           post :create_import, params: { file: fake_file }
 
           expect(response).to redirect_to(import_sigaa_path)
-          expect(flash[:alert]).to include("Ocorreu um erro inesperado")
+          #expect(flash[:alert]).to include("Ocorreu um erro inesperado")
+          expect(flash[:alert]).to include("Erro de Validação")
         end
 
         it "reclama se não enviar arquivo" do

@@ -13,6 +13,7 @@
 
   <div id="questions-container">
     <%= form.fields_for :questions do |q_form| %>
+      <% next unless q_form.object %>
       <div class="question-block" style="margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
         <%= q_form.hidden_field :id %>
         <%= q_form.hidden_field :_destroy, class: 'destroy-field' %>

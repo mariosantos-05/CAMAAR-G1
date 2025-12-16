@@ -1,0 +1,9 @@
+Mon, 15 Dec 2025 22:28:37 -0300
+app/controllers/admins/forms_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/admins/templates_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/admins_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/application_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/avaliacoes_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/first_access_controller.rb	Mon, 15 Dec 2025 22:16:13 -0300
+app/controllers/forms_controller.rb	Mon, 15 Dec 2025 20:59:41 -0300
+app/controllers/sessions_controller.rb	Mon, 15 Dec 2025 22:26:26 -0300

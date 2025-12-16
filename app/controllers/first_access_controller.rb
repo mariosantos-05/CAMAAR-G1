@@ -1,5 +1,14 @@
 class FirstAccessController < ApplicationController
-  # GET /first_access/:id/edit
+  # Exibe o formulário para definição de senha no primeiro acesso.
+  #
+  # Argumentos:
+  #   - params[:id] (Integer): ID do usuário.
+  #
+  # Retorno:
+  #   - Renderiza a view 'edit'.
+  #   - Ou redireciona para root_path se o usuário já estiver ativo.
+  #
+  # Efeitos Colaterais: Consulta o banco de dados.
   def edit
     @user = Usuario.find(params[:id])
 
@@ -9,7 +18,19 @@ class FirstAccessController < ApplicationController
     end
   end
 
-  # PATCH /first_access/:id
+  # Atualiza a senha e ativa a conta do usuário.
+  #
+  # Argumentos:
+  #   - params[:id] (Integer): ID do usuário.
+  #   - params[:usuario] (Hash): Contém password e password_confirmation.
+  #
+  # Retorno:
+  #   - Redireciona para 'avaliacoes_path' em caso de sucesso.
+  #   - Renderiza 'edit' com status 422 em caso de erro.
+  #
+  # Efeitos Colaterais:
+  #   - Atualiza o registro do usuário no banco (senha e status).
+  #   - Inicia a sessão (login automático).
   def update
     @user = Usuario.find(params[:id])
 
@@ -27,6 +48,7 @@ class FirstAccessController < ApplicationController
 
   private
 
+  # Filtra os parâmetros permitidos para atualização.
   def user_params
     params.require(:usuario).permit(:password, :password_confirmation)
   end
