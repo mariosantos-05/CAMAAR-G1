@@ -5,11 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>application.js - RDoc Documentation</title>
+<title>service-worker.js - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,documentation,application.js">
-  <meta name="description" content="application.js: function(e,t){&quot;use strict&quot;;&quot;object&quot;==typeof module&amp;&amp;&quot;object&quot;==typeof module. exports?module.">
+  <meta name="keywords" content="ruby,documentation,service-worker.js">
+  <meta name="description" content="service-worker.js: self. const { title, options } = await event.">
 
 
 
@@ -117,7 +117,7 @@
 
 
 
-    <li><details><summary>app</summary>
+    <li><details open><summary>app</summary>
     <ul class="link-list">
 
       <li><a href="../../../app/assets/builds/tailwind_css.html">tailwind.css</a></li>
@@ -180,7 +180,7 @@
 
 
 
-    <li><details open><summary>coverage</summary>
+    <li><details><summary>coverage</summary>
     <ul class="link-list">
 
       <li><a href="../../../coverage/assets/0_13_2/application_css.html">application.css</a></li>
@@ -377,4 +377,10 @@
 
 </nav>
 
-<main role="main" aria-label="Page coverage/assets/0.13.2/application.js">
+<main role="main" aria-label="Page app/views/pwa/service-worker.js">
+
+<p>// Add a service worker for processing Web Push notifications: // // self.addEventListener(“push”, async (event) =&gt; { //   const { title, options } = await event.data.json() //   event.waitUntil(self.registration.showNotification(title, options)) // }) // // self.addEventListener(“notificationclick”, function(event) { //   event.notification.close() //   event.waitUntil( //     clients.matchAll({ type: “window” }).then((clientList) =&gt; { //       for (let i = 0; i &lt; clientList.length; i++) { //         let client = <a href="i">clientList</a> //         let clientPath = (new URL(client.url)).pathname // //         if (clientPath == event.notification.data.path &amp;&amp; “focus” in client) { //           return client.focus() //         } //       } // //       if (clients.openWindow) { //         return clients.openWindow(event.notification.data.path) //       } //     }) //   ) // })</p>
+
+</main>
+</body>
+

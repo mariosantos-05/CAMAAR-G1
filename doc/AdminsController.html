@@ -233,7 +233,7 @@
             <pre><span class="ruby-comment"># File app/controllers/admins_controller.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">export_csv</span>
   <span class="ruby-ivar">@turma</span> = <span class="ruby-constant">Turma</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:turma_id</span>])
-  
+
   <span class="ruby-identifier">questions</span>, <span class="ruby-identifier">answers</span> = <span class="ruby-identifier">load_export_data</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_empty_turma</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">answers</span>.<span class="ruby-identifier">empty?</span>
 

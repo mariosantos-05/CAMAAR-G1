@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,Form">
 
 
-    <meta name="description" content="Documentation for the Form class">
+    <meta name="description" content="class Form: Representa um formulário associado a um template e a uma turma. Cada Form é baseado em um Template, que define as perguntas do formulário, e está vinc">
 
 
 
@@ -108,6 +108,15 @@
 
   <section class="description">
     
+<p>Representa um formulário associado a um template e a uma turma.</p>
+
+<p>Cada <a href="Form.html"><code>Form</code></a> é baseado em um <a href="Template.html"><code>Template</code></a>, que define as perguntas do formulário, e está vinculado a uma <a href="Turma.html"><code>Turma</code></a> específica.</p>
+
+<p>Associations:</p>
+
+<pre>belongs_to :template - o modelo de perguntas e estrutura do formulário
+belongs_to :turma    - a turma à qual o formulário pertence</pre>
+
   </section>
 
 

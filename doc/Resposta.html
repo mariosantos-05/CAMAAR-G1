@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,Resposta">
 
 
-    <meta name="description" content="Documentation for the Resposta class">
+    <meta name="description" content="class Resposta: Representa a resposta de um usuário a um formulário. Cada resposta pertence a um formulário (Form) e a um usuário (Usuario).">
 
 
 
@@ -117,6 +117,19 @@
 
   <section class="description">
     
+<p>Representa a resposta de um usuário a um formulário.</p>
+
+<p>Cada resposta pertence a um formulário (<a href="Form.html"><code>Form</code></a>) e a um usuário (<a href="Usuario.html"><code>Usuario</code></a>). O campo ‘answers` armazena um hash JSON com as respostas enviadas pelo usuário.</p>
+
+<p>Associations:</p>
+
+<pre>belongs_to :form    - o formulário respondido
+belongs_to :usuario - o usuário que respondeu</pre>
+
+<p>Methods:</p>
+
+<pre>answers_hash -&gt; retorna o hash de respostas garantindo keys acessíveis de forma indiferente (Symbol/String)</pre>
+
   </section>
 
 
@@ -160,7 +173,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="answers_hash-source">
-            <pre><span class="ruby-comment"># File app/models/resposta.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/models/resposta.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">answers_hash</span>
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">answers</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">with_indifferent_access</span>
 <span class="ruby-keyword">end</span></pre>
@@ -168,7 +181,9 @@
 
 
 
-          <p>answers será um hash armazenado no campo JSON; garantimos um hash vazio por padrão</p>
+          <p>Retorna o hash de respostas com keys acessíveis por string ou símbolo</p>
+
+<p>@return [Hash] respostas enviadas pelo usuário, vazio se nenhuma resposta</p>
 
 
         </div>

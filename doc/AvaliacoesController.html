@@ -275,7 +275,7 @@
   <span class="ruby-ivar">@form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:template</span>, <span class="ruby-value">:turma</span>).<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:form_id</span>])
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você não tem acesso a esse formulário.&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_has_access?</span>(<span class="ruby-ivar">@form</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">already_responded?</span>(<span class="ruby-ivar">@form</span>)
+  <span class="ruby-identifier">redirect_with_alert</span>(<span class="ruby-string">&quot;Você já respondeu este formulário.&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">already_responded?</span>(<span class="ruby-ivar">@form</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 

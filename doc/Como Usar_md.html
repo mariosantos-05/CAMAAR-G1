@@ -5,11 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Procfile.dev - RDoc Documentation</title>
+<title>Como Usar - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,documentation,Procfile.dev">
-  <meta name="description" content="Procfile.dev: web: bin/rails server css: bin/rails tailwindcss:watch">
+  <meta name="keywords" content="ruby,documentation,Como Usar">
+  <meta name="description" content="Como Usar: Guia de Execução e Testes (Sprint 3) Este guia descreve o fluxo necessário para configurar o ambiente, realizar o primeiro acesso administrativo, pop">
 
 
 
@@ -68,6 +68,166 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-F0-9F-9B-A0-EF-B8-8F+Guia+de+Execu-C3-A7-C3-A3o+e+Testes+-28Sprint+3-29">🛠️ Guia de Execução e Testes (Sprint 3)</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Op-C3-A7-C3-A3o+1-3A+Rodar+Localmente+-28Recomendada+para+desenvolvimento-29">Opção 1: Rodar Localmente (Recomendada para desenvolvimento)</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-1.+Login+Inicial">1. Login Inicial</a>
+</li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-2.+Fluxo+de+Acesso+e+Utiliza-C3-A7-C3-A3o">2. Fluxo de Acesso e Utilização</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Passo+1-3A+Login+Administrativo">Passo 1: Login Administrativo</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Passo+2-3A+Importa-C3-A7-C3-A3o+de+Dados+-28SIGAA-29">Passo 2: Importação de Dados (SIGAA)</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Passo+3-3A+Cria-C3-A7-C3-A3o+de+Templates+e+Formul-C3-A1rios">Passo 3: Criação de Templates e Formulários</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Passo+4-3A+Primeiro+Acesso+de+Usu-C3-A1rio+-28Aluno-2FProfessor-29">Passo 4: Primeiro Acesso de Usuário (Aluno/Professor)</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-3.+Execu-C3-A7-C3-A3o+de+Testes+e+M-C3-A9tricas">3. Execução de Testes e Métricas</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-F0-9F-A7-AA+Testes+Automatizados+-28RSpec-29">🧪 Testes Automatizados (RSpec)</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-F0-9F-93-88+Cobertura+de+C-C3-B3digo+-28SimpleCov-29">📈 Cobertura de Código (SimpleCov)</a>
+</li>
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#label-Complexity+-26+Code+Smells">Complexity &amp; Code Smells</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#label-Complexidade+Ciclom-C3-A1tica+-28Saikuro-29">Complexidade Ciclomática (Saikuro)</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#label-Qualidade+e+ABC+Score+-28RubyCritic-29">Qualidade e ABC Score (RubyCritic)</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+      <a href="#label-4.+Documenta-C3-A7-C3-A3o+do+C-C3-B3digo">4. Documentação do Código</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -377,9 +537,155 @@
 
 </nav>
 
-<main role="main" aria-label="Page Procfile.dev">
+<main role="main" aria-label="Page Como Usar.md">
 
-<p>web: <a href="bin/rails.html">bin/rails</a> server css: <a href="bin/rails.html">bin/rails</a> tailwindcss:watch</p>
+<h1 id="label-F0-9F-9B-A0-EF-B8-8F+Guia+de+Execu-C3-A7-C3-A3o+e+Testes+-28Sprint+3-29">🛠️ Guia de Execução e Testes (Sprint 3)<span><a href="#label-F0-9F-9B-A0-EF-B8-8F+Guia+de+Execu-C3-A7-C3-A3o+e+Testes+-28Sprint+3-29">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Este guia descreve o fluxo necessário para configurar o ambiente, realizar o primeiro acesso administrativo, popular o banco de dados e executar as baterias de testes e métricas de qualidade.</p>
+
+<h2 id="label-Op-C3-A7-C3-A3o+1-3A+Rodar+Localmente+-28Recomendada+para+desenvolvimento-29">Opção 1: Rodar Localmente (Recomendada para desenvolvimento)<span><a href="#label-Op-C3-A7-C3-A3o+1-3A+Rodar+Localmente+-28Recomendada+para+desenvolvimento-29">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p><strong>Instale as dependências</strong> (caso ainda não tenha feito):</p>
+
+<pre class="ruby"><span class="ruby-identifier">bundle</span> <span class="ruby-identifier">install</span>
+</pre>
+</li><li>
+<p><strong>Prepare o banco de dados</strong>:</p>
+
+<pre>bin/rails db:reset</pre>
+</li><li>
+<p><strong>Execute o sistema</strong>: Use o comando abaixo, que lê o seu arquivo <a href="Procfile_dev.html">Procfile.dev</a>:</p>
+
+<pre>./bin/dev</pre>
+
+<p><em>Acesse em: <code>http://localhost:3000</em></code></p>
+</li></ol>
+
+<h2 id="label-1.+Login+Inicial">1. Login Inicial<span><a href="#label-1.+Login+Inicial">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Antes de iniciar a aplicação como aluno ou professor, é necessário acessar como <strong>Administrador</strong>. O sistema possui um <em>seed</em> configurado para criar este usuário padrão, que é criado rodando os comandos anteriores.</p>
+
+<h2 id="label-2.+Fluxo+de+Acesso+e+Utiliza-C3-A7-C3-A3o">2. Fluxo de Acesso e Utilização<span><a href="#label-2.+Fluxo+de+Acesso+e+Utiliza-C3-A7-C3-A3o">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>O sistema segue uma ordem lógica de dependência de dados. Siga os passos abaixo para testar o fluxo completo:</p>
+
+<h3 id="label-Passo+1-3A+Login+Administrativo">Passo 1: Login Administrativo<span><a href="#label-Passo+1-3A+Login+Administrativo">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>O primeiro acesso deve ser feito pelo Administrador para configurar o sistema.</p>
+<ol><li>
+<p>Acesse a rota <code>/login</code>.</p>
+</li><li>
+<p>Utilize as credenciais padrão criadas pelo seed:</p>
+<ul><li>
+<p><strong>Login:</strong> <code>admin</code> (ou <code>admin@camaar.unb.br</code>)</p>
+</li><li>
+<p><strong>Senha:</strong> <code>Admin123</code></p>
+</li></ul>
+</li></ol>
+
+<h3 id="label-Passo+2-3A+Importa-C3-A7-C3-A3o+de+Dados+-28SIGAA-29">Passo 2: Importação de Dados (SIGAA)<span><a href="#label-Passo+2-3A+Importa-C3-A7-C3-A3o+de+Dados+-28SIGAA-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Após logar como Admin, você será redirecionado para o Painel Administrativo. O sistema precisa dos dados de turmas e alunos para funcionar.</p>
+<ol><li>
+<p>No menu, clique em <strong>“Importar Dados do SIGAA”</strong> (ou acesse <code>/importar_sigaa</code>).</p>
+</li><li>
+<p>Realize o upload dos arquivos JSON nesta ordem (ou conforme a lógica do seu importador):</p>
+<ul><li>
+<p><a href="classes_json.html">classes.json</a> (Dados das turmas)</p>
+</li><li>
+<p><a href="class_members_json.html">class_members.json</a> (Vínculos de alunos e professores)</p>
+</li></ul>
+</li><li>
+<p>O sistema processará os arquivos e criará os usuários com status <strong>Inativo</strong> e <strong>Sem Senha</strong>.</p>
+</li></ol>
+
+<h3 id="label-Passo+3-3A+Cria-C3-A7-C3-A3o+de+Templates+e+Formul-C3-A1rios">Passo 3: Criação de Templates e Formulários<span><a href="#label-Passo+3-3A+Cria-C3-A7-C3-A3o+de+Templates+e+Formul-C3-A1rios">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Com os dados carregados:</p>
+<ol><li>
+<p>O Admin deve criar um <strong>Template de Avaliação</strong> (perguntas).</p>
+</li><li>
+<p>O Admin deve criar um <strong>Formulário</strong> vinculando este template a uma <a href="Turma.html"><code>Turma</code></a> específica (importada no passo anterior).</p>
+</li></ol>
+
+<h3 id="label-Passo+4-3A+Primeiro+Acesso+de+Usu-C3-A1rio+-28Aluno-2FProfessor-29">Passo 4: Primeiro Acesso de Usuário (Aluno/Professor)<span><a href="#label-Passo+4-3A+Primeiro+Acesso+de+Usu-C3-A1rio+-28Aluno-2FProfessor-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Agora que os usuários foram importados, eles podem acessar o sistema.</p>
+<ol><li>
+<p>O usuário acessa a tela de login.</p>
+</li><li>
+<p>Informa sua <strong>Matrícula</strong> (ex: vinda do <a href="class_members_json.html">class_members.json</a>) ou <strong>E-mail</strong>.</p>
+</li><li>
+<p>Como é o primeiro acesso (usuário importado sem senha), o sistema detectará <code>password_digest: nil</code> e redirecionará para a tela de <strong>Definição de Senha</strong>.</p>
+</li><li>
+<p>O usuário define sua nova senha.</p>
+</li><li>
+<p>O sistema ativa o cadastro (<code>status: true</code>) e loga o usuário automaticamente.</p>
+</li><li>
+<p>O usuário é redirecionado para responder aos questionários pendentes.</p>
+</li></ol>
+<hr>
+
+<h2 id="label-3.+Execu-C3-A7-C3-A3o+de+Testes+e+M-C3-A9tricas">3. Execução de Testes e Métricas<span><a href="#label-3.+Execu-C3-A7-C3-A3o+de+Testes+e+M-C3-A9tricas">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Para garantir a qualidade do código entregue nesta Sprint, utilizamos as seguintes ferramentas. Execute os comandos na raiz do projeto:</p>
+
+<h3 id="label-F0-9F-A7-AA+Testes+Automatizados+-28RSpec-29">🧪 Testes Automatizados (RSpec)<span><a href="#label-F0-9F-A7-AA+Testes+Automatizados+-28RSpec-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Roda todos os testes de unidade e integração (Models e Requests).</p>
+
+<pre class="ruby"><span class="ruby-identifier">bundle</span> <span class="ruby-identifier">exec</span> <span class="ruby-identifier">rspec</span>
+</pre>
+<ul><li>
+<p><strong>Critério de Aceite:</strong> Todos os testes devem passar (0 failures).</p>
+</li></ul>
+
+<h3 id="label-F0-9F-93-88+Cobertura+de+C-C3-B3digo+-28SimpleCov-29">📈 Cobertura de Código (SimpleCov)<span><a href="#label-F0-9F-93-88+Cobertura+de+C-C3-B3digo+-28SimpleCov-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>A cobertura é calculada automaticamente ao rodar o RSpec.</p>
+<ol><li>
+<p>Rode o comando do RSpec acima.</p>
+</li><li>
+<p>Abra o relatório gerado em:</p>
+
+<pre class="ruby"><span class="ruby-identifier">coverage</span><span class="ruby-operator">/</span><span class="ruby-identifier">index</span>.<span class="ruby-identifier">html</span>
+</pre>
+</li></ol>
+<!-- end list --><ul><li>
+<p><strong>Critério de Aceite:</strong> Cobertura global &gt; 90%.</p>
+</li></ul>
+
+<h3 id="label-Complexity+-26+Code+Smells">Complexity &amp; Code Smells<span><a href="#label-Complexity+-26+Code+Smells">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<h4 id="label-Complexidade+Ciclom-C3-A1tica+-28Saikuro-29">Complexidade Ciclomática (Saikuro)<span><a href="#label-Complexidade+Ciclom-C3-A1tica+-28Saikuro-29">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Não foi necessário, está com status “depecrated”</p>
+
+<h4 id="label-Qualidade+e+ABC+Score+-28RubyCritic-29">Qualidade e ABC Score (RubyCritic)<span><a href="#label-Qualidade+e+ABC+Score+-28RubyCritic-29">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Analisa a qualidade geral, duplicidade e complexidade (Assignment, Branch, Condition).</p>
+
+<pre class="ruby"><span class="ruby-identifier">bundle</span> <span class="ruby-identifier">exec</span> <span class="ruby-identifier">rubycritic</span> <span class="ruby-identifier">app</span><span class="ruby-operator">/</span><span class="ruby-identifier">controllers</span>
+</pre>
+<ul><li>
+<p>O relatório será aberto automaticamente ou salvo em <a href="tmp/rubycritic/overview_html.html">tmp/rubycritic/overview.html</a>.</p>
+</li><li>
+<p><strong>Meta:</strong> ABC Score &lt; 20 e classificação “A” nos arquivos principais.</p>
+</li></ul>
+<hr>
+
+<h2 id="label-4.+Documenta-C3-A7-C3-A3o+do+C-C3-B3digo">4. Documentação do Código<span><a href="#label-4.+Documenta-C3-A7-C3-A3o+do+C-C3-B3digo">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>A documentação técnica dos controladores foi gerada utilizando <strong>RDoc</strong>. Para visualizar:</p>
+<ol><li>
+<p>Gere a documentação (caso não exista):</p>
+
+<pre>bundle exec rdoc app/ --output doc/app --title &quot;Documentação CAMAAR-G1&quot;</pre>
+</li><li>
+<p>Abra o arquivo <code>doc/controllers/index.html</code> no navegador.</p>
+</li><li>
+<p>Navegue pelas classes para ver os detalhes de métodos, parâmetros e retornos.</p>
+</li></ol>
 
 </main>
 </body>

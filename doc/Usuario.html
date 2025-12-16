@@ -163,7 +163,7 @@
             <pre><span class="ruby-comment"># File app/models/usuario.rb, line 14</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">password_complexity</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">password</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/</span>
-  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:password</span>, <span class="ruby-string">&#39;deve ter no mínimo 8 caracteres, maiúsculas, minúsculas e números&#39;</span>
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-value">:password</span>, <span class="ruby-string">&quot;deve ter no mínimo 8 caracteres, maiúsculas, minúsculas e números&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 

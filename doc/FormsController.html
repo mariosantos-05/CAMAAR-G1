@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,FormsController">
 
 
-    <meta name="description" content="Documentation for the FormsController class">
+    <meta name="description" content="class FormsController: Forms Controller Controlador responsável pela criação pública de formulários de avaliação, permitindo que usuários (Docentes ou Discentes) instanciem">
 
 
 
@@ -119,6 +119,10 @@
 
   <section class="description">
     
+<h1 id="class-FormsController-label-Forms+Controller">Forms Controller<span><a href="#class-FormsController-label-Forms+Controller">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Controlador responsável pela criação pública de formulários de avaliação, permitindo que usuários (Docentes ou Discentes) instanciem avaliações baseadas em templates predefinidos.</p>
+
   </section>
 
 
@@ -162,7 +166,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/forms_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/forms_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-comment"># Cenário Triste: Tentativa de criar sem selecionar público</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:target_audience</span>].<span class="ruby-identifier">blank?</span>
@@ -172,12 +176,12 @@
 
   <span class="ruby-comment"># Lógica para Docentes (sem turma) e Discentes (com turma)</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:target_audience</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Discentes&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:turma_id</span>].<span class="ruby-identifier">blank?</span>
-    <span class="ruby-comment">#BDD foca no público-alvo no cenário triste simples</span>
+    <span class="ruby-comment"># BDD foca no público-alvo no cenário triste simples</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Criação simulada</span>
   <span class="ruby-ivar">@form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">new</span>(
-    <span class="ruby-value">template_id:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:template_id</span>], 
+    <span class="ruby-value">template_id:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:template_id</span>],
     <span class="ruby-value">turma_id:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:turma_id</span>],
     <span class="ruby-value">is_active:</span> <span class="ruby-keyword">true</span>
   )
@@ -192,7 +196,18 @@
 
 
 
-          
+          <p>Processa a criação de um formulário.</p>
+
+<h2 id="method-i-create-label-L-C3-B3gica+de+Neg-C3-B3cio">Lógica de Negócio<span><a href="#method-i-create-label-L-C3-B3gica+de+Neg-C3-B3cio">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Verifica se o <code>target_audience</code> foi selecionado.</p>
+</li><li>
+<p>Valida a presença de <code>turma_id</code> para discentes.</p>
+</li><li>
+<p>Instancia o formulário como ativo (+is_active: true+).</p>
+</li></ul>
+
+<p>Redireciona para a listagem em caso de sucesso ou re-renderiza <code>new</code> em caso de falha.</p>
 
 
         </div>
@@ -228,7 +243,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/forms_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/forms_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>
   <span class="ruby-ivar">@form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -236,7 +251,7 @@
 
 
 
-          
+          <p>Inicializa um novo objeto <a href="Form.html"><code>Form</code></a> para exibição na view.</p>
 
 
         </div>

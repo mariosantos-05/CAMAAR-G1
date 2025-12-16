@@ -162,7 +162,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/first_access_controller.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/controllers/first_access_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">Usuario</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 
@@ -175,7 +175,18 @@
 
 
 
-          <p>GET /first_access/:id/edit</p>
+          <p>Exibe o formulário para definição de senha no primeiro acesso.</p>
+
+<p>Argumentos:</p>
+
+<pre>- params[:id] (Integer): ID do usuário.</pre>
+
+<p>Retorno:</p>
+
+<pre>- Renderiza a view &#39;edit&#39;.
+- Ou redireciona para root_path se o usuário já estiver ativo.</pre>
+
+<p>Efeitos Colaterais: Consulta o banco de dados.</p>
 
 
         </div>
@@ -211,7 +222,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/first_access_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/first_access_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">Usuario</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 
@@ -230,7 +241,22 @@
 
 
 
-          <p>PATCH /first_access/:id</p>
+          <p>Atualiza a senha e ativa a conta do usuário.</p>
+
+<p>Argumentos:</p>
+
+<pre>- params[:id] (Integer): ID do usuário.
+- params[:usuario] (Hash): Contém password e password_confirmation.</pre>
+
+<p>Retorno:</p>
+
+<pre>- Redireciona para &#39;avaliacoes_path&#39; em caso de sucesso.
+- Renderiza &#39;edit&#39; com status 422 em caso de erro.</pre>
+
+<p>Efeitos Colaterais:</p>
+
+<pre>- Atualiza o registro do usuário no banco (senha e status).
+- Inicia a sessão (login automático).</pre>
 
 
         </div>

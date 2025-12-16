@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,SessionsController">
 
 
-    <meta name="description" content="Documentation for the SessionsController class">
+    <meta name="description" content="class SessionsController: Gerencia o ciclo de vida da sessão (login, logout e autenticação). Permite que usuários entrem no sistema via matrícula ou email.">
 
 
 
@@ -121,6 +121,8 @@
 
   <section class="description">
     
+<p>Gerencia o ciclo de vida da sessão (login, logout e autenticação). Permite que usuários entrem no sistema via matrícula ou email.</p>
+
   </section>
 
 
@@ -164,44 +166,33 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
-  <span class="ruby-comment"># RN-L-01: Autenticar por email OU matrícula</span>
   <span class="ruby-identifier">login</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:login</span>]
   <span class="ruby-identifier">user</span> = <span class="ruby-constant">Usuario</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">email:</span> <span class="ruby-identifier">login</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">Usuario</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">matricula:</span> <span class="ruby-identifier">login</span>)
 
-  <span class="ruby-comment"># RN-L-06: Só permite login se status for true (Ativo)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>
-    <span class="ruby-comment"># 1. Sem senha definida (senha é nil)</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">password_digest</span>.<span class="ruby-identifier">nil?</span>
-      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_first_access_path</span>(<span class="ruby-identifier">user</span>), <span class="ruby-value">notice:</span> <span class="ruby-string">&quot;Bem-vindo! Por favor, defina sua senha para continuar.&quot;</span>
-      <span class="ruby-keyword">return</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># 1. Usuário não encontrado</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">handle_login_error</span>(<span class="ruby-string">&quot;E-mail ou matrícula não encontrados&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>
 
-    <span class="ruby-comment"># 2. Conta inativa (status é false)</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
-      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_first_access_path</span>(<span class="ruby-identifier">user</span>), <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Sua conta ainda não foi ativada.&quot;</span>
-      <span class="ruby-keyword">return</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-comment"># 3. Tentativa de Login</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>])
-      <span class="ruby-identifier">session</span>[<span class="ruby-value">:usuario_id</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
-      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">destination_by_profile</span>(<span class="ruby-identifier">user</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;Senha incorreta&quot;</span>
-      <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># Usuário não encontrado</span>
-    <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;E-mail ou matrícula não encontrados&quot;</span>
-    <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># 2. Verificações de acesso (Sem senha ou Inativo)</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_account_status</span>(<span class="ruby-identifier">user</span>)
+
+  <span class="ruby-comment"># 3. Senha incorreta</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">handle_login_error</span>(<span class="ruby-string">&quot;Senha incorreta&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>])
+
+  <span class="ruby-comment"># 4. Sucesso</span>
+  <span class="ruby-identifier">perform_login</span>(<span class="ruby-identifier">user</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          
+          <p>Processa a tentativa de login do usuário. Refatorado para reduzir complexidade ciclomática e eliminar duplicação.</p>
+
+<p>Argumentos:</p>
+
+<pre>- params[:login] (String): Email ou Matrícula.
+- params[:password] (String): Senha do usuário.</pre>
 
 
         </div>
@@ -237,7 +228,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:usuario_id</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>, <span class="ruby-value">notice:</span> <span class="ruby-string">&quot;Logout realizado com sucesso&quot;</span>
@@ -246,7 +237,7 @@
 
 
 
-          
+          <p>Realiza o logout do usuário.</p>
 
 
         </div>
@@ -282,14 +273,16 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
 
 
 
-          
+          <p>Renderiza a tela de login.</p>
+
+<p>Argumentos: Nenhum. Retorno: Renderiza a view ‘new’. Efeitos Colaterais: Nenhum.</p>
 
 
         </div>
