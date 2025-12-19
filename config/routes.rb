@@ -9,10 +9,10 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :templates
-    resources :forms, only: [:new, :create]
+    resources :forms, only: [ :new, :create ]
   end
 
-  resources :forms, only: [:index, :new, :create]
+  resources :forms, only: [ :index, :new, :create ]
 
   get "avaliacoes", to: "avaliacoes#index", as: "avaliacoes"
   get "avaliacoes/:turma_id/forms/:form_id/responder",
